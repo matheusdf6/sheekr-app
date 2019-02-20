@@ -20,24 +20,25 @@ Na fase da modelagem, escolheu-se dividir os requisitos em 3 grandes áreas, des
 • Agendamento de Discursos
 • Designação para Estudantes em “Faça seu melhor no ministério”
 
-## PRIMEIRA ÁREA: Territorios
+### PRIMEIRA ÁREA: Territorios
 
-### Descrição dos Atores
+![Casos de Uso](https://github.com/matheusdf6/sheekr-app/blob/master/Project/UserCases/user-case-territorios.png)
+
+#### Descrição dos Atores
 
 • Usuário 1 – Responsável por fazer as designações do território. Tem permissão para manipular a agenda, as designações, e para fazer apenas consultas nos territórios.
 • DBA – Data Base Administrator, atua sobre as entidades do sistema, podendo acrescentar, atualizar ou excluir territórios.
 
-### Descrição dos Casos de Uso
+#### Descrição dos Casos de Uso
 
-#### UC001 - Designar Território
+##### UC001 - Designar Território
 
-- **Descrição**: Esse caso de uso tem como funcionalidade designar um território para um publicador
-- **Atores**: Usuário 1, Publicador
-- **Pré-Condição**: Usuário deve estar conectado e autenticado ao sistema, com permissão necessária.
-- **Pós-Condição**: Território designado com o estado alterado para “Em Trabalho”
-- **Cenário Principal**:
+- **Descrição** | Esse caso de uso tem como funcionalidade designar um território para um publicador
+- **Atores** | Usuário 1, Publicador
+- **Pré-Condição** | Usuário deve estar conectado e autenticado ao sistema, com permissão necessária.
+- **Pós-Condição** | Território designado com o estado alterado para “Em Trabalho”
+- **Cenário Principal** | 1. Usuário especifica data da saída de campo.
 
-1. Usuário especifica data da saída de campo.
 2. Usuário fornece o identificador do publicador a ser designado
 3. Sistema consulta o publicador
 4. Sistema consulta os Territórios com estado “Disponível”, e retorna ao usuário. INCLUDE <UC004 Consultar Territórios>
@@ -45,12 +46,12 @@ Na fase da modelagem, escolheu-se dividir os requisitos em 3 grandes áreas, des
 6. Usuário confirma a operação.
 7. Sistema atualiza o território para “Em Trabalho”
 
-- **Cenário Alternativo**:
+- **Cenário Alternativo** |
 
 3. – Publicador não encontrado.
-   a. – Retornar ao passo 2
+   1. – Retornar ao passo 2
 4. – Não há território com estado “Disponível”
-   a. – Fim do caso de uso.
+   1. – Fim do caso de uso.
 
 ## Arquitetura do Sistema
 
