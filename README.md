@@ -33,8 +33,9 @@ Na fase da modelagem, escolheu-se dividir os requisitos em 3 grandes áreas, des
 
 #### Descrição dos Casos de Uso
 
-| Referência | Nome do Caso de Uso |
-|UC001 | [Designar Territorios](https://github.com/matheusdf6/sheekr-app/blob/master/Project/UserCases/uc001.md)
+| Referência | Nome do Caso de Uso                                                                                     |
+| ---------- | ------------------------------------------------------------------------------------------------------- |
+| UC001      | [Designar Territorios](https://github.com/matheusdf6/sheekr-app/blob/master/Project/UserCases/uc001.md) |
 
 ## Arquitetura do Sistema
 
