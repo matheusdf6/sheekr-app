@@ -1,6 +1,14 @@
 # Sheekr
 
+![Logo](https://github.com/matheusdf6/sheekr-app/blob/master/Project/Design/Brand/logo-608-178.png)
+
 Sheekr é um aplicativo de agendamento construido em ASP.NET Core Web API, Entity Framework Core e React. O objetivo do aplicativo é facilitar o agendamento de discursos, designações e territórios dentro de uma congregação.
+
+## Histórico de Revisões
+
+| Data       | Versão | Descrição                                                                   |
+| ---------- | ------ | --------------------------------------------------------------------------- |
+| 20/02/2019 | 1.0    | Adicionado objetivos do projeto e requisitos para o campo dos "Territórios" |
 
 ## Introdução
 
@@ -33,12 +41,18 @@ Na fase da modelagem, escolheu-se dividir os requisitos em 3 grandes áreas, des
 
 #### Descrição dos Casos de Uso
 
-| Referência | Nome do Caso de Uso                                                                                     |
-| ---------- | ------------------------------------------------------------------------------------------------------- |
-| UC001      | [Designar Territorios](https://github.com/matheusdf6/sheekr-app/blob/master/Project/UserCases/uc001.md) |
-
-## Arquitetura do Sistema
+| Referência | Nome do Caso de Uso                                                                                                  |
+| ---------- | -------------------------------------------------------------------------------------------------------------------- |
+| UC001      | [Designar Territorios](https://github.com/matheusdf6/sheekr-app/blob/master/Project/UserCases/uc001.md)              |
+| UC002      | [Retornar Territorios](https://github.com/matheusdf6/sheekr-app/blob/master/Project/UserCases/uc002.md)              |
+| UC003      | [Gerar Relatório](https://github.com/matheusdf6/sheekr-app/blob/master/Project/UserCases/uc003.md)                   |
+| UC004      | [Consultar Territórios](https://github.com/matheusdf6/sheekr-app/blob/master/Project/UserCases/uc004.md)             |
+| UC005      | [Consultar Territórios Disponiveis](https://github.com/matheusdf6/sheekr-app/blob/master/Project/UserCases/uc005.md) |
+| UC006      | [Consultar Territórios em Trabalho](https://github.com/matheusdf6/sheekr-app/blob/master/Project/UserCases/uc006.md) |
+| UC007      | [Consultar Publicadores](https://github.com/matheusdf6/sheekr-app/blob/master/Project/UserCases/uc007.md)            |
+| UC008      | [Consultar Agenda](https://github.com/matheusdf6/sheekr-app/blob/master/Project/UserCases/uc008.md)                  |
+| UC009      | [Adicionar Territorios](https://github.com/matheusdf6/sheekr-app/blob/master/Project/UserCases/uc009.md)             |
+| UC010      | [Excluir Territorios](https://github.com/matheusdf6/sheekr-app/blob/master/Project/UserCases/uc010.md)               |
+| UC011      | [Migrar Territorios](https://github.com/matheusdf6/sheekr-app/blob/master/Project/UserCases/uc011.md)                |
 
 ## Diário de Bordo
-
-### 20/02/2019 - Início do Projeto
