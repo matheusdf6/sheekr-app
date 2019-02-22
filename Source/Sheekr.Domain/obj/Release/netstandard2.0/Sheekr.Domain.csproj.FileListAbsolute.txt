@@ -1,0 +1,12 @@
+C:\Users\mathe\source\repos\Sheekr\Sheekr.Domain\bin\Release\netstandard2.0\Sheekr.Domain.deps.json
+C:\Users\mathe\source\repos\Sheekr\Sheekr.Domain\bin\Release\netstandard2.0\Sheekr.Domain.dll
+C:\Users\mathe\source\repos\Sheekr\Sheekr.Domain\bin\Release\netstandard2.0\Sheekr.Domain.pdb
+C:\Users\mathe\source\repos\Sheekr\Sheekr.Domain\bin\Release\netstandard2.0\System.ComponentModel.Annotations.dll
+C:\Users\mathe\source\repos\Sheekr\Sheekr.Domain\bin\Release\netstandard2.0\System.ComponentModel.Annotations.xml
+C:\Users\mathe\source\repos\Sheekr\Sheekr.Domain\obj\Release\netstandard2.0\Sheekr.Domain.csprojAssemblyReference.cache
+C:\Users\mathe\source\repos\Sheekr\Sheekr.Domain\obj\Release\netstandard2.0\Sheekr.Domain.csproj.CoreCompileInputs.cache
+C:\Users\mathe\source\repos\Sheekr\Sheekr.Domain\obj\Release\netstandard2.0\Sheekr.Domain.AssemblyInfoInputs.cache
+C:\Users\mathe\source\repos\Sheekr\Sheekr.Domain\obj\Release\netstandard2.0\Sheekr.Domain.AssemblyInfo.cs
+C:\Users\mathe\source\repos\Sheekr\Sheekr.Domain\obj\Release\netstandard2.0\Sheekr.Domain.csproj.CopyComplete
+C:\Users\mathe\source\repos\Sheekr\Sheekr.Domain\obj\Release\netstandard2.0\Sheekr.Domain.dll
+C:\Users\mathe\source\repos\Sheekr\Sheekr.Domain\obj\Release\netstandard2.0\Sheekr.Domain.pdb
