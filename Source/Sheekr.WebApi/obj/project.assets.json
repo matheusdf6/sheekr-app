@@ -4823,6 +4823,7 @@
           "MediatR": "5.1.0",
           "Sheekr.Data": "1.0.0",
           "Sheekr.Domain": "1.0.0",
+          "Sheekr.Infrastructure": "1.0.0",
           "iTextSharp": "5.5.13"
         },
         "compile": {
@@ -4864,6 +4865,16 @@
         },
         "runtime": {
           "bin/placeholder/Sheekr.Domain.dll": {}
+        }
+      },
+      "Sheekr.Infrastructure/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v2.2",
+        "compile": {
+          "bin/placeholder/Sheekr.Infrastructure.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Sheekr.Infrastructure.dll": {}
         }
       }
     }
@@ -13262,6 +13273,11 @@
       "type": "project",
       "path": "../Sheekr.Domain/Sheekr.Domain.csproj",
       "msbuildProject": "../Sheekr.Domain/Sheekr.Domain.csproj"
+    },
+    "Sheekr.Infrastructure/1.0.0": {
+      "type": "project",
+      "path": "../Sheekr.Infrastructure/Sheekr.Infrastructure.csproj",
+      "msbuildProject": "../Sheekr.Infrastructure/Sheekr.Infrastructure.csproj"
     }
   },
   "projectFileDependencyGroups": {
@@ -13286,11 +13302,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\mathe\\source\\repos\\Sheekr\\Sheekr.WebApi\\Sheekr.WebApi.csproj",
+      "projectUniqueName": "C:\\Users\\mathe\\Desktop\\sheekr-app\\sheekr-app\\Source\\Sheekr.WebApi\\Sheekr.WebApi.csproj",
       "projectName": "Sheekr.WebApi",
-      "projectPath": "C:\\Users\\mathe\\source\\repos\\Sheekr\\Sheekr.WebApi\\Sheekr.WebApi.csproj",
+      "projectPath": "C:\\Users\\mathe\\Desktop\\sheekr-app\\sheekr-app\\Source\\Sheekr.WebApi\\Sheekr.WebApi.csproj",
       "packagesPath": "C:\\Users\\mathe\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\mathe\\source\\repos\\Sheekr\\Sheekr.WebApi\\obj\\",
+      "outputPath": "C:\\Users\\mathe\\Desktop\\sheekr-app\\sheekr-app\\Source\\Sheekr.WebApi\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -13309,11 +13325,11 @@
       "frameworks": {
         "netcoreapp2.2": {
           "projectReferences": {
-            "C:\\Users\\mathe\\source\\repos\\Sheekr\\Sheekr.Application\\Sheekr.Application.csproj": {
-              "projectPath": "C:\\Users\\mathe\\source\\repos\\Sheekr\\Sheekr.Application\\Sheekr.Application.csproj"
+            "C:\\Users\\mathe\\Desktop\\sheekr-app\\sheekr-app\\Source\\Sheekr.Application\\Sheekr.Application.csproj": {
+              "projectPath": "C:\\Users\\mathe\\Desktop\\sheekr-app\\sheekr-app\\Source\\Sheekr.Application\\Sheekr.Application.csproj"
             },
-            "C:\\Users\\mathe\\source\\repos\\Sheekr\\Sheekr.Data\\Sheekr.Data.csproj": {
-              "projectPath": "C:\\Users\\mathe\\source\\repos\\Sheekr\\Sheekr.Data\\Sheekr.Data.csproj"
+            "C:\\Users\\mathe\\Desktop\\sheekr-app\\sheekr-app\\Source\\Sheekr.Data\\Sheekr.Data.csproj": {
+              "projectPath": "C:\\Users\\mathe\\Desktop\\sheekr-app\\sheekr-app\\Source\\Sheekr.Data\\Sheekr.Data.csproj"
             }
           }
         }

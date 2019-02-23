@@ -207,11 +207,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\mathe\\source\\repos\\Sheekr\\Sheekr.Domain\\Sheekr.Domain.csproj",
+      "projectUniqueName": "C:\\Users\\mathe\\Desktop\\sheekr-app\\sheekr-app\\Source\\Sheekr.Domain\\Sheekr.Domain.csproj",
       "projectName": "Sheekr.Domain",
-      "projectPath": "C:\\Users\\mathe\\source\\repos\\Sheekr\\Sheekr.Domain\\Sheekr.Domain.csproj",
+      "projectPath": "C:\\Users\\mathe\\Desktop\\sheekr-app\\sheekr-app\\Source\\Sheekr.Domain\\Sheekr.Domain.csproj",
       "packagesPath": "C:\\Users\\mathe\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\mathe\\source\\repos\\Sheekr\\Sheekr.Domain\\obj\\",
+      "outputPath": "C:\\Users\\mathe\\Desktop\\sheekr-app\\sheekr-app\\Source\\Sheekr.Domain\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"

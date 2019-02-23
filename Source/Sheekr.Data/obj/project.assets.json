@@ -4661,11 +4661,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\mathe\\source\\repos\\Sheekr\\Sheekr.Data\\Sheekr.Data.csproj",
+      "projectUniqueName": "C:\\Users\\mathe\\Desktop\\sheekr-app\\sheekr-app\\Source\\Sheekr.Data\\Sheekr.Data.csproj",
       "projectName": "Sheekr.Data",
-      "projectPath": "C:\\Users\\mathe\\source\\repos\\Sheekr\\Sheekr.Data\\Sheekr.Data.csproj",
+      "projectPath": "C:\\Users\\mathe\\Desktop\\sheekr-app\\sheekr-app\\Source\\Sheekr.Data\\Sheekr.Data.csproj",
       "packagesPath": "C:\\Users\\mathe\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\mathe\\source\\repos\\Sheekr\\Sheekr.Data\\obj\\",
+      "outputPath": "C:\\Users\\mathe\\Desktop\\sheekr-app\\sheekr-app\\Source\\Sheekr.Data\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -4684,8 +4684,8 @@
       "frameworks": {
         "netcoreapp2.1": {
           "projectReferences": {
-            "C:\\Users\\mathe\\source\\repos\\Sheekr\\Sheekr.Domain\\Sheekr.Domain.csproj": {
-              "projectPath": "C:\\Users\\mathe\\source\\repos\\Sheekr\\Sheekr.Domain\\Sheekr.Domain.csproj"
+            "C:\\Users\\mathe\\Desktop\\sheekr-app\\sheekr-app\\Source\\Sheekr.Domain\\Sheekr.Domain.csproj": {
+              "projectPath": "C:\\Users\\mathe\\Desktop\\sheekr-app\\sheekr-app\\Source\\Sheekr.Domain\\Sheekr.Domain.csproj"
             }
           }
         }

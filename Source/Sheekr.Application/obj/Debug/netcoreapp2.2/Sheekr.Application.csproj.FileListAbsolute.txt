@@ -12,3 +12,17 @@ C:\Users\mathe\source\repos\Sheekr\Sheekr.Application\obj\Debug\netcoreapp2.2\Sh
 C:\Users\mathe\source\repos\Sheekr\Sheekr.Application\obj\Debug\netcoreapp2.2\Sheekr.Application.csproj.CopyComplete
 C:\Users\mathe\source\repos\Sheekr\Sheekr.Application\obj\Debug\netcoreapp2.2\Sheekr.Application.dll
 C:\Users\mathe\source\repos\Sheekr\Sheekr.Application\obj\Debug\netcoreapp2.2\Sheekr.Application.pdb
+C:\Users\mathe\Desktop\sheekr-app\sheekr-app\Source\Sheekr.Application\bin\Debug\netcoreapp2.2\Sheekr.Application.deps.json
+C:\Users\mathe\Desktop\sheekr-app\sheekr-app\Source\Sheekr.Application\bin\Debug\netcoreapp2.2\Sheekr.Application.dll
+C:\Users\mathe\Desktop\sheekr-app\sheekr-app\Source\Sheekr.Application\bin\Debug\netcoreapp2.2\Sheekr.Application.pdb
+C:\Users\mathe\Desktop\sheekr-app\sheekr-app\Source\Sheekr.Application\bin\Debug\netcoreapp2.2\Sheekr.Data.dll
+C:\Users\mathe\Desktop\sheekr-app\sheekr-app\Source\Sheekr.Application\bin\Debug\netcoreapp2.2\Sheekr.Domain.dll
+C:\Users\mathe\Desktop\sheekr-app\sheekr-app\Source\Sheekr.Application\bin\Debug\netcoreapp2.2\Sheekr.Data.pdb
+C:\Users\mathe\Desktop\sheekr-app\sheekr-app\Source\Sheekr.Application\bin\Debug\netcoreapp2.2\Sheekr.Domain.pdb
+C:\Users\mathe\Desktop\sheekr-app\sheekr-app\Source\Sheekr.Application\obj\Debug\netcoreapp2.2\Sheekr.Application.csprojAssemblyReference.cache
+C:\Users\mathe\Desktop\sheekr-app\sheekr-app\Source\Sheekr.Application\obj\Debug\netcoreapp2.2\Sheekr.Application.csproj.CoreCompileInputs.cache
+C:\Users\mathe\Desktop\sheekr-app\sheekr-app\Source\Sheekr.Application\obj\Debug\netcoreapp2.2\Sheekr.Application.AssemblyInfoInputs.cache
+C:\Users\mathe\Desktop\sheekr-app\sheekr-app\Source\Sheekr.Application\obj\Debug\netcoreapp2.2\Sheekr.Application.AssemblyInfo.cs
+C:\Users\mathe\Desktop\sheekr-app\sheekr-app\Source\Sheekr.Application\obj\Debug\netcoreapp2.2\Sheekr.Application.csproj.CopyComplete
+C:\Users\mathe\Desktop\sheekr-app\sheekr-app\Source\Sheekr.Application\obj\Debug\netcoreapp2.2\Sheekr.Application.dll
+C:\Users\mathe\Desktop\sheekr-app\sheekr-app\Source\Sheekr.Application\obj\Debug\netcoreapp2.2\Sheekr.Application.pdb

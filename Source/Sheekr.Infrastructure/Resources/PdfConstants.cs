@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Sheekr.Application.Resources
+namespace Sheekr.Infrastructure.Resources
 {
     public static class PdfConstants
     {

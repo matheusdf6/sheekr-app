@@ -13,10 +13,7 @@
   <ItemGroup>
     <ProjectReference Include="..\Sheekr.Data\Sheekr.Data.csproj" />
     <ProjectReference Include="..\Sheekr.Domain\Sheekr.Domain.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Resources\GeneratedFiles\" />
+    <ProjectReference Include="..\Sheekr.Infrastructure\Sheekr.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>

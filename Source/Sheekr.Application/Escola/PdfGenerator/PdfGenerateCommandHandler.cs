@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using MediatR;
 using Sheekr.Data;
 using Sheekr.Domain.Entities;
-using Sheekr.Application.Resources;
+using Sheekr.Infrastructure.Resources;
 using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
@@ -17,8 +17,8 @@ namespace Sheekr.Application.Escola.PdfGenerator
         : IRequestHandler<PdfGenerateCommand, bool>
     {
         private readonly SheekrDbContext _db;
-        private string _pathTemplate = @"C:\Users\mathe\source\repos\Sheekr\Sheekr.Application\Resources\S-89-T-4up.pdf";
-        private string _pathNewPdf = @"C:\Users\mathe\source\repos\Sheekr\Sheekr.Application\Resources\GeneratedFiles\" ;
+        private string _pathTemplate = @"C:\Users\mathe\Desktop\sheekr-app\sheekr-app\Sheekr.Infrastructure\Resources\S-89-T-4up.pdf";
+        private string _pathNewPdf = @"C:\Users\mathe\Desktop\sheekr-app\sheekr-app\Sheekr.Infrastructure\Resources\GeneratedFiles\";
 
         public PdfGenerateCommandHandler(SheekrDbContext db)
         {
