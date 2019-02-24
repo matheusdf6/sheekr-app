@@ -12,6 +12,7 @@
           "MediatR": "5.1.0",
           "Sheekr.Data": "1.0.0",
           "Sheekr.Domain": "1.0.0",
+          "Sheekr.Infrastructure": "1.0.0",
           "iTextSharp": "5.5.13"
         },
         "runtime": {
@@ -991,6 +992,11 @@
         "runtime": {
           "Sheekr.Domain.dll": {}
         }
+      },
+      "Sheekr.Infrastructure/1.0.0": {
+        "runtime": {
+          "Sheekr.Infrastructure.dll": {}
+        }
       }
     }
   },
@@ -1664,6 +1670,11 @@
       "sha512": ""
     },
     "Sheekr.Domain/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Sheekr.Infrastructure/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

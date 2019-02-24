@@ -14,6 +14,11 @@ namespace Sheekr.WebApi.Controllers
     public class AlunosController : BaseController
     {
         // GET api/alunos
+        /// <summary>
+        /// Listar todos os alunos
+        /// </summary>
+        /// <returns>Retorna os alunos do cadastro</returns>
+        /// <reponse code="200">Foi retornado todos os alunos corretamente</reponse>
         [HttpGet]
         public async Task<IActionResult> GetAllAsync()
         {
@@ -21,8 +26,14 @@ namespace Sheekr.WebApi.Controllers
         }
 
         // GET api/alunos/5
+        /// <summary>
+        /// Informações de um aluno
+        /// </summary>
+        /// <param name="id">A chave primária do aluno</param>
+        /// <response code="200">Aluno encontrado</response>
+        /// <returns>Retorna os detalhes do aluno</returns>
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetAsync(int id)
+        public async Task<IActionResult> GetAsync([FromRoute] int id)
         {
             return Ok(await Mediator.Send(new GetAlunoDetailsQuery { AlunoId = id }));
         }
@@ -47,7 +58,7 @@ namespace Sheekr.WebApi.Controllers
 
         // DELETE api/alunos/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteAsync(int id)
+        public async Task<IActionResult> DeleteAsync([FromRoute] int id)
         {
             await Mediator.Send(new DeletarAlunoCommand { AlunoId = id });
 

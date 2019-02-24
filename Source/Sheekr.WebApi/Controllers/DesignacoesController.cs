@@ -35,7 +35,7 @@ namespace Sheekr.WebApi.Controllers
 
         // GET api/designacoes/5
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetAsync(int id)
+        public async Task<IActionResult> GetAsync([FromRoute] int id)
         {
             return Ok(await Mediator.Send(new GetDetailDesignacaoQuery { Id = id }));
         }
@@ -49,7 +49,7 @@ namespace Sheekr.WebApi.Controllers
 
         // PUT api/designacoes/5
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutAsync(int id, [FromBody] AtualizarDesignacaoCommand command)
+        public async Task<IActionResult> PutAsync([FromRoute] int id, [FromBody] AtualizarDesignacaoCommand command)
         {
             if (command == null || command.DesignacaoId != id)
             {
@@ -60,7 +60,7 @@ namespace Sheekr.WebApi.Controllers
 
         // DELETE api/designacoes/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteAsync(int id)
+        public async Task<IActionResult> DeleteAsync([FromRoute] int id)
         {
             await Mediator.Send(new CancelarDesignacaoCommand { Id = id });
 

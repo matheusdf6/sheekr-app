@@ -11,7 +11,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sheekr.Domain", "Sheekr.Dom
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sheekr.WebApi", "Sheekr.WebApi\Sheekr.WebApi.csproj", "{420C7628-3188-4AD4-8936-3FEA7BFB9D0B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sheekr.Infrastructure", "Sheekr.Infrastructure\Sheekr.Infrastructure.csproj", "{B8DDCAEA-24C0-4B02-A7C1-8822913B06C1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sheekr.Infrastructure", "Sheekr.Infrastructure\Sheekr.Infrastructure.csproj", "{B8DDCAEA-24C0-4B02-A7C1-8822913B06C1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

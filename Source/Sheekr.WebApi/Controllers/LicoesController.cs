@@ -18,21 +18,21 @@ namespace Sheekr.WebApi.Controllers
 
         // GET api/licoes/5
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetAsync(int id)
+        public async Task<IActionResult> GetAsync([FromRoute] int id)
         {
             return Ok(await Mediator.Send(new GetDetailLicaoQuery { Id = id }));
         }
 
         // POST api/licoes
         [HttpPost]
-        public async Task<IActionResult> PostAsync([FromBody]CriarLicaoCommand command)
+        public async Task<IActionResult> PostAsync([FromBody] CriarLicaoCommand command)
         {
             return Ok(await Mediator.Send(command));
         }
 
         // PUT api/licoes/5
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutAsync(int id, [FromBody] AtualizarLicaoCommand command)
+        public async Task<IActionResult> PutAsync([FromRoute] int id, [FromBody] AtualizarLicaoCommand command)
         {
             if (command == null || command.Id != id)
             {
@@ -43,7 +43,7 @@ namespace Sheekr.WebApi.Controllers
 
         // DELETE api/licoes/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteAsync(int id)
+        public async Task<IActionResult> DeleteAsync([FromRoute] int id)
         {
             await Mediator.Send(new DeletarLicaoCommand { Id = id });
 

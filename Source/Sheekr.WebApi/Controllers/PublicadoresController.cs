@@ -19,7 +19,7 @@ namespace Sheekr.WebApi.Controllers
 
         // GET api/publicador/5
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetAsync(int id)
+        public async Task<IActionResult> GetAsync([FromRoute] int id)
         {
             return Ok(await Mediator.Send(new GetDetailPublicadorQuery { PublicadorId = id }));
         }
@@ -33,7 +33,7 @@ namespace Sheekr.WebApi.Controllers
 
         // PUT api/publicador/5
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutAsync(int id, [FromBody] AtualizarPublicadorCommand command)
+        public async Task<IActionResult> PutAsync([FromRoute] int id, [FromBody] AtualizarPublicadorCommand command)
         {
             if (command == null || command.PublicadorId != id)
             {
@@ -44,7 +44,7 @@ namespace Sheekr.WebApi.Controllers
 
         // DELETE api/publicador/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteAsync(int id)
+        public async Task<IActionResult> DeleteAsync([FromRoute] int id)
         {
             await Mediator.Send(new DeletarPublicadorCommand { PublicadorId = id });
 

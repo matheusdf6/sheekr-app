@@ -40,3 +40,13 @@ C:\Users\mathe\Desktop\sheekr-app\sheekr-app\Source\Sheekr.WebApi\obj\Debug\netc
 C:\Users\mathe\Desktop\sheekr-app\sheekr-app\Source\Sheekr.WebApi\obj\Debug\netcoreapp2.2\Sheekr.WebApi.csproj.CopyComplete
 C:\Users\mathe\Desktop\sheekr-app\sheekr-app\Source\Sheekr.WebApi\obj\Debug\netcoreapp2.2\Sheekr.WebApi.dll
 C:\Users\mathe\Desktop\sheekr-app\sheekr-app\Source\Sheekr.WebApi\obj\Debug\netcoreapp2.2\Sheekr.WebApi.pdb
+C:\Users\mathe\Desktop\sheekr-app\sheekr-app\Source\Sheekr.WebApi\bin\Debug\netcoreapp2.2\Sheekr.WebApi.Views.dll
+C:\Users\mathe\Desktop\sheekr-app\sheekr-app\Source\Sheekr.WebApi\bin\Debug\netcoreapp2.2\Sheekr.WebApi.Views.pdb
+C:\Users\mathe\Desktop\sheekr-app\sheekr-app\Source\Sheekr.WebApi\bin\Debug\netcoreapp2.2\Sheekr.Infrastructure.dll
+C:\Users\mathe\Desktop\sheekr-app\sheekr-app\Source\Sheekr.WebApi\bin\Debug\netcoreapp2.2\Sheekr.Infrastructure.pdb
+C:\Users\mathe\Desktop\sheekr-app\sheekr-app\Source\Sheekr.WebApi\obj\Debug\netcoreapp2.2\Sheekr.WebApi.TagHelpers.input.cache
+C:\Users\mathe\Desktop\sheekr-app\sheekr-app\Source\Sheekr.WebApi\obj\Debug\netcoreapp2.2\Sheekr.WebApi.TagHelpers.output.cache
+C:\Users\mathe\Desktop\sheekr-app\sheekr-app\Source\Sheekr.WebApi\obj\Debug\netcoreapp2.2\Sheekr.WebApi.RazorCoreGenerate.cache
+C:\Users\mathe\Desktop\sheekr-app\sheekr-app\Source\Sheekr.WebApi\obj\Debug\netcoreapp2.2\Razor\Pages\_ViewImports.g.cshtml.cs
+C:\Users\mathe\Desktop\sheekr-app\sheekr-app\Source\Sheekr.WebApi\obj\Debug\netcoreapp2.2\Sheekr.WebApi.RazorTargetAssemblyInfo.cs
+C:\Users\mathe\Desktop\sheekr-app\sheekr-app\Source\Sheekr.WebApi\obj\Debug\netcoreapp2.2\Sheekr.WebApi.Views.pdb

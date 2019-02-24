@@ -1,15 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.SpaServices.ReactDevelopmentServer;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
 using FluentValidation;
 using FluentValidation.AspNetCore;
 using MediatR.Pipeline;
@@ -19,6 +13,7 @@ using Sheekr.Application.Escola.Alunos.Command;
 using Sheekr.Data;
 using Microsoft.EntityFrameworkCore;
 using System.Reflection;
+using NSwag.AspNetCore;
 
 namespace Sheekr.WebApi
 {
@@ -50,6 +45,23 @@ namespace Sheekr.WebApi
                 options.SuppressModelStateInvalidFilter = true;
             });
 
+            services.AddSwaggerDocument();
+            //services.AddSwaggerGen(config =>
+            //{
+            //    config.SwaggerDoc("v1", new Info { Title = "Sheekr API", Version = "v1" });
+            //});
+
+            //services.AddNodeServices(options =>
+            //{
+            //    options.ProjectPath = "clientapp";
+            //});
+
+            services.AddSpaStaticFiles(configuration =>
+            {
+                configuration.RootPath = "ClientApp/build";
+            });
+
+            
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -66,7 +78,26 @@ namespace Sheekr.WebApi
             }
 
             app.UseHttpsRedirection();
-            app.UseMvc();
+            app.UseSpaStaticFiles();
+            app.UseSwagger();
+            app.UseSwaggerUi3();
+
+            app.UseMvc(routes =>
+            {
+                routes.MapRoute(
+                    name: "default",
+                    template: "{controller}/{action=Index}/{id?}");
+            });
+
+            app.UseSpa(spa =>
+            {
+                spa.Options.SourcePath = "clientapp";
+
+                if (env.IsDevelopment())
+                {
+                    spa.UseProxyToSpaDevelopmentServer("http://localhost:3000");
+                }
+            });
         }
 
         public static void AddMediatR(IServiceCollection services)

@@ -1,0 +1,9 @@
+C:\Users\mathe\Desktop\sheekr-app\sheekr-app\Source\Sheekr.Infrastructure\bin\Debug\netcoreapp2.2\Sheekr.Infrastructure.deps.json
+C:\Users\mathe\Desktop\sheekr-app\sheekr-app\Source\Sheekr.Infrastructure\bin\Debug\netcoreapp2.2\Sheekr.Infrastructure.dll
+C:\Users\mathe\Desktop\sheekr-app\sheekr-app\Source\Sheekr.Infrastructure\bin\Debug\netcoreapp2.2\Sheekr.Infrastructure.pdb
+C:\Users\mathe\Desktop\sheekr-app\sheekr-app\Source\Sheekr.Infrastructure\obj\Debug\netcoreapp2.2\Sheekr.Infrastructure.csprojAssemblyReference.cache
+C:\Users\mathe\Desktop\sheekr-app\sheekr-app\Source\Sheekr.Infrastructure\obj\Debug\netcoreapp2.2\Sheekr.Infrastructure.csproj.CoreCompileInputs.cache
+C:\Users\mathe\Desktop\sheekr-app\sheekr-app\Source\Sheekr.Infrastructure\obj\Debug\netcoreapp2.2\Sheekr.Infrastructure.AssemblyInfoInputs.cache
+C:\Users\mathe\Desktop\sheekr-app\sheekr-app\Source\Sheekr.Infrastructure\obj\Debug\netcoreapp2.2\Sheekr.Infrastructure.AssemblyInfo.cs
+C:\Users\mathe\Desktop\sheekr-app\sheekr-app\Source\Sheekr.Infrastructure\obj\Debug\netcoreapp2.2\Sheekr.Infrastructure.dll
+C:\Users\mathe\Desktop\sheekr-app\sheekr-app\Source\Sheekr.Infrastructure\obj\Debug\netcoreapp2.2\Sheekr.Infrastructure.pdb

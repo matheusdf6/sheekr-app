@@ -26,3 +26,5 @@ C:\Users\mathe\Desktop\sheekr-app\sheekr-app\Source\Sheekr.Application\obj\Debug
 C:\Users\mathe\Desktop\sheekr-app\sheekr-app\Source\Sheekr.Application\obj\Debug\netcoreapp2.2\Sheekr.Application.csproj.CopyComplete
 C:\Users\mathe\Desktop\sheekr-app\sheekr-app\Source\Sheekr.Application\obj\Debug\netcoreapp2.2\Sheekr.Application.dll
 C:\Users\mathe\Desktop\sheekr-app\sheekr-app\Source\Sheekr.Application\obj\Debug\netcoreapp2.2\Sheekr.Application.pdb
+C:\Users\mathe\Desktop\sheekr-app\sheekr-app\Source\Sheekr.Application\bin\Debug\netcoreapp2.2\Sheekr.Infrastructure.dll
+C:\Users\mathe\Desktop\sheekr-app\sheekr-app\Source\Sheekr.Application\bin\Debug\netcoreapp2.2\Sheekr.Infrastructure.pdb
