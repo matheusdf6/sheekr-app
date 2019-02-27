@@ -61,7 +61,6 @@ namespace Sheekr.WebApi.Controllers
         public async Task<IActionResult> DeleteAsync([FromRoute] int id)
         {
             await Mediator.Send(new DeletarAlunoCommand { AlunoId = id });
-
             return NoContent();
         }
     }

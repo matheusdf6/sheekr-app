@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace Sheekr.Application.Publicadores.Query
 {
-    public class GetAllPublicadorQuery : IRequest<List<PublicadorDetailModel>>
+    public class GetAllPublicadorQuery : IRequest<RequestInfo<PublicadorListViewModel>>
     {
         
     }

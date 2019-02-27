@@ -29,6 +29,7 @@ namespace Sheekr.Data
         public DbSet<DiscursoFora> DiscursosFora { get; set; }
         public DbSet<DiscursoLocal> DiscursosLocal { get; set; }
 
+        public DbSet<Usuario> Usuarios { get; set; }
         public DbSet<InfoTables> Informacoes { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -46,6 +47,7 @@ namespace Sheekr.Data
             modelBuilder.ApplyConfiguration(new TemaConfiguration());
             modelBuilder.ApplyConfiguration(new DiscursoForaConfiguration());
             modelBuilder.ApplyConfiguration(new DiscursoLocalConfiguration());
+            modelBuilder.ApplyConfiguration(new UsuarioConfiguration());
             modelBuilder.Ignore<InfoTables>();
         }
     }

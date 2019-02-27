@@ -294,6 +294,38 @@ namespace Sheekr.Data.Migrations
                     b.ToTable("Territorios");
                 });
 
+            modelBuilder.Entity("Sheekr.Domain.Entities.Usuario", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnName("UsuarioId")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("FirstName")
+                        .IsRequired()
+                        .HasMaxLength(20);
+
+                    b.Property<byte[]>("HashedPassword")
+                        .IsRequired();
+
+                    b.Property<string>("LastName")
+                        .IsRequired()
+                        .HasMaxLength(20);
+
+                    b.Property<int>("Role");
+
+                    b.Property<byte[]>("Salt")
+                        .IsRequired();
+
+                    b.Property<string>("UserName")
+                        .IsRequired()
+                        .HasMaxLength(30);
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Usuarios");
+                });
+
             modelBuilder.Entity("Sheekr.Domain.Entities.Aluno", b =>
                 {
                     b.HasOne("Sheekr.Domain.Entities.Publicador", "DadosPublicador")

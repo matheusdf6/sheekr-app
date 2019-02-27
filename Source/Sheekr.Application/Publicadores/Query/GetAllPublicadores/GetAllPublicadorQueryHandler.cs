@@ -3,51 +3,63 @@ using Microsoft.EntityFrameworkCore;
 using Sheekr.Application.Exceptions;
 using Sheekr.Data;
 using Sheekr.Domain.Entities;
+using System;
 using System.Collections.Generic;
+using System.Data.Common;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
 namespace Sheekr.Application.Publicadores.Query
 {
-    public class GetAllPublicadorQueryHandler : IRequestHandler<GetAllPublicadorQuery, List<PublicadorDetailModel>>
+    public class GetAllPublicadorQueryHandler : IRequestHandler<GetAllPublicadorQuery, RequestInfo<PublicadorListViewModel>>
     {
         private readonly SheekrDbContext _db;
+        private readonly RequestInfo<PublicadorListViewModel> _info;
 
         public GetAllPublicadorQueryHandler(SheekrDbContext db)
         {
-            this._db = db; 
+            this._db = db;
+            this._info = new RequestInfo<PublicadorListViewModel>();
         }
 
-        public async Task<List<PublicadorDetailModel>> Handle(GetAllPublicadorQuery request, CancellationToken cancellationToken)
-        {
-            var publicadores = await _db.Publicadores
-                .Include(p => p.Aluno)
-                .Include(p => p.Dirigente)
-                .Include(p => p.Orador)
-                .ToListAsync();
-
-            if (publicadores == null)
-                throw new NenhumRegistroException(nameof(Publicador));
-
-            var list = new List<PublicadorDetailModel>(); 
-            foreach (var publicador in publicadores)
+        public async Task<RequestInfo<PublicadorListViewModel>> Handle(GetAllPublicadorQuery request, CancellationToken cancellationToken)
+        {          
+            try
             {
-                list.Add(new PublicadorDetailModel
+                var vm = new PublicadorListViewModel
                 {
-                    PublicadorId = publicador.PublicadorId,
-                    NomeCompleto = publicador.NomeCompleto,
-                    Sexo = publicador.Sexo.ToString(),
-                    Privilegio = publicador.Privilegio.ToString(),
-                    Telefone = publicador.Telefone,
-                    Email = publicador.Email,
-                    IsAluno = (publicador.Aluno != null),
-                    IsOrador = (publicador.Orador != null),
-                    IsDirigente = (publicador.Dirigente != null)
-                });
-            }
+                    Publicadores = await _db.Publicadores
+                                .Include(p => p.Aluno)
+                                .Include(p => p.Dirigente)
+                                .Include(p => p.Orador)
+                                .Select(p => new PublicadorDetailModel
+                                {
+                                    PublicadorId = p.PublicadorId,
+                                    NomeCompleto = p.NomeCompleto,
+                                    Sexo = p.Sexo.ToString(),
+                                    Privilegio = p.Privilegio.ToString(),
+                                    Telefone = p.Telefone,
+                                    Email = p.Email,
+                                    IsAluno = (p.Aluno != null),
+                                    IsOrador = (p.Orador != null),
+                                    IsDirigente = (p.Dirigente != null)
+                                })
+                                .ToListAsync()
+                };
 
-            return list;
+                _info.Sucess();
+                _info.AddResponde(vm);
+            }
+            catch (DbException ex)
+            {
+                _info.AddFailure("Erro ocorrido ao fazer conexão com banco de dados", ex);
+            }
+            catch (Exception ex)
+            {
+                _info.AddFailure($"Erro! Conferir descrição. ", ex);
+            }
+            return _info;
         }
     }
 

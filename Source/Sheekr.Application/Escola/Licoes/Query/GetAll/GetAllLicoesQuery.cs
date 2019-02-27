@@ -6,7 +6,8 @@ using Sheekr.Domain.Entities;
 
 namespace Sheekr.Application.Escola.Licoes.Query
 {
-    public class GetAllLicoesQuery : IRequest<List<Licao>>
+    public class GetAllLicoesQuery : IRequest<RequestInfo<LicaoListViewModel>>
     {
+
     }
 }

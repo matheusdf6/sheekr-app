@@ -55,12 +55,6 @@ namespace Sheekr.WebApi
             //{
             //    options.ProjectPath = "clientapp";
             //});
-
-            services.AddSpaStaticFiles(configuration =>
-            {
-                configuration.RootPath = "ClientApp/build";
-            });
-
             
         }
 
@@ -78,7 +72,6 @@ namespace Sheekr.WebApi
             }
 
             app.UseHttpsRedirection();
-            app.UseSpaStaticFiles();
             app.UseSwagger();
             app.UseSwaggerUi3();
 
@@ -87,16 +80,6 @@ namespace Sheekr.WebApi
                 routes.MapRoute(
                     name: "default",
                     template: "{controller}/{action=Index}/{id?}");
-            });
-
-            app.UseSpa(spa =>
-            {
-                spa.Options.SourcePath = "clientapp";
-
-                if (env.IsDevelopment())
-                {
-                    spa.UseProxyToSpaDevelopmentServer("http://localhost:3000");
-                }
             });
         }
 

@@ -1,0 +1,14 @@
+{
+  "ProjectFilePath": "c:\\Users\\mathe\\Desktop\\sheekr-app\\sheekr-app\\Source\\Sheekr.Application\\Sheekr.Application.csproj",
+  "TargetFramework": "netcoreapp2.2",
+  "TagHelpers": [],
+  "Configuration": {
+    "ConfigurationName": "UnsupportedRazor",
+    "LanguageVersion": "1.0",
+    "Extensions": [
+      {
+        "ExtensionName": "UnsupportedRazorExtension"
+      }
+    ]
+  }
+}

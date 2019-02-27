@@ -5,6 +5,9 @@ using FluentValidation;
 
 namespace Sheekr.Application.Escola.Alunos.Command
 { 
+    /// <summary>
+    /// Classe que valida os dados informados na classe "CriarAlunoCommand"
+    /// </summary>
     public class CriarAlunoCommandValidator : AbstractValidator<CriarAlunoCommand>
     {
         public CriarAlunoCommandValidator()

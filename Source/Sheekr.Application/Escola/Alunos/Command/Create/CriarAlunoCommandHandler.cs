@@ -1,42 +1,68 @@
-﻿using System.Threading;
+﻿using Microsoft.EntityFrameworkCore.Diagnostics;
+using System.Threading;
 using System.Threading.Tasks;
 using MediatR;
 using Sheekr.Domain.Entities;
 using Sheekr.Data;
 using Sheekr.Application.Exceptions;
+using System.Data.Common;
+using System;
 
 namespace Sheekr.Application.Escola.Alunos.Command
 {
-    public class CriarAlunoCommandHandler : IRequestHandler<CriarAlunoCommand, MediatR.Unit>
+    /// <summary>
+    /// Classe que faz o tratamento do comando "CriarAlunoCommand" dentro da pipeline MediatR
+    /// </summary>
+    public class CriarAlunoCommandHandler : IRequestHandler<CriarAlunoCommand, RequestInfo>
     {
         private readonly SheekrDbContext _db;
+        private readonly RequestInfo info;
 
         public CriarAlunoCommandHandler(SheekrDbContext db)
         {
             _db = db;
+            info = new RequestInfo();
         }
 
-        public async Task<Unit> Handle(CriarAlunoCommand request, CancellationToken cancellationToken)
+        /// <summary>
+        /// Tratamento do comando CriarAlunoCommand
+        /// </summary>
+        /// <param name="request">Um objeto que implementa "MediatR.IRequest"</param>
+        /// <param name="cancellationToken">Token para cancelamento da thread</param>
+        /// <returns></returns>
+        public async Task<RequestInfo> Handle(CriarAlunoCommand request, CancellationToken cancellationToken)
         {
-            var sucess = await _db.Publicadores.FindAsync(request.PublicadorId);
-            if (sucess == null)
-                throw new NaoEncontradoException(nameof(Publicador), request.PublicadorId);
-
-            var entity = new Aluno()
+            try
             {
-                AlunoId = request.AlunoId,
-                PublicadorId = request.PublicadorId,
-                FazLeitura = request.FazLeitura,
-                FazDemonstracao = request.FazDemonstracao,
-                FazDiscurso = request.FazDiscurso
-            };
+                if (await _db.Publicadores.FindAsync(request.PublicadorId) == null)
+                    throw new NaoEncontradoException(nameof(Publicador), request.PublicadorId);
 
-            _db.Alunos.Add(entity);
+                _db.Alunos.Add(new Aluno()
+                {
+                    AlunoId = request.AlunoId,
+                    PublicadorId = request.PublicadorId,
+                    FazLeitura = request.FazLeitura,
+                    FazDemonstracao = request.FazDemonstracao,
+                    FazDiscurso = request.FazDiscurso
+                });
 
-            await _db.SaveChangesAsync(cancellationToken);
+                await _db.SaveChangesAsync(cancellationToken);
+                info.Sucess();
+            }      
+            catch(NaoEncontradoException ex)
+            {
+                info.AddFailure("Não encontrado um publicador com a chave fornecida. É obrigatório informar um publicador já cadastrado", ex);
+            }
+            catch(DbException ex) 
+            {
+                info.AddFailure("Erro ocorrido ao fazer conexão com banco de dados", ex);
+            }
+            catch(Exception ex)
+            {
+                info.AddFailure($"Erro! Conferir descrição. ", ex);
+            }
 
-            return Unit.Value;
-
+            return info;
         }
     }
 }

@@ -9,41 +9,53 @@ using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Sheekr.Data;
+using System.Data.Common;
 
 namespace Sheekr.Application.Escola.Alunos.Query
 {
-    public class GetAllPublicadorQueryHandler : IRequestHandler<GetAllAlunosQuery, List<AlunoDetailsModel>>
+    public class GetAllAlunosQueryHandler : IRequestHandler<GetAllAlunosQuery, RequestInfo<AlunoListViewModel>>
     {
         private readonly SheekrDbContext _db;
+        private readonly RequestInfo<AlunoListViewModel> _info;
 
-        public GetAllPublicadorQueryHandler(SheekrDbContext db)
+        public GetAllAlunosQueryHandler(SheekrDbContext db)
         {
-            this._db = db; 
+            this._db = db;
+            this._info = new RequestInfo<AlunoListViewModel>();
         }
 
-        public async Task<List<AlunoDetailsModel>> Handle(GetAllAlunosQuery request, CancellationToken cancellationToken)
+        public async Task<RequestInfo<AlunoListViewModel>> Handle(GetAllAlunosQuery request, CancellationToken cancellationToken)
         {
-            var alunos = await _db.Alunos
-                .Include(a => a.DadosPublicador)
-                .ToListAsync();
-
-            if (alunos == null)
-                throw new NenhumRegistroException(nameof(Aluno));
-
-            var list = new List<AlunoDetailsModel>();
-            foreach(var aluno in alunos)
+            try
             {
-                list.Add(new AlunoDetailsModel
+                var vm = new AlunoListViewModel
                 {
-                    AlunoId = aluno.AlunoId,
-                    NomePublicador = aluno.DadosPublicador.NomeCompleto,
-                    FazDemonstracao = aluno.FazDemonstracao,
-                    FazDiscurso = aluno.FazDiscurso,
-                    FazLeitura = aluno.FazLeitura
-                });
+                    Alunos = await _db.Alunos
+                        .Include(a => a.DadosPublicador)
+                        .Select(a => new AlunoDetailsModel
+                        {
+                            AlunoId = a.AlunoId,
+                            NomePublicador = a.DadosPublicador.NomeCompleto,
+                            FazDemonstracao = a.FazDemonstracao,
+                            FazDiscurso = a.FazDiscurso,
+                            FazLeitura = a.FazLeitura
+                        })
+                        .ToListAsync()
+                };
+
+                _info.Sucess();
+                _info.AddResponde(vm);
+            }
+            catch (DbException ex)
+            {
+                _info.AddFailure("Erro ocorrido ao fazer conexão com banco de dados", ex);
+            }
+            catch (Exception ex)
+            {
+                _info.AddFailure($"Erro! Conferir descrição. ", ex);
             }
 
-            return list;
+            return _info;
         }
     }
 

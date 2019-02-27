@@ -4,7 +4,7 @@ using Sheekr.Domain.Enum;
 
 namespace Sheekr.Application.Publicadores.Command
 {
-    public class CriarPublicadorCommand : IRequest
+    public class CriarPublicadorCommand : IRequest<RequestInfo>
     {
         public int PublicadorId { get; set; }
         public string PrimeiroNome { get; set; }

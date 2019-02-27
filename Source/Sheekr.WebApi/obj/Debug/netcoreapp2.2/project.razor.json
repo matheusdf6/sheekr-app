@@ -1,0 +1,14 @@
+{
+  "ProjectFilePath": "c:\\Users\\mathe\\Desktop\\sheekr-app\\sheekr-app\\Source\\Sheekr.WebApi\\Sheekr.WebApi.csproj",
+  "TargetFramework": "netcoreapp2.2",
+  "TagHelpers": [],
+  "Configuration": {
+    "ConfigurationName": "MVC-2.1",
+    "LanguageVersion": "2.1",
+    "Extensions": [
+      {
+        "ExtensionName": "MVC-2.1"
+      }
+    ]
+  }
+}

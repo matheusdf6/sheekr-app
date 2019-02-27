@@ -6,7 +6,7 @@ using Sheekr.Domain.Enum;
 
 namespace Sheekr.Data.Configuration
 {
-    class PublicadorConfiguration : IEntityTypeConfiguration<Publicador>
+    public class PublicadorConfiguration : IEntityTypeConfiguration<Publicador>
     {
         public void Configure(EntityTypeBuilder<Publicador> builder)
         {

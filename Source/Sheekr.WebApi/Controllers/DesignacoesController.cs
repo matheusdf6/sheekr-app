@@ -16,7 +16,7 @@ namespace Sheekr.WebApi.Controllers
         [HttpGet]
         public async Task<IActionResult> GetAllAsync([FromQuery] int qtde)
         {
-            return Ok(await Mediator.Send(new GetAllDesignacoesQuery() { Quantity = qtde}));
+            return Ok(await Mediator.Send(new GetAllDesignacoesQuery()));
         }
 
         // GET api/designacoes/gerarpdf

@@ -6,8 +6,7 @@ using Sheekr.Domain.Enum;
 
 namespace Sheekr.Application.Escola.Desigacoes.Query
 {
-    public class GetAllDesignacoesQuery : IRequest<List<DesignacaoDetailModel>>
+    public class GetAllDesignacoesQuery : IRequest<RequestInfo<DesignacaoListViewModel>>
     {
-        public int? Quantity { get; set; }
     }
 }

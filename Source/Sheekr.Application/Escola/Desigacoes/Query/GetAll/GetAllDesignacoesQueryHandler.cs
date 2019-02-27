@@ -7,61 +7,62 @@ using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
+using System.Data.Common;
+using System;
 
 namespace Sheekr.Application.Escola.Desigacoes.Query
 {
     public class GetAllDesignacoesQueryHandler
-        : IRequestHandler<GetAllDesignacoesQuery, List<DesignacaoDetailModel>>
+        : IRequestHandler<GetAllDesignacoesQuery, RequestInfo<DesignacaoListViewModel>>
     {
         private readonly SheekrDbContext _db;
+        private readonly RequestInfo<DesignacaoListViewModel> _info;
 
         public GetAllDesignacoesQueryHandler(SheekrDbContext db)
         {
-            this._db = db; 
+            this._db = db;
+            this._info = new RequestInfo<DesignacaoListViewModel>();
         }
 
-        public async Task<List<DesignacaoDetailModel>> Handle(GetAllDesignacoesQuery request, CancellationToken cancellationToken)
+        public async Task<RequestInfo<DesignacaoListViewModel>> Handle(GetAllDesignacoesQuery request, CancellationToken cancellationToken)
         {
-            // TODO: Refatorar!
-            var qtde = request.Quantity ?? 0;
-            var designacoes = new List<Designacao>();
-            if (qtde == 0)
-                designacoes = await _db.Designacoes
-                    .Include(q => q.AlunoPrincipal)
-                        .ThenInclude(a => a.DadosPublicador)
-                    .Include(q => q.AlunoAjudante)
-                        .ThenInclude(a => a.DadosPublicador)
-                    .ToListAsync();
-            else
-                designacoes = await _db.Designacoes
-                    .Include(q => q.AlunoPrincipal)
-                        .ThenInclude(a => a.DadosPublicador)
-                    .Include(q => q.AlunoAjudante)
-                        .ThenInclude(a => a.DadosPublicador)
-                    .Take(qtde)
-                    .ToListAsync();
-
-            if (designacoes == null || designacoes.Count == 0)
-                throw new NenhumRegistroException(nameof(Desigacoes));
-
-            var list = new List<DesignacaoDetailModel>();
-            foreach(var designacao in designacoes)
+            try
             {
-                list.Add(new DesignacaoDetailModel
+                var vm = new DesignacaoListViewModel
                 {
-                    Id = designacao.DesignacaoId,
-                    NomePrincipal = designacao.AlunoPrincipal.DadosPublicador.NomeCompleto,
-                    NomeAjudante = (designacao.AlunoAjudante != null)
-                                    ? designacao.AlunoAjudante.DadosPublicador.NomeCompleto
-                                    : " ",
-                    Licao = designacao.LicaoId,
-                    Data = designacao.Data.ToShortDateString(),
-                    Local = designacao.Local.ToString(),
-                    Tipo = designacao.Tipo.ToString()
-                });
+                    Designacoes = await _db.Designacoes
+                        .Include(q => q.AlunoPrincipal)
+                            .ThenInclude(a => a.DadosPublicador)
+                        .Include(q => q.AlunoAjudante)
+                            .ThenInclude(a => a.DadosPublicador)
+                        .Select(d => new DesignacaoDetailModel
+                        {
+                            Id = d.DesignacaoId,
+                            NomePrincipal = d.AlunoPrincipal.DadosPublicador.NomeCompleto,
+                            NomeAjudante = (d.AlunoAjudante != null)
+                                        ? d.AlunoAjudante.DadosPublicador.NomeCompleto
+                                        : " ",
+                            Data = d.Data.ToShortDateString(),
+                            Licao = d.LicaoId,
+                            Local = d.Local.ToString(),
+                            Tipo = d.Tipo.ToString()
+                        })
+                        .ToListAsync()
+                };
+
+                _info.Sucess();
+                _info.AddResponde(vm);
+            }
+            catch (DbException ex)
+            {
+                _info.AddFailure("Erro ocorrido ao fazer conexão com banco de dados", ex);
+            }
+            catch (Exception ex)
+            {
+                _info.AddFailure($"Erro! Conferir descrição. ", ex);
             }
 
-            return list;
+            return _info;
         }
     }
 }
