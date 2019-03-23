@@ -33,6 +33,8 @@ namespace Sheekr.Application.Publicadores.Query
                                     .Select(p => new PublicadorDetailModel
                                     {
                                         PublicadorId = p.PublicadorId,
+                                        PrimeiroNome = p.PrimeiroNome,
+                                        UltimoNome = p.UltimoNome,
                                         NomeCompleto = p.NomeCompleto,
                                         Sexo = p.Sexo.ToString(),
                                         Privilegio = p.Privilegio.ToString(),

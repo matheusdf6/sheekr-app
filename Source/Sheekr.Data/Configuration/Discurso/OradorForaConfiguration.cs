@@ -15,7 +15,7 @@ namespace Sheekr.Data.Configuration
 
             builder.Property(o => o.OradorId)
                 .HasColumnName("OradorId")
-                .ValueGeneratedNever(); 
+                .ValueGeneratedOnAdd();
 
             builder.Property(o => o.PrimeiroNome)
                 .HasColumnType("varchar")
@@ -43,7 +43,7 @@ namespace Sheekr.Data.Configuration
                 .WithMany()
                 .HasForeignKey(o => o.CongregacaoId)
                 .HasConstraintName("FK_OradorFora_Congregacao")
-                .IsRequired();                 
+                .IsRequired();
         }
     }
 }

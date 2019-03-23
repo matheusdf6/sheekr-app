@@ -70,6 +70,7 @@ namespace Sheekr.WebApp
                  .AddFluentValidation(fv =>
                     fv.RegisterValidatorsFromAssemblyContaining<CriarAlunoCommand>());
 
+            services.AddCors();
 
             services.Configure<ApiBehaviorOptions>(options =>
             {
@@ -102,15 +103,22 @@ namespace Sheekr.WebApp
             }
             else
             {
+                app.UseSpaStaticFiles();
                 app.UseExceptionHandler("/Error");
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
 
             app.UseAuthentication();
-            app.UseHttpsRedirection();
+            //app.UseHttpsRedirection();
             app.UseStaticFiles();
-            app.UseSpaStaticFiles();
+
+            app.UseCors(config =>
+            {
+                config.AllowAnyHeader();
+                config.AllowAnyMethod();
+                config.AllowAnyOrigin();
+            });
 
             app.UseSwagger();
             app.UseSwaggerUi3();
@@ -128,7 +136,7 @@ namespace Sheekr.WebApp
 
                 if (env.IsDevelopment())
                 {
-                    spa.UseProxyToSpaDevelopmentServer("http://localhost:4200");
+                    spa.UseAngularCliServer(npmScript: "start");
                 }
             });
         }

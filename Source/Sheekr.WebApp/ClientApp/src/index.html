@@ -1,14 +1,98 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="utf-8">
-  <title>Sheekr.WebApp</title>
-  <base href="/">
+  <head>
+    <meta charset="utf-8" />
+    <title>Sheekr</title>
+    <base href="/" />
 
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="icon" type="image/x-icon" href="favicon.ico">
-</head>
-<body>
-  <app-root>Loading...</app-root>
-</body>
+    <style type="text/css">
+      html,
+      body {
+        width: 100%;
+      }
+      .app-loading {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+      }
+
+      .app-loading .spinner {
+        position: relative;
+        height: 250px;
+        width: 250px;
+      }
+
+      .app-loading .spinner .logo {
+        width: 100px;
+        height: 100px;
+        background: url(./assets/logo-icon100.png) center center no-repeat;
+        animation: enter 1s ease-in-out;
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        margin: auto;
+      }
+
+      .app-loading .spinner svg {
+        height: 200px;
+        width: 200px;
+        animation: rotate 2s ease-in-out infinite;
+        transform-origin: center center;
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        margin: auto;
+      }
+
+      @keyframes enter {
+        0% {
+          opacity: 0;
+        }
+        100% {
+          opacity: 1;
+        }
+      }
+
+      @keyframes rotate {
+        100% {
+          transform: rotate(360deg);
+        }
+      }
+    </style>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+  </head>
+  <body>
+    <app-root>
+      <div class="app-loading">
+        <div class="spinner">
+          <div class="logo"></div>
+          <svg
+            class="spinner"
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 100 100"
+            preserveAspectRatio="xMidYMid"
+            style="background: rgba(0, 0, 0, 0) none repeat scroll 0% 0%;"
+          >
+            <circle
+              cx="50"
+              cy="50"
+              fill="none"
+              stroke-linecap="round"
+              r="40"
+              stroke-width="2"
+              stroke="#bb002c"
+              stroke-dasharray="62.83185307179586 62.83185307179586"
+            ></circle>
+          </svg>
+        </div>
+      </div>
+    </app-root>
+  </body>
 </html>

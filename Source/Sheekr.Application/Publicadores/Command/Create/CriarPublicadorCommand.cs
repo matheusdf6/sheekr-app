@@ -6,7 +6,6 @@ namespace Sheekr.Application.Publicadores.Command
 {
     public class CriarPublicadorCommand : IRequest<RequestInfo>
     {
-        public int PublicadorId { get; set; }
         public string PrimeiroNome { get; set; }
         public string UltimoNome { get; set; }
         public string Email { get; set; }

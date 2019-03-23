@@ -26,7 +26,6 @@ namespace Sheekr.Application.Escola.Desigacoes.Command
             {
                 _db.Designacoes.Add(new Designacao()
                 {
-                    DesignacaoId = request.DesignacaoId,
                     LicaoId = request.LicaoId,
                     AlunoPrincipalId = request.AlunoPrincipalId,
                     AlunoAjudanteId = request.AlunoAjudanteId,

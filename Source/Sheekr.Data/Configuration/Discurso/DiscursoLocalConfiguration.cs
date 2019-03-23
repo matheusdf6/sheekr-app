@@ -15,7 +15,7 @@ namespace Sheekr.Data.Configuration
 
             builder.Property(d => d.DiscursoLocalId)
                 .HasColumnName("DiscursoLocalId")
-                .ValueGeneratedNever(); 
+                .ValueGeneratedOnAdd();
 
             builder.Property(d => d.Data)
                 .HasColumnType("date")
@@ -32,6 +32,7 @@ namespace Sheekr.Data.Configuration
                 .WithMany()
                 .HasForeignKey(d => d.TemaId)
                 .HasConstraintName("FK_DiscursoLocal_Tema")
+                .OnDelete(DeleteBehavior.Restrict)
                 .IsRequired();
 
             builder.HasOne(d => d.OradorLocal)

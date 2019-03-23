@@ -39,7 +39,6 @@ namespace Sheekr.Application.Escola.Alunos.Command
 
                 _db.Alunos.Add(new Aluno()
                 {
-                    AlunoId = request.AlunoId,
                     PublicadorId = request.PublicadorId,
                     FazLeitura = request.FazLeitura,
                     FazDemonstracao = request.FazDemonstracao,
@@ -48,16 +47,16 @@ namespace Sheekr.Application.Escola.Alunos.Command
 
                 await _db.SaveChangesAsync(cancellationToken);
                 info.Sucess();
-            }      
-            catch(NaoEncontradoException ex)
+            }
+            catch (NaoEncontradoException ex)
             {
                 info.AddFailure("Não encontrado um publicador com a chave fornecida. É obrigatório informar um publicador já cadastrado", ex);
             }
-            catch(DbException ex) 
+            catch (DbException ex)
             {
                 info.AddFailure("Erro ocorrido ao fazer conexão com banco de dados", ex);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 info.AddFailure($"Erro! Conferir descrição. ", ex);
             }

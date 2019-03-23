@@ -6,7 +6,6 @@ namespace Sheekr.Application.Escola.Desigacoes.Command
 {
     public class DesignarCommand : IRequest<RequestInfo>
     {
-        public int DesignacaoId { get; set; }
         public int LicaoId { get; set; }
         public int AlunoPrincipalId { get; set; }
         public int? AlunoAjudanteId { get; set; }

@@ -22,7 +22,9 @@ namespace Sheekr.Data.Migrations
             modelBuilder.Entity("Sheekr.Domain.Entities.Aluno", b =>
                 {
                     b.Property<int>("AlunoId")
-                        .HasColumnName("AlunoId");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnName("AlunoId")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<bool>("FazDemonstracao")
                         .HasColumnType("bit");
@@ -46,7 +48,9 @@ namespace Sheekr.Data.Migrations
             modelBuilder.Entity("Sheekr.Domain.Entities.Congregacao", b =>
                 {
                     b.Property<int>("CongregacaoId")
-                        .HasColumnName("CongregacaoId");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnName("CongregacaoId")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.HasKey("CongregacaoId");
 
@@ -56,7 +60,9 @@ namespace Sheekr.Data.Migrations
             modelBuilder.Entity("Sheekr.Domain.Entities.Designacao", b =>
                 {
                     b.Property<int>("DesignacaoId")
-                        .HasColumnName("DesignacaoId");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnName("DesignacaoId")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<int?>("AlunoAjudanteId");
 
@@ -87,7 +93,9 @@ namespace Sheekr.Data.Migrations
             modelBuilder.Entity("Sheekr.Domain.Entities.Dirigente", b =>
                 {
                     b.Property<int>("DirigenteId")
-                        .HasColumnName("DirigenteId");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnName("DirigenteId")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<int>("PublicadorId");
 
@@ -102,7 +110,9 @@ namespace Sheekr.Data.Migrations
             modelBuilder.Entity("Sheekr.Domain.Entities.DiscursoFora", b =>
                 {
                     b.Property<int>("DiscursoForaId")
-                        .HasColumnName("DiscursoLocalId");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnName("DiscursoLocalId")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<DateTime>("Data")
                         .HasColumnType("date");
@@ -123,7 +133,9 @@ namespace Sheekr.Data.Migrations
             modelBuilder.Entity("Sheekr.Domain.Entities.DiscursoLocal", b =>
                 {
                     b.Property<int>("DiscursoLocalId")
-                        .HasColumnName("DiscursoLocalId");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnName("DiscursoLocalId")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<int>("CongregacaoId");
 
@@ -162,7 +174,9 @@ namespace Sheekr.Data.Migrations
             modelBuilder.Entity("Sheekr.Domain.Entities.OradorFora", b =>
                 {
                     b.Property<int>("OradorId")
-                        .HasColumnName("OradorId");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnName("OradorId")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<int>("CongregacaoId");
 
@@ -197,7 +211,9 @@ namespace Sheekr.Data.Migrations
             modelBuilder.Entity("Sheekr.Domain.Entities.OradorLocal", b =>
                 {
                     b.Property<int>("OradorId")
-                        .HasColumnName("OradorId");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnName("OradorId")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<int>("CongregacaoId");
 
@@ -216,7 +232,9 @@ namespace Sheekr.Data.Migrations
             modelBuilder.Entity("Sheekr.Domain.Entities.Publicador", b =>
                 {
                     b.Property<int>("PublicadorId")
-                        .HasColumnName("PublicadorId");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnName("PublicadorId")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Email")
                         .HasMaxLength(60);
@@ -242,7 +260,9 @@ namespace Sheekr.Data.Migrations
             modelBuilder.Entity("Sheekr.Domain.Entities.Saida", b =>
                 {
                     b.Property<int>("SaidaId")
-                        .HasColumnName("SaidaId");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnName("SaidaId")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<DateTime>("Data")
                         .HasColumnType("date");
@@ -339,7 +359,9 @@ namespace Sheekr.Data.Migrations
                 {
                     b.OwnsOne("Sheekr.Domain.Entities.NomeCongregacao", "NomeCongregacao", b1 =>
                         {
-                            b1.Property<int>("CongregacaoId");
+                            b1.Property<int>("CongregacaoId")
+                                .ValueGeneratedOnAdd()
+                                .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                             b1.Property<string>("Cidade");
 
@@ -374,7 +396,7 @@ namespace Sheekr.Data.Migrations
                         .WithMany()
                         .HasForeignKey("LicaoId")
                         .HasConstraintName("FK_Designacao_Licao")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Restrict);
                 });
 
             modelBuilder.Entity("Sheekr.Domain.Entities.Dirigente", b =>
@@ -392,13 +414,13 @@ namespace Sheekr.Data.Migrations
                         .WithMany()
                         .HasForeignKey("OradorForaId")
                         .HasConstraintName("FK_DiscursoFora_OradorFora")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("Sheekr.Domain.Entities.Tema", "Tema")
                         .WithMany()
                         .HasForeignKey("TemaId")
                         .HasConstraintName("FK_DiscursoFora_Tema")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Restrict);
                 });
 
             modelBuilder.Entity("Sheekr.Domain.Entities.DiscursoLocal", b =>
@@ -419,7 +441,7 @@ namespace Sheekr.Data.Migrations
                         .WithMany()
                         .HasForeignKey("TemaId")
                         .HasConstraintName("FK_DiscursoLocal_Tema")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Restrict);
                 });
 
             modelBuilder.Entity("Sheekr.Domain.Entities.OradorFora", b =>
@@ -452,13 +474,13 @@ namespace Sheekr.Data.Migrations
                         .WithMany("Saidas")
                         .HasForeignKey("DirigenteId")
                         .HasConstraintName("FK_Saida_Dirigente")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("Sheekr.Domain.Entities.Territorio", "Territorio")
                         .WithMany("DiasTrabalhados")
                         .HasForeignKey("TerritorioId")
                         .HasConstraintName("FK_Saida_Territorio")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Restrict);
                 });
 #pragma warning restore 612, 618
         }

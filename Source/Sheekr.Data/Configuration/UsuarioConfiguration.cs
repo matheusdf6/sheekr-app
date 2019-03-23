@@ -15,7 +15,8 @@ namespace Sheekr.Data.Configuration
             builder.HasKey(u => u.Id);
 
             builder.Property(u => u.Id)
-                .HasColumnName("UsuarioId");
+                .HasColumnName("UsuarioId")
+                .ValueGeneratedOnAdd();
 
             builder.Property(u => u.FirstName)
                 .HasMaxLength(20)

@@ -1,0 +1,29 @@
+<nav class="box-shadow">
+  <div class="navbar-container">
+    <div class="app-nav-collapse">
+      <a class="btn-collapse" (click)="collapseMenu()">
+        <span class="oi icon" data-glyph="menu"></span>
+      </a>
+    </div>
+    <div class="app-nav-dash">
+      <button class="app-nav-button" routerLink="/home">
+        <span class="oi icon" data-glyph="home"></span>
+        <span class="title">Dashboard</span>
+      </button>
+    </div>
+    <div class="app-nav-brand">
+      <img src="../../assets/logo300.png" />
+    </div>
+    <div class="app-nav-user-box">
+      <div class="app-nav-user-info">
+        <span id="username">{{ user.userName }}</span>
+        <span id="role">{{ role }}</span>
+      </div>
+      <div class="app-nav-user-img">
+        <div class="app-nav-user-front">
+          <img src="../../assets/user.png" />
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>

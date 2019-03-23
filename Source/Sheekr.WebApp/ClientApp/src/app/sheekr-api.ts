@@ -14,11 +14,11 @@ import { HttpClient, HttpHeaders, HttpResponse, HttpResponseBase } from '@angula
 export const API_BASE_URL = new InjectionToken<string>('API_BASE_URL');
 
 export interface IAlunosClient {
-    getAll(): Observable<FileResponse>;
-    post(command: CriarAlunoCommand): Observable<FileResponse>;
-    get(id: number): Observable<FileResponse>;
-    put(id: number, command: AtualizarAlunoCommand): Observable<FileResponse>;
-    delete(id: number): Observable<FileResponse>;
+    getAll(): Observable<RequestInfoOfAlunoListViewModel | null>;
+    post(command: CriarAlunoCommand): Observable<RequestInfo | null>;
+    get(id: number): Observable<RequestInfoOfAlunoDetailsModel | null>;
+    put(id: number, command: AtualizarAlunoCommand): Observable<RequestInfo | null>;
+    delete(id: number): Observable<RequestInfo | null>;
 }
 
 @Injectable()
@@ -32,7 +32,7 @@ export class AlunosClient implements IAlunosClient {
         this.baseUrl = baseUrl ? baseUrl : "";
     }
 
-    getAll(): Observable<FileResponse> {
+    getAll(): Observable<RequestInfoOfAlunoListViewModel | null> {
         let url_ = this.baseUrl + "/api/Alunos";
         url_ = url_.replace(/[?&]$/, "");
 
@@ -51,34 +51,36 @@ export class AlunosClient implements IAlunosClient {
                 try {
                     return this.processGetAll(<any>response_);
                 } catch (e) {
-                    return <Observable<FileResponse>><any>_observableThrow(e);
+                    return <Observable<RequestInfoOfAlunoListViewModel | null>><any>_observableThrow(e);
                 }
             } else
-                return <Observable<FileResponse>><any>_observableThrow(response_);
+                return <Observable<RequestInfoOfAlunoListViewModel | null>><any>_observableThrow(response_);
         }));
     }
 
-    protected processGetAll(response: HttpResponseBase): Observable<FileResponse> {
+    protected processGetAll(response: HttpResponseBase): Observable<RequestInfoOfAlunoListViewModel | null> {
         const status = response.status;
         const responseBlob = 
             response instanceof HttpResponse ? response.body : 
             (<any>response).error instanceof Blob ? (<any>response).error : undefined;
 
         let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }};
-        if (status === 200 || status === 206) {
-            const contentDisposition = response.headers ? response.headers.get("content-disposition") : undefined;
-            const fileNameMatch = contentDisposition ? /filename="?([^"]*?)"?(;|$)/g.exec(contentDisposition) : undefined;
-            const fileName = fileNameMatch && fileNameMatch.length > 1 ? fileNameMatch[1] : undefined;
-            return _observableOf({ fileName: fileName, data: <any>responseBlob, status: status, headers: _headers });
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = resultData200 ? RequestInfoOfAlunoListViewModel.fromJS(resultData200) : <any>null;
+            return _observableOf(result200);
+            }));
         } else if (status !== 200 && status !== 204) {
             return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
             return throwException("An unexpected server error occurred.", status, _responseText, _headers);
             }));
         }
-        return _observableOf<FileResponse>(<any>null);
+        return _observableOf<RequestInfoOfAlunoListViewModel | null>(<any>null);
     }
 
-    post(command: CriarAlunoCommand): Observable<FileResponse> {
+    post(command: CriarAlunoCommand): Observable<RequestInfo | null> {
         let url_ = this.baseUrl + "/api/Alunos";
         url_ = url_.replace(/[?&]$/, "");
 
@@ -101,34 +103,36 @@ export class AlunosClient implements IAlunosClient {
                 try {
                     return this.processPost(<any>response_);
                 } catch (e) {
-                    return <Observable<FileResponse>><any>_observableThrow(e);
+                    return <Observable<RequestInfo | null>><any>_observableThrow(e);
                 }
             } else
-                return <Observable<FileResponse>><any>_observableThrow(response_);
+                return <Observable<RequestInfo | null>><any>_observableThrow(response_);
         }));
     }
 
-    protected processPost(response: HttpResponseBase): Observable<FileResponse> {
+    protected processPost(response: HttpResponseBase): Observable<RequestInfo | null> {
         const status = response.status;
         const responseBlob = 
             response instanceof HttpResponse ? response.body : 
             (<any>response).error instanceof Blob ? (<any>response).error : undefined;
 
         let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }};
-        if (status === 200 || status === 206) {
-            const contentDisposition = response.headers ? response.headers.get("content-disposition") : undefined;
-            const fileNameMatch = contentDisposition ? /filename="?([^"]*?)"?(;|$)/g.exec(contentDisposition) : undefined;
-            const fileName = fileNameMatch && fileNameMatch.length > 1 ? fileNameMatch[1] : undefined;
-            return _observableOf({ fileName: fileName, data: <any>responseBlob, status: status, headers: _headers });
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = resultData200 ? RequestInfo.fromJS(resultData200) : <any>null;
+            return _observableOf(result200);
+            }));
         } else if (status !== 200 && status !== 204) {
             return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
             return throwException("An unexpected server error occurred.", status, _responseText, _headers);
             }));
         }
-        return _observableOf<FileResponse>(<any>null);
+        return _observableOf<RequestInfo | null>(<any>null);
     }
 
-    get(id: number): Observable<FileResponse> {
+    get(id: number): Observable<RequestInfoOfAlunoDetailsModel | null> {
         let url_ = this.baseUrl + "/api/Alunos/{id}";
         if (id === undefined || id === null)
             throw new Error("The parameter 'id' must be defined.");
@@ -150,34 +154,36 @@ export class AlunosClient implements IAlunosClient {
                 try {
                     return this.processGet(<any>response_);
                 } catch (e) {
-                    return <Observable<FileResponse>><any>_observableThrow(e);
+                    return <Observable<RequestInfoOfAlunoDetailsModel | null>><any>_observableThrow(e);
                 }
             } else
-                return <Observable<FileResponse>><any>_observableThrow(response_);
+                return <Observable<RequestInfoOfAlunoDetailsModel | null>><any>_observableThrow(response_);
         }));
     }
 
-    protected processGet(response: HttpResponseBase): Observable<FileResponse> {
+    protected processGet(response: HttpResponseBase): Observable<RequestInfoOfAlunoDetailsModel | null> {
         const status = response.status;
         const responseBlob = 
             response instanceof HttpResponse ? response.body : 
             (<any>response).error instanceof Blob ? (<any>response).error : undefined;
 
         let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }};
-        if (status === 200 || status === 206) {
-            const contentDisposition = response.headers ? response.headers.get("content-disposition") : undefined;
-            const fileNameMatch = contentDisposition ? /filename="?([^"]*?)"?(;|$)/g.exec(contentDisposition) : undefined;
-            const fileName = fileNameMatch && fileNameMatch.length > 1 ? fileNameMatch[1] : undefined;
-            return _observableOf({ fileName: fileName, data: <any>responseBlob, status: status, headers: _headers });
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = resultData200 ? RequestInfoOfAlunoDetailsModel.fromJS(resultData200) : <any>null;
+            return _observableOf(result200);
+            }));
         } else if (status !== 200 && status !== 204) {
             return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
             return throwException("An unexpected server error occurred.", status, _responseText, _headers);
             }));
         }
-        return _observableOf<FileResponse>(<any>null);
+        return _observableOf<RequestInfoOfAlunoDetailsModel | null>(<any>null);
     }
 
-    put(id: number, command: AtualizarAlunoCommand): Observable<FileResponse> {
+    put(id: number, command: AtualizarAlunoCommand): Observable<RequestInfo | null> {
         let url_ = this.baseUrl + "/api/Alunos/{id}";
         if (id === undefined || id === null)
             throw new Error("The parameter 'id' must be defined.");
@@ -203,34 +209,43 @@ export class AlunosClient implements IAlunosClient {
                 try {
                     return this.processPut(<any>response_);
                 } catch (e) {
-                    return <Observable<FileResponse>><any>_observableThrow(e);
+                    return <Observable<RequestInfo | null>><any>_observableThrow(e);
                 }
             } else
-                return <Observable<FileResponse>><any>_observableThrow(response_);
+                return <Observable<RequestInfo | null>><any>_observableThrow(response_);
         }));
     }
 
-    protected processPut(response: HttpResponseBase): Observable<FileResponse> {
+    protected processPut(response: HttpResponseBase): Observable<RequestInfo | null> {
         const status = response.status;
         const responseBlob = 
             response instanceof HttpResponse ? response.body : 
             (<any>response).error instanceof Blob ? (<any>response).error : undefined;
 
         let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }};
-        if (status === 200 || status === 206) {
-            const contentDisposition = response.headers ? response.headers.get("content-disposition") : undefined;
-            const fileNameMatch = contentDisposition ? /filename="?([^"]*?)"?(;|$)/g.exec(contentDisposition) : undefined;
-            const fileName = fileNameMatch && fileNameMatch.length > 1 ? fileNameMatch[1] : undefined;
-            return _observableOf({ fileName: fileName, data: <any>responseBlob, status: status, headers: _headers });
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = resultData200 ? RequestInfo.fromJS(resultData200) : <any>null;
+            return _observableOf(result200);
+            }));
+        } else if (status === 400) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result400: any = null;
+            let resultData400 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result400 = resultData400 ? ProblemDetails.fromJS(resultData400) : <any>null;
+            return throwException("A server error occurred.", status, _responseText, _headers, result400);
+            }));
         } else if (status !== 200 && status !== 204) {
             return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
             return throwException("An unexpected server error occurred.", status, _responseText, _headers);
             }));
         }
-        return _observableOf<FileResponse>(<any>null);
+        return _observableOf<RequestInfo | null>(<any>null);
     }
 
-    delete(id: number): Observable<FileResponse> {
+    delete(id: number): Observable<RequestInfo | null> {
         let url_ = this.baseUrl + "/api/Alunos/{id}";
         if (id === undefined || id === null)
             throw new Error("The parameter 'id' must be defined.");
@@ -252,41 +267,43 @@ export class AlunosClient implements IAlunosClient {
                 try {
                     return this.processDelete(<any>response_);
                 } catch (e) {
-                    return <Observable<FileResponse>><any>_observableThrow(e);
+                    return <Observable<RequestInfo | null>><any>_observableThrow(e);
                 }
             } else
-                return <Observable<FileResponse>><any>_observableThrow(response_);
+                return <Observable<RequestInfo | null>><any>_observableThrow(response_);
         }));
     }
 
-    protected processDelete(response: HttpResponseBase): Observable<FileResponse> {
+    protected processDelete(response: HttpResponseBase): Observable<RequestInfo | null> {
         const status = response.status;
         const responseBlob = 
             response instanceof HttpResponse ? response.body : 
             (<any>response).error instanceof Blob ? (<any>response).error : undefined;
 
         let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }};
-        if (status === 200 || status === 206) {
-            const contentDisposition = response.headers ? response.headers.get("content-disposition") : undefined;
-            const fileNameMatch = contentDisposition ? /filename="?([^"]*?)"?(;|$)/g.exec(contentDisposition) : undefined;
-            const fileName = fileNameMatch && fileNameMatch.length > 1 ? fileNameMatch[1] : undefined;
-            return _observableOf({ fileName: fileName, data: <any>responseBlob, status: status, headers: _headers });
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = resultData200 ? RequestInfo.fromJS(resultData200) : <any>null;
+            return _observableOf(result200);
+            }));
         } else if (status !== 200 && status !== 204) {
             return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
             return throwException("An unexpected server error occurred.", status, _responseText, _headers);
             }));
         }
-        return _observableOf<FileResponse>(<any>null);
+        return _observableOf<RequestInfo | null>(<any>null);
     }
 }
 
 export interface IDesignacoesClient {
-    getAll(qtde: number): Observable<FileResponse>;
-    post(command: DesignarCommand): Observable<FileResponse>;
-    gerarPdf(command: PdfGenerateCommand): Observable<FileResponse>;
-    get(id: number): Observable<FileResponse>;
-    put(id: number, command: AtualizarDesignacaoCommand): Observable<FileResponse>;
-    delete(id: number): Observable<FileResponse>;
+    getAll(qtde: number): Observable<RequestInfoOfDesignacaoListViewModel | null>;
+    post(command: DesignarCommand): Observable<RequestInfo | null>;
+    gerarPdf(command: PdfGenerateCommand): Observable<File | null>;
+    get(id: number): Observable<RequestInfoOfDesignacaoDetailModel | null>;
+    put(id: number, command: AtualizarDesignacaoCommand): Observable<RequestInfo | null>;
+    delete(id: number): Observable<RequestInfo | null>;
 }
 
 @Injectable()
@@ -300,7 +317,7 @@ export class DesignacoesClient implements IDesignacoesClient {
         this.baseUrl = baseUrl ? baseUrl : "";
     }
 
-    getAll(qtde: number): Observable<FileResponse> {
+    getAll(qtde: number): Observable<RequestInfoOfDesignacaoListViewModel | null> {
         let url_ = this.baseUrl + "/api/Designacoes?";
         if (qtde === undefined || qtde === null)
             throw new Error("The parameter 'qtde' must be defined and cannot be null.");
@@ -323,34 +340,36 @@ export class DesignacoesClient implements IDesignacoesClient {
                 try {
                     return this.processGetAll(<any>response_);
                 } catch (e) {
-                    return <Observable<FileResponse>><any>_observableThrow(e);
+                    return <Observable<RequestInfoOfDesignacaoListViewModel | null>><any>_observableThrow(e);
                 }
             } else
-                return <Observable<FileResponse>><any>_observableThrow(response_);
+                return <Observable<RequestInfoOfDesignacaoListViewModel | null>><any>_observableThrow(response_);
         }));
     }
 
-    protected processGetAll(response: HttpResponseBase): Observable<FileResponse> {
+    protected processGetAll(response: HttpResponseBase): Observable<RequestInfoOfDesignacaoListViewModel | null> {
         const status = response.status;
         const responseBlob = 
             response instanceof HttpResponse ? response.body : 
             (<any>response).error instanceof Blob ? (<any>response).error : undefined;
 
         let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }};
-        if (status === 200 || status === 206) {
-            const contentDisposition = response.headers ? response.headers.get("content-disposition") : undefined;
-            const fileNameMatch = contentDisposition ? /filename="?([^"]*?)"?(;|$)/g.exec(contentDisposition) : undefined;
-            const fileName = fileNameMatch && fileNameMatch.length > 1 ? fileNameMatch[1] : undefined;
-            return _observableOf({ fileName: fileName, data: <any>responseBlob, status: status, headers: _headers });
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = resultData200 ? RequestInfoOfDesignacaoListViewModel.fromJS(resultData200) : <any>null;
+            return _observableOf(result200);
+            }));
         } else if (status !== 200 && status !== 204) {
             return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
             return throwException("An unexpected server error occurred.", status, _responseText, _headers);
             }));
         }
-        return _observableOf<FileResponse>(<any>null);
+        return _observableOf<RequestInfoOfDesignacaoListViewModel | null>(<any>null);
     }
 
-    post(command: DesignarCommand): Observable<FileResponse> {
+    post(command: DesignarCommand): Observable<RequestInfo | null> {
         let url_ = this.baseUrl + "/api/Designacoes";
         url_ = url_.replace(/[?&]$/, "");
 
@@ -373,34 +392,36 @@ export class DesignacoesClient implements IDesignacoesClient {
                 try {
                     return this.processPost(<any>response_);
                 } catch (e) {
-                    return <Observable<FileResponse>><any>_observableThrow(e);
+                    return <Observable<RequestInfo | null>><any>_observableThrow(e);
                 }
             } else
-                return <Observable<FileResponse>><any>_observableThrow(response_);
+                return <Observable<RequestInfo | null>><any>_observableThrow(response_);
         }));
     }
 
-    protected processPost(response: HttpResponseBase): Observable<FileResponse> {
+    protected processPost(response: HttpResponseBase): Observable<RequestInfo | null> {
         const status = response.status;
         const responseBlob = 
             response instanceof HttpResponse ? response.body : 
             (<any>response).error instanceof Blob ? (<any>response).error : undefined;
 
         let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }};
-        if (status === 200 || status === 206) {
-            const contentDisposition = response.headers ? response.headers.get("content-disposition") : undefined;
-            const fileNameMatch = contentDisposition ? /filename="?([^"]*?)"?(;|$)/g.exec(contentDisposition) : undefined;
-            const fileName = fileNameMatch && fileNameMatch.length > 1 ? fileNameMatch[1] : undefined;
-            return _observableOf({ fileName: fileName, data: <any>responseBlob, status: status, headers: _headers });
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = resultData200 ? RequestInfo.fromJS(resultData200) : <any>null;
+            return _observableOf(result200);
+            }));
         } else if (status !== 200 && status !== 204) {
             return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
             return throwException("An unexpected server error occurred.", status, _responseText, _headers);
             }));
         }
-        return _observableOf<FileResponse>(<any>null);
+        return _observableOf<RequestInfo | null>(<any>null);
     }
 
-    gerarPdf(command: PdfGenerateCommand): Observable<FileResponse> {
+    gerarPdf(command: PdfGenerateCommand): Observable<File | null> {
         let url_ = this.baseUrl + "/api/Designacoes/GerarPdf";
         url_ = url_.replace(/[?&]$/, "");
 
@@ -423,34 +444,36 @@ export class DesignacoesClient implements IDesignacoesClient {
                 try {
                     return this.processGerarPdf(<any>response_);
                 } catch (e) {
-                    return <Observable<FileResponse>><any>_observableThrow(e);
+                    return <Observable<File | null>><any>_observableThrow(e);
                 }
             } else
-                return <Observable<FileResponse>><any>_observableThrow(response_);
+                return <Observable<File | null>><any>_observableThrow(response_);
         }));
     }
 
-    protected processGerarPdf(response: HttpResponseBase): Observable<FileResponse> {
+    protected processGerarPdf(response: HttpResponseBase): Observable<File | null> {
         const status = response.status;
         const responseBlob = 
             response instanceof HttpResponse ? response.body : 
             (<any>response).error instanceof Blob ? (<any>response).error : undefined;
 
         let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }};
-        if (status === 200 || status === 206) {
-            const contentDisposition = response.headers ? response.headers.get("content-disposition") : undefined;
-            const fileNameMatch = contentDisposition ? /filename="?([^"]*?)"?(;|$)/g.exec(contentDisposition) : undefined;
-            const fileName = fileNameMatch && fileNameMatch.length > 1 ? fileNameMatch[1] : undefined;
-            return _observableOf({ fileName: fileName, data: <any>responseBlob, status: status, headers: _headers });
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = resultData200 ? File.fromJS(resultData200) : <any>null;
+            return _observableOf(result200);
+            }));
         } else if (status !== 200 && status !== 204) {
             return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
             return throwException("An unexpected server error occurred.", status, _responseText, _headers);
             }));
         }
-        return _observableOf<FileResponse>(<any>null);
+        return _observableOf<File | null>(<any>null);
     }
 
-    get(id: number): Observable<FileResponse> {
+    get(id: number): Observable<RequestInfoOfDesignacaoDetailModel | null> {
         let url_ = this.baseUrl + "/api/Designacoes/{id}";
         if (id === undefined || id === null)
             throw new Error("The parameter 'id' must be defined.");
@@ -472,34 +495,36 @@ export class DesignacoesClient implements IDesignacoesClient {
                 try {
                     return this.processGet(<any>response_);
                 } catch (e) {
-                    return <Observable<FileResponse>><any>_observableThrow(e);
+                    return <Observable<RequestInfoOfDesignacaoDetailModel | null>><any>_observableThrow(e);
                 }
             } else
-                return <Observable<FileResponse>><any>_observableThrow(response_);
+                return <Observable<RequestInfoOfDesignacaoDetailModel | null>><any>_observableThrow(response_);
         }));
     }
 
-    protected processGet(response: HttpResponseBase): Observable<FileResponse> {
+    protected processGet(response: HttpResponseBase): Observable<RequestInfoOfDesignacaoDetailModel | null> {
         const status = response.status;
         const responseBlob = 
             response instanceof HttpResponse ? response.body : 
             (<any>response).error instanceof Blob ? (<any>response).error : undefined;
 
         let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }};
-        if (status === 200 || status === 206) {
-            const contentDisposition = response.headers ? response.headers.get("content-disposition") : undefined;
-            const fileNameMatch = contentDisposition ? /filename="?([^"]*?)"?(;|$)/g.exec(contentDisposition) : undefined;
-            const fileName = fileNameMatch && fileNameMatch.length > 1 ? fileNameMatch[1] : undefined;
-            return _observableOf({ fileName: fileName, data: <any>responseBlob, status: status, headers: _headers });
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = resultData200 ? RequestInfoOfDesignacaoDetailModel.fromJS(resultData200) : <any>null;
+            return _observableOf(result200);
+            }));
         } else if (status !== 200 && status !== 204) {
             return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
             return throwException("An unexpected server error occurred.", status, _responseText, _headers);
             }));
         }
-        return _observableOf<FileResponse>(<any>null);
+        return _observableOf<RequestInfoOfDesignacaoDetailModel | null>(<any>null);
     }
 
-    put(id: number, command: AtualizarDesignacaoCommand): Observable<FileResponse> {
+    put(id: number, command: AtualizarDesignacaoCommand): Observable<RequestInfo | null> {
         let url_ = this.baseUrl + "/api/Designacoes/{id}";
         if (id === undefined || id === null)
             throw new Error("The parameter 'id' must be defined.");
@@ -525,34 +550,43 @@ export class DesignacoesClient implements IDesignacoesClient {
                 try {
                     return this.processPut(<any>response_);
                 } catch (e) {
-                    return <Observable<FileResponse>><any>_observableThrow(e);
+                    return <Observable<RequestInfo | null>><any>_observableThrow(e);
                 }
             } else
-                return <Observable<FileResponse>><any>_observableThrow(response_);
+                return <Observable<RequestInfo | null>><any>_observableThrow(response_);
         }));
     }
 
-    protected processPut(response: HttpResponseBase): Observable<FileResponse> {
+    protected processPut(response: HttpResponseBase): Observable<RequestInfo | null> {
         const status = response.status;
         const responseBlob = 
             response instanceof HttpResponse ? response.body : 
             (<any>response).error instanceof Blob ? (<any>response).error : undefined;
 
         let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }};
-        if (status === 200 || status === 206) {
-            const contentDisposition = response.headers ? response.headers.get("content-disposition") : undefined;
-            const fileNameMatch = contentDisposition ? /filename="?([^"]*?)"?(;|$)/g.exec(contentDisposition) : undefined;
-            const fileName = fileNameMatch && fileNameMatch.length > 1 ? fileNameMatch[1] : undefined;
-            return _observableOf({ fileName: fileName, data: <any>responseBlob, status: status, headers: _headers });
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = resultData200 ? RequestInfo.fromJS(resultData200) : <any>null;
+            return _observableOf(result200);
+            }));
+        } else if (status === 400) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result400: any = null;
+            let resultData400 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result400 = resultData400 ? ProblemDetails.fromJS(resultData400) : <any>null;
+            return throwException("A server error occurred.", status, _responseText, _headers, result400);
+            }));
         } else if (status !== 200 && status !== 204) {
             return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
             return throwException("An unexpected server error occurred.", status, _responseText, _headers);
             }));
         }
-        return _observableOf<FileResponse>(<any>null);
+        return _observableOf<RequestInfo | null>(<any>null);
     }
 
-    delete(id: number): Observable<FileResponse> {
+    delete(id: number): Observable<RequestInfo | null> {
         let url_ = this.baseUrl + "/api/Designacoes/{id}";
         if (id === undefined || id === null)
             throw new Error("The parameter 'id' must be defined.");
@@ -574,40 +608,42 @@ export class DesignacoesClient implements IDesignacoesClient {
                 try {
                     return this.processDelete(<any>response_);
                 } catch (e) {
-                    return <Observable<FileResponse>><any>_observableThrow(e);
+                    return <Observable<RequestInfo | null>><any>_observableThrow(e);
                 }
             } else
-                return <Observable<FileResponse>><any>_observableThrow(response_);
+                return <Observable<RequestInfo | null>><any>_observableThrow(response_);
         }));
     }
 
-    protected processDelete(response: HttpResponseBase): Observable<FileResponse> {
+    protected processDelete(response: HttpResponseBase): Observable<RequestInfo | null> {
         const status = response.status;
         const responseBlob = 
             response instanceof HttpResponse ? response.body : 
             (<any>response).error instanceof Blob ? (<any>response).error : undefined;
 
         let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }};
-        if (status === 200 || status === 206) {
-            const contentDisposition = response.headers ? response.headers.get("content-disposition") : undefined;
-            const fileNameMatch = contentDisposition ? /filename="?([^"]*?)"?(;|$)/g.exec(contentDisposition) : undefined;
-            const fileName = fileNameMatch && fileNameMatch.length > 1 ? fileNameMatch[1] : undefined;
-            return _observableOf({ fileName: fileName, data: <any>responseBlob, status: status, headers: _headers });
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = resultData200 ? RequestInfo.fromJS(resultData200) : <any>null;
+            return _observableOf(result200);
+            }));
         } else if (status !== 200 && status !== 204) {
             return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
             return throwException("An unexpected server error occurred.", status, _responseText, _headers);
             }));
         }
-        return _observableOf<FileResponse>(<any>null);
+        return _observableOf<RequestInfo | null>(<any>null);
     }
 }
 
 export interface ILicoesClient {
-    getAll(): Observable<FileResponse>;
-    post(command: CriarLicaoCommand): Observable<FileResponse>;
-    get(id: number): Observable<FileResponse>;
-    put(id: number, command: AtualizarLicaoCommand): Observable<FileResponse>;
-    delete(id: number): Observable<FileResponse>;
+    getAll(): Observable<RequestInfoOfLicaoListViewModel | null>;
+    post(command: CriarLicaoCommand): Observable<RequestInfo | null>;
+    get(id: number): Observable<RequestInfoOfLicao | null>;
+    put(id: number, command: AtualizarLicaoCommand): Observable<RequestInfo | null>;
+    delete(id: number): Observable<RequestInfo | null>;
 }
 
 @Injectable()
@@ -621,7 +657,7 @@ export class LicoesClient implements ILicoesClient {
         this.baseUrl = baseUrl ? baseUrl : "";
     }
 
-    getAll(): Observable<FileResponse> {
+    getAll(): Observable<RequestInfoOfLicaoListViewModel | null> {
         let url_ = this.baseUrl + "/api/Licoes";
         url_ = url_.replace(/[?&]$/, "");
 
@@ -640,34 +676,36 @@ export class LicoesClient implements ILicoesClient {
                 try {
                     return this.processGetAll(<any>response_);
                 } catch (e) {
-                    return <Observable<FileResponse>><any>_observableThrow(e);
+                    return <Observable<RequestInfoOfLicaoListViewModel | null>><any>_observableThrow(e);
                 }
             } else
-                return <Observable<FileResponse>><any>_observableThrow(response_);
+                return <Observable<RequestInfoOfLicaoListViewModel | null>><any>_observableThrow(response_);
         }));
     }
 
-    protected processGetAll(response: HttpResponseBase): Observable<FileResponse> {
+    protected processGetAll(response: HttpResponseBase): Observable<RequestInfoOfLicaoListViewModel | null> {
         const status = response.status;
         const responseBlob = 
             response instanceof HttpResponse ? response.body : 
             (<any>response).error instanceof Blob ? (<any>response).error : undefined;
 
         let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }};
-        if (status === 200 || status === 206) {
-            const contentDisposition = response.headers ? response.headers.get("content-disposition") : undefined;
-            const fileNameMatch = contentDisposition ? /filename="?([^"]*?)"?(;|$)/g.exec(contentDisposition) : undefined;
-            const fileName = fileNameMatch && fileNameMatch.length > 1 ? fileNameMatch[1] : undefined;
-            return _observableOf({ fileName: fileName, data: <any>responseBlob, status: status, headers: _headers });
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = resultData200 ? RequestInfoOfLicaoListViewModel.fromJS(resultData200) : <any>null;
+            return _observableOf(result200);
+            }));
         } else if (status !== 200 && status !== 204) {
             return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
             return throwException("An unexpected server error occurred.", status, _responseText, _headers);
             }));
         }
-        return _observableOf<FileResponse>(<any>null);
+        return _observableOf<RequestInfoOfLicaoListViewModel | null>(<any>null);
     }
 
-    post(command: CriarLicaoCommand): Observable<FileResponse> {
+    post(command: CriarLicaoCommand): Observable<RequestInfo | null> {
         let url_ = this.baseUrl + "/api/Licoes";
         url_ = url_.replace(/[?&]$/, "");
 
@@ -690,34 +728,36 @@ export class LicoesClient implements ILicoesClient {
                 try {
                     return this.processPost(<any>response_);
                 } catch (e) {
-                    return <Observable<FileResponse>><any>_observableThrow(e);
+                    return <Observable<RequestInfo | null>><any>_observableThrow(e);
                 }
             } else
-                return <Observable<FileResponse>><any>_observableThrow(response_);
+                return <Observable<RequestInfo | null>><any>_observableThrow(response_);
         }));
     }
 
-    protected processPost(response: HttpResponseBase): Observable<FileResponse> {
+    protected processPost(response: HttpResponseBase): Observable<RequestInfo | null> {
         const status = response.status;
         const responseBlob = 
             response instanceof HttpResponse ? response.body : 
             (<any>response).error instanceof Blob ? (<any>response).error : undefined;
 
         let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }};
-        if (status === 200 || status === 206) {
-            const contentDisposition = response.headers ? response.headers.get("content-disposition") : undefined;
-            const fileNameMatch = contentDisposition ? /filename="?([^"]*?)"?(;|$)/g.exec(contentDisposition) : undefined;
-            const fileName = fileNameMatch && fileNameMatch.length > 1 ? fileNameMatch[1] : undefined;
-            return _observableOf({ fileName: fileName, data: <any>responseBlob, status: status, headers: _headers });
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = resultData200 ? RequestInfo.fromJS(resultData200) : <any>null;
+            return _observableOf(result200);
+            }));
         } else if (status !== 200 && status !== 204) {
             return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
             return throwException("An unexpected server error occurred.", status, _responseText, _headers);
             }));
         }
-        return _observableOf<FileResponse>(<any>null);
+        return _observableOf<RequestInfo | null>(<any>null);
     }
 
-    get(id: number): Observable<FileResponse> {
+    get(id: number): Observable<RequestInfoOfLicao | null> {
         let url_ = this.baseUrl + "/api/Licoes/{id}";
         if (id === undefined || id === null)
             throw new Error("The parameter 'id' must be defined.");
@@ -739,34 +779,36 @@ export class LicoesClient implements ILicoesClient {
                 try {
                     return this.processGet(<any>response_);
                 } catch (e) {
-                    return <Observable<FileResponse>><any>_observableThrow(e);
+                    return <Observable<RequestInfoOfLicao | null>><any>_observableThrow(e);
                 }
             } else
-                return <Observable<FileResponse>><any>_observableThrow(response_);
+                return <Observable<RequestInfoOfLicao | null>><any>_observableThrow(response_);
         }));
     }
 
-    protected processGet(response: HttpResponseBase): Observable<FileResponse> {
+    protected processGet(response: HttpResponseBase): Observable<RequestInfoOfLicao | null> {
         const status = response.status;
         const responseBlob = 
             response instanceof HttpResponse ? response.body : 
             (<any>response).error instanceof Blob ? (<any>response).error : undefined;
 
         let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }};
-        if (status === 200 || status === 206) {
-            const contentDisposition = response.headers ? response.headers.get("content-disposition") : undefined;
-            const fileNameMatch = contentDisposition ? /filename="?([^"]*?)"?(;|$)/g.exec(contentDisposition) : undefined;
-            const fileName = fileNameMatch && fileNameMatch.length > 1 ? fileNameMatch[1] : undefined;
-            return _observableOf({ fileName: fileName, data: <any>responseBlob, status: status, headers: _headers });
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = resultData200 ? RequestInfoOfLicao.fromJS(resultData200) : <any>null;
+            return _observableOf(result200);
+            }));
         } else if (status !== 200 && status !== 204) {
             return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
             return throwException("An unexpected server error occurred.", status, _responseText, _headers);
             }));
         }
-        return _observableOf<FileResponse>(<any>null);
+        return _observableOf<RequestInfoOfLicao | null>(<any>null);
     }
 
-    put(id: number, command: AtualizarLicaoCommand): Observable<FileResponse> {
+    put(id: number, command: AtualizarLicaoCommand): Observable<RequestInfo | null> {
         let url_ = this.baseUrl + "/api/Licoes/{id}";
         if (id === undefined || id === null)
             throw new Error("The parameter 'id' must be defined.");
@@ -792,34 +834,43 @@ export class LicoesClient implements ILicoesClient {
                 try {
                     return this.processPut(<any>response_);
                 } catch (e) {
-                    return <Observable<FileResponse>><any>_observableThrow(e);
+                    return <Observable<RequestInfo | null>><any>_observableThrow(e);
                 }
             } else
-                return <Observable<FileResponse>><any>_observableThrow(response_);
+                return <Observable<RequestInfo | null>><any>_observableThrow(response_);
         }));
     }
 
-    protected processPut(response: HttpResponseBase): Observable<FileResponse> {
+    protected processPut(response: HttpResponseBase): Observable<RequestInfo | null> {
         const status = response.status;
         const responseBlob = 
             response instanceof HttpResponse ? response.body : 
             (<any>response).error instanceof Blob ? (<any>response).error : undefined;
 
         let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }};
-        if (status === 200 || status === 206) {
-            const contentDisposition = response.headers ? response.headers.get("content-disposition") : undefined;
-            const fileNameMatch = contentDisposition ? /filename="?([^"]*?)"?(;|$)/g.exec(contentDisposition) : undefined;
-            const fileName = fileNameMatch && fileNameMatch.length > 1 ? fileNameMatch[1] : undefined;
-            return _observableOf({ fileName: fileName, data: <any>responseBlob, status: status, headers: _headers });
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = resultData200 ? RequestInfo.fromJS(resultData200) : <any>null;
+            return _observableOf(result200);
+            }));
+        } else if (status === 400) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result400: any = null;
+            let resultData400 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result400 = resultData400 ? ProblemDetails.fromJS(resultData400) : <any>null;
+            return throwException("A server error occurred.", status, _responseText, _headers, result400);
+            }));
         } else if (status !== 200 && status !== 204) {
             return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
             return throwException("An unexpected server error occurred.", status, _responseText, _headers);
             }));
         }
-        return _observableOf<FileResponse>(<any>null);
+        return _observableOf<RequestInfo | null>(<any>null);
     }
 
-    delete(id: number): Observable<FileResponse> {
+    delete(id: number): Observable<RequestInfo | null> {
         let url_ = this.baseUrl + "/api/Licoes/{id}";
         if (id === undefined || id === null)
             throw new Error("The parameter 'id' must be defined.");
@@ -841,40 +892,43 @@ export class LicoesClient implements ILicoesClient {
                 try {
                     return this.processDelete(<any>response_);
                 } catch (e) {
-                    return <Observable<FileResponse>><any>_observableThrow(e);
+                    return <Observable<RequestInfo | null>><any>_observableThrow(e);
                 }
             } else
-                return <Observable<FileResponse>><any>_observableThrow(response_);
+                return <Observable<RequestInfo | null>><any>_observableThrow(response_);
         }));
     }
 
-    protected processDelete(response: HttpResponseBase): Observable<FileResponse> {
+    protected processDelete(response: HttpResponseBase): Observable<RequestInfo | null> {
         const status = response.status;
         const responseBlob = 
             response instanceof HttpResponse ? response.body : 
             (<any>response).error instanceof Blob ? (<any>response).error : undefined;
 
         let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }};
-        if (status === 200 || status === 206) {
-            const contentDisposition = response.headers ? response.headers.get("content-disposition") : undefined;
-            const fileNameMatch = contentDisposition ? /filename="?([^"]*?)"?(;|$)/g.exec(contentDisposition) : undefined;
-            const fileName = fileNameMatch && fileNameMatch.length > 1 ? fileNameMatch[1] : undefined;
-            return _observableOf({ fileName: fileName, data: <any>responseBlob, status: status, headers: _headers });
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = resultData200 ? RequestInfo.fromJS(resultData200) : <any>null;
+            return _observableOf(result200);
+            }));
         } else if (status !== 200 && status !== 204) {
             return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
             return throwException("An unexpected server error occurred.", status, _responseText, _headers);
             }));
         }
-        return _observableOf<FileResponse>(<any>null);
+        return _observableOf<RequestInfo | null>(<any>null);
     }
 }
 
 export interface IPublicadoresClient {
-    getAll(): Observable<FileResponse>;
-    post(command: CriarPublicadorCommand): Observable<FileResponse>;
-    get(id: number): Observable<FileResponse>;
-    put(id: number, command: AtualizarPublicadorCommand): Observable<FileResponse>;
-    delete(id: number): Observable<FileResponse>;
+    getAll(): Observable<RequestInfoOfPublicadorListViewModel | null>;
+    post(command: CriarPublicadorCommand): Observable<RequestInfo | null>;
+    deleteMany(command: DeletarVariosPublicadorCommand): Observable<RequestInfo | null>;
+    get(id: number): Observable<RequestInfoOfPublicadorDetailModel | null>;
+    put(id: number, command: AtualizarPublicadorCommand): Observable<RequestInfo | null>;
+    delete(id: number): Observable<RequestInfo | null>;
 }
 
 @Injectable()
@@ -888,7 +942,7 @@ export class PublicadoresClient implements IPublicadoresClient {
         this.baseUrl = baseUrl ? baseUrl : "";
     }
 
-    getAll(): Observable<FileResponse> {
+    getAll(): Observable<RequestInfoOfPublicadorListViewModel | null> {
         let url_ = this.baseUrl + "/api/Publicadores";
         url_ = url_.replace(/[?&]$/, "");
 
@@ -907,34 +961,36 @@ export class PublicadoresClient implements IPublicadoresClient {
                 try {
                     return this.processGetAll(<any>response_);
                 } catch (e) {
-                    return <Observable<FileResponse>><any>_observableThrow(e);
+                    return <Observable<RequestInfoOfPublicadorListViewModel | null>><any>_observableThrow(e);
                 }
             } else
-                return <Observable<FileResponse>><any>_observableThrow(response_);
+                return <Observable<RequestInfoOfPublicadorListViewModel | null>><any>_observableThrow(response_);
         }));
     }
 
-    protected processGetAll(response: HttpResponseBase): Observable<FileResponse> {
+    protected processGetAll(response: HttpResponseBase): Observable<RequestInfoOfPublicadorListViewModel | null> {
         const status = response.status;
         const responseBlob = 
             response instanceof HttpResponse ? response.body : 
             (<any>response).error instanceof Blob ? (<any>response).error : undefined;
 
         let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }};
-        if (status === 200 || status === 206) {
-            const contentDisposition = response.headers ? response.headers.get("content-disposition") : undefined;
-            const fileNameMatch = contentDisposition ? /filename="?([^"]*?)"?(;|$)/g.exec(contentDisposition) : undefined;
-            const fileName = fileNameMatch && fileNameMatch.length > 1 ? fileNameMatch[1] : undefined;
-            return _observableOf({ fileName: fileName, data: <any>responseBlob, status: status, headers: _headers });
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = resultData200 ? RequestInfoOfPublicadorListViewModel.fromJS(resultData200) : <any>null;
+            return _observableOf(result200);
+            }));
         } else if (status !== 200 && status !== 204) {
             return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
             return throwException("An unexpected server error occurred.", status, _responseText, _headers);
             }));
         }
-        return _observableOf<FileResponse>(<any>null);
+        return _observableOf<RequestInfoOfPublicadorListViewModel | null>(<any>null);
     }
 
-    post(command: CriarPublicadorCommand): Observable<FileResponse> {
+    post(command: CriarPublicadorCommand): Observable<RequestInfo | null> {
         let url_ = this.baseUrl + "/api/Publicadores";
         url_ = url_.replace(/[?&]$/, "");
 
@@ -957,34 +1013,88 @@ export class PublicadoresClient implements IPublicadoresClient {
                 try {
                     return this.processPost(<any>response_);
                 } catch (e) {
-                    return <Observable<FileResponse>><any>_observableThrow(e);
+                    return <Observable<RequestInfo | null>><any>_observableThrow(e);
                 }
             } else
-                return <Observable<FileResponse>><any>_observableThrow(response_);
+                return <Observable<RequestInfo | null>><any>_observableThrow(response_);
         }));
     }
 
-    protected processPost(response: HttpResponseBase): Observable<FileResponse> {
+    protected processPost(response: HttpResponseBase): Observable<RequestInfo | null> {
         const status = response.status;
         const responseBlob = 
             response instanceof HttpResponse ? response.body : 
             (<any>response).error instanceof Blob ? (<any>response).error : undefined;
 
         let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }};
-        if (status === 200 || status === 206) {
-            const contentDisposition = response.headers ? response.headers.get("content-disposition") : undefined;
-            const fileNameMatch = contentDisposition ? /filename="?([^"]*?)"?(;|$)/g.exec(contentDisposition) : undefined;
-            const fileName = fileNameMatch && fileNameMatch.length > 1 ? fileNameMatch[1] : undefined;
-            return _observableOf({ fileName: fileName, data: <any>responseBlob, status: status, headers: _headers });
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = resultData200 ? RequestInfo.fromJS(resultData200) : <any>null;
+            return _observableOf(result200);
+            }));
         } else if (status !== 200 && status !== 204) {
             return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
             return throwException("An unexpected server error occurred.", status, _responseText, _headers);
             }));
         }
-        return _observableOf<FileResponse>(<any>null);
+        return _observableOf<RequestInfo | null>(<any>null);
     }
 
-    get(id: number): Observable<FileResponse> {
+    deleteMany(command: DeletarVariosPublicadorCommand): Observable<RequestInfo | null> {
+        let url_ = this.baseUrl + "/api/Publicadores";
+        url_ = url_.replace(/[?&]$/, "");
+
+        const content_ = JSON.stringify(command);
+
+        let options_ : any = {
+            body: content_,
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Content-Type": "application/json", 
+                "Accept": "application/json"
+            })
+        };
+
+        return this.http.request("delete", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processDeleteMany(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processDeleteMany(<any>response_);
+                } catch (e) {
+                    return <Observable<RequestInfo | null>><any>_observableThrow(e);
+                }
+            } else
+                return <Observable<RequestInfo | null>><any>_observableThrow(response_);
+        }));
+    }
+
+    protected processDeleteMany(response: HttpResponseBase): Observable<RequestInfo | null> {
+        const status = response.status;
+        const responseBlob = 
+            response instanceof HttpResponse ? response.body : 
+            (<any>response).error instanceof Blob ? (<any>response).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }};
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = resultData200 ? RequestInfo.fromJS(resultData200) : <any>null;
+            return _observableOf(result200);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf<RequestInfo | null>(<any>null);
+    }
+
+    get(id: number): Observable<RequestInfoOfPublicadorDetailModel | null> {
         let url_ = this.baseUrl + "/api/Publicadores/{id}";
         if (id === undefined || id === null)
             throw new Error("The parameter 'id' must be defined.");
@@ -1006,34 +1116,36 @@ export class PublicadoresClient implements IPublicadoresClient {
                 try {
                     return this.processGet(<any>response_);
                 } catch (e) {
-                    return <Observable<FileResponse>><any>_observableThrow(e);
+                    return <Observable<RequestInfoOfPublicadorDetailModel | null>><any>_observableThrow(e);
                 }
             } else
-                return <Observable<FileResponse>><any>_observableThrow(response_);
+                return <Observable<RequestInfoOfPublicadorDetailModel | null>><any>_observableThrow(response_);
         }));
     }
 
-    protected processGet(response: HttpResponseBase): Observable<FileResponse> {
+    protected processGet(response: HttpResponseBase): Observable<RequestInfoOfPublicadorDetailModel | null> {
         const status = response.status;
         const responseBlob = 
             response instanceof HttpResponse ? response.body : 
             (<any>response).error instanceof Blob ? (<any>response).error : undefined;
 
         let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }};
-        if (status === 200 || status === 206) {
-            const contentDisposition = response.headers ? response.headers.get("content-disposition") : undefined;
-            const fileNameMatch = contentDisposition ? /filename="?([^"]*?)"?(;|$)/g.exec(contentDisposition) : undefined;
-            const fileName = fileNameMatch && fileNameMatch.length > 1 ? fileNameMatch[1] : undefined;
-            return _observableOf({ fileName: fileName, data: <any>responseBlob, status: status, headers: _headers });
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = resultData200 ? RequestInfoOfPublicadorDetailModel.fromJS(resultData200) : <any>null;
+            return _observableOf(result200);
+            }));
         } else if (status !== 200 && status !== 204) {
             return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
             return throwException("An unexpected server error occurred.", status, _responseText, _headers);
             }));
         }
-        return _observableOf<FileResponse>(<any>null);
+        return _observableOf<RequestInfoOfPublicadorDetailModel | null>(<any>null);
     }
 
-    put(id: number, command: AtualizarPublicadorCommand): Observable<FileResponse> {
+    put(id: number, command: AtualizarPublicadorCommand): Observable<RequestInfo | null> {
         let url_ = this.baseUrl + "/api/Publicadores/{id}";
         if (id === undefined || id === null)
             throw new Error("The parameter 'id' must be defined.");
@@ -1059,34 +1171,43 @@ export class PublicadoresClient implements IPublicadoresClient {
                 try {
                     return this.processPut(<any>response_);
                 } catch (e) {
-                    return <Observable<FileResponse>><any>_observableThrow(e);
+                    return <Observable<RequestInfo | null>><any>_observableThrow(e);
                 }
             } else
-                return <Observable<FileResponse>><any>_observableThrow(response_);
+                return <Observable<RequestInfo | null>><any>_observableThrow(response_);
         }));
     }
 
-    protected processPut(response: HttpResponseBase): Observable<FileResponse> {
+    protected processPut(response: HttpResponseBase): Observable<RequestInfo | null> {
         const status = response.status;
         const responseBlob = 
             response instanceof HttpResponse ? response.body : 
             (<any>response).error instanceof Blob ? (<any>response).error : undefined;
 
         let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }};
-        if (status === 200 || status === 206) {
-            const contentDisposition = response.headers ? response.headers.get("content-disposition") : undefined;
-            const fileNameMatch = contentDisposition ? /filename="?([^"]*?)"?(;|$)/g.exec(contentDisposition) : undefined;
-            const fileName = fileNameMatch && fileNameMatch.length > 1 ? fileNameMatch[1] : undefined;
-            return _observableOf({ fileName: fileName, data: <any>responseBlob, status: status, headers: _headers });
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = resultData200 ? RequestInfo.fromJS(resultData200) : <any>null;
+            return _observableOf(result200);
+            }));
+        } else if (status === 400) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result400: any = null;
+            let resultData400 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result400 = resultData400 ? ProblemDetails.fromJS(resultData400) : <any>null;
+            return throwException("A server error occurred.", status, _responseText, _headers, result400);
+            }));
         } else if (status !== 200 && status !== 204) {
             return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
             return throwException("An unexpected server error occurred.", status, _responseText, _headers);
             }));
         }
-        return _observableOf<FileResponse>(<any>null);
+        return _observableOf<RequestInfo | null>(<any>null);
     }
 
-    delete(id: number): Observable<FileResponse> {
+    delete(id: number): Observable<RequestInfo | null> {
         let url_ = this.baseUrl + "/api/Publicadores/{id}";
         if (id === undefined || id === null)
             throw new Error("The parameter 'id' must be defined.");
@@ -1108,38 +1229,40 @@ export class PublicadoresClient implements IPublicadoresClient {
                 try {
                     return this.processDelete(<any>response_);
                 } catch (e) {
-                    return <Observable<FileResponse>><any>_observableThrow(e);
+                    return <Observable<RequestInfo | null>><any>_observableThrow(e);
                 }
             } else
-                return <Observable<FileResponse>><any>_observableThrow(response_);
+                return <Observable<RequestInfo | null>><any>_observableThrow(response_);
         }));
     }
 
-    protected processDelete(response: HttpResponseBase): Observable<FileResponse> {
+    protected processDelete(response: HttpResponseBase): Observable<RequestInfo | null> {
         const status = response.status;
         const responseBlob = 
             response instanceof HttpResponse ? response.body : 
             (<any>response).error instanceof Blob ? (<any>response).error : undefined;
 
         let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }};
-        if (status === 200 || status === 206) {
-            const contentDisposition = response.headers ? response.headers.get("content-disposition") : undefined;
-            const fileNameMatch = contentDisposition ? /filename="?([^"]*?)"?(;|$)/g.exec(contentDisposition) : undefined;
-            const fileName = fileNameMatch && fileNameMatch.length > 1 ? fileNameMatch[1] : undefined;
-            return _observableOf({ fileName: fileName, data: <any>responseBlob, status: status, headers: _headers });
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = resultData200 ? RequestInfo.fromJS(resultData200) : <any>null;
+            return _observableOf(result200);
+            }));
         } else if (status !== 200 && status !== 204) {
             return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
             return throwException("An unexpected server error occurred.", status, _responseText, _headers);
             }));
         }
-        return _observableOf<FileResponse>(<any>null);
+        return _observableOf<RequestInfo | null>(<any>null);
     }
 }
 
 export interface IUsuariosClient {
-    getAll(): Observable<FileResponse>;
-    autenticar(command: AutenticarUsuarioCommand): Observable<FileResponse>;
-    criar(command: CreateUserCommand): Observable<FileResponse>;
+    getAll(): Observable<RequestInfoOfUsuarioListViewModel | null>;
+    autenticar(command: AutenticarUsuarioCommand): Observable<RequestInfoOfUsuarioDto | null>;
+    criar(command: CreateUserCommand): Observable<RequestInfo | null>;
 }
 
 @Injectable()
@@ -1153,7 +1276,7 @@ export class UsuariosClient implements IUsuariosClient {
         this.baseUrl = baseUrl ? baseUrl : "";
     }
 
-    getAll(): Observable<FileResponse> {
+    getAll(): Observable<RequestInfoOfUsuarioListViewModel | null> {
         let url_ = this.baseUrl + "/api/Usuarios";
         url_ = url_.replace(/[?&]$/, "");
 
@@ -1172,34 +1295,36 @@ export class UsuariosClient implements IUsuariosClient {
                 try {
                     return this.processGetAll(<any>response_);
                 } catch (e) {
-                    return <Observable<FileResponse>><any>_observableThrow(e);
+                    return <Observable<RequestInfoOfUsuarioListViewModel | null>><any>_observableThrow(e);
                 }
             } else
-                return <Observable<FileResponse>><any>_observableThrow(response_);
+                return <Observable<RequestInfoOfUsuarioListViewModel | null>><any>_observableThrow(response_);
         }));
     }
 
-    protected processGetAll(response: HttpResponseBase): Observable<FileResponse> {
+    protected processGetAll(response: HttpResponseBase): Observable<RequestInfoOfUsuarioListViewModel | null> {
         const status = response.status;
         const responseBlob = 
             response instanceof HttpResponse ? response.body : 
             (<any>response).error instanceof Blob ? (<any>response).error : undefined;
 
         let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }};
-        if (status === 200 || status === 206) {
-            const contentDisposition = response.headers ? response.headers.get("content-disposition") : undefined;
-            const fileNameMatch = contentDisposition ? /filename="?([^"]*?)"?(;|$)/g.exec(contentDisposition) : undefined;
-            const fileName = fileNameMatch && fileNameMatch.length > 1 ? fileNameMatch[1] : undefined;
-            return _observableOf({ fileName: fileName, data: <any>responseBlob, status: status, headers: _headers });
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = resultData200 ? RequestInfoOfUsuarioListViewModel.fromJS(resultData200) : <any>null;
+            return _observableOf(result200);
+            }));
         } else if (status !== 200 && status !== 204) {
             return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
             return throwException("An unexpected server error occurred.", status, _responseText, _headers);
             }));
         }
-        return _observableOf<FileResponse>(<any>null);
+        return _observableOf<RequestInfoOfUsuarioListViewModel | null>(<any>null);
     }
 
-    autenticar(command: AutenticarUsuarioCommand): Observable<FileResponse> {
+    autenticar(command: AutenticarUsuarioCommand): Observable<RequestInfoOfUsuarioDto | null> {
         let url_ = this.baseUrl + "/api/Usuarios/Autenticar";
         url_ = url_.replace(/[?&]$/, "");
 
@@ -1222,34 +1347,36 @@ export class UsuariosClient implements IUsuariosClient {
                 try {
                     return this.processAutenticar(<any>response_);
                 } catch (e) {
-                    return <Observable<FileResponse>><any>_observableThrow(e);
+                    return <Observable<RequestInfoOfUsuarioDto | null>><any>_observableThrow(e);
                 }
             } else
-                return <Observable<FileResponse>><any>_observableThrow(response_);
+                return <Observable<RequestInfoOfUsuarioDto | null>><any>_observableThrow(response_);
         }));
     }
 
-    protected processAutenticar(response: HttpResponseBase): Observable<FileResponse> {
+    protected processAutenticar(response: HttpResponseBase): Observable<RequestInfoOfUsuarioDto | null> {
         const status = response.status;
         const responseBlob = 
             response instanceof HttpResponse ? response.body : 
             (<any>response).error instanceof Blob ? (<any>response).error : undefined;
 
         let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }};
-        if (status === 200 || status === 206) {
-            const contentDisposition = response.headers ? response.headers.get("content-disposition") : undefined;
-            const fileNameMatch = contentDisposition ? /filename="?([^"]*?)"?(;|$)/g.exec(contentDisposition) : undefined;
-            const fileName = fileNameMatch && fileNameMatch.length > 1 ? fileNameMatch[1] : undefined;
-            return _observableOf({ fileName: fileName, data: <any>responseBlob, status: status, headers: _headers });
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = resultData200 ? RequestInfoOfUsuarioDto.fromJS(resultData200) : <any>null;
+            return _observableOf(result200);
+            }));
         } else if (status !== 200 && status !== 204) {
             return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
             return throwException("An unexpected server error occurred.", status, _responseText, _headers);
             }));
         }
-        return _observableOf<FileResponse>(<any>null);
+        return _observableOf<RequestInfoOfUsuarioDto | null>(<any>null);
     }
 
-    criar(command: CreateUserCommand): Observable<FileResponse> {
+    criar(command: CreateUserCommand): Observable<RequestInfo | null> {
         let url_ = this.baseUrl + "/api/Usuarios/Criar";
         url_ = url_.replace(/[?&]$/, "");
 
@@ -1272,36 +1399,251 @@ export class UsuariosClient implements IUsuariosClient {
                 try {
                     return this.processCriar(<any>response_);
                 } catch (e) {
-                    return <Observable<FileResponse>><any>_observableThrow(e);
+                    return <Observable<RequestInfo | null>><any>_observableThrow(e);
                 }
             } else
-                return <Observable<FileResponse>><any>_observableThrow(response_);
+                return <Observable<RequestInfo | null>><any>_observableThrow(response_);
         }));
     }
 
-    protected processCriar(response: HttpResponseBase): Observable<FileResponse> {
+    protected processCriar(response: HttpResponseBase): Observable<RequestInfo | null> {
         const status = response.status;
         const responseBlob = 
             response instanceof HttpResponse ? response.body : 
             (<any>response).error instanceof Blob ? (<any>response).error : undefined;
 
         let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }};
-        if (status === 200 || status === 206) {
-            const contentDisposition = response.headers ? response.headers.get("content-disposition") : undefined;
-            const fileNameMatch = contentDisposition ? /filename="?([^"]*?)"?(;|$)/g.exec(contentDisposition) : undefined;
-            const fileName = fileNameMatch && fileNameMatch.length > 1 ? fileNameMatch[1] : undefined;
-            return _observableOf({ fileName: fileName, data: <any>responseBlob, status: status, headers: _headers });
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = resultData200 ? RequestInfo.fromJS(resultData200) : <any>null;
+            return _observableOf(result200);
+            }));
         } else if (status !== 200 && status !== 204) {
             return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
             return throwException("An unexpected server error occurred.", status, _responseText, _headers);
             }));
         }
-        return _observableOf<FileResponse>(<any>null);
+        return _observableOf<RequestInfo | null>(<any>null);
     }
 }
 
-export class CriarAlunoCommand implements ICriarAlunoCommand {
+export class RequestInfo implements IRequestInfo {
+    isSucceed?: boolean;
+    errors?: { [key: string] : any; } | undefined;
+
+    constructor(data?: IRequestInfo) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(data?: any) {
+        if (data) {
+            this.isSucceed = data["isSucceed"];
+            if (data["errors"]) {
+                this.errors = {} as any;
+                for (let key in data["errors"]) {
+                    if (data["errors"].hasOwnProperty(key))
+                        this.errors![key] = data["errors"][key];
+                }
+            }
+        }
+    }
+
+    static fromJS(data: any): RequestInfo {
+        data = typeof data === 'object' ? data : {};
+        let result = new RequestInfo();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["isSucceed"] = this.isSucceed;
+        if (this.errors) {
+            data["errors"] = {};
+            for (let key in this.errors) {
+                if (this.errors.hasOwnProperty(key))
+                    data["errors"][key] = this.errors[key];
+            }
+        }
+        return data; 
+    }
+}
+
+export interface IRequestInfo {
+    isSucceed?: boolean;
+    errors?: { [key: string] : any; } | undefined;
+}
+
+export class RequestInfoOfAlunoListViewModel extends RequestInfo implements IRequestInfoOfAlunoListViewModel {
+    response?: AlunoListViewModel | undefined;
+
+    constructor(data?: IRequestInfoOfAlunoListViewModel) {
+        super(data);
+    }
+
+    init(data?: any) {
+        super.init(data);
+        if (data) {
+            this.response = data["response"] ? AlunoListViewModel.fromJS(data["response"]) : <any>undefined;
+        }
+    }
+
+    static fromJS(data: any): RequestInfoOfAlunoListViewModel {
+        data = typeof data === 'object' ? data : {};
+        let result = new RequestInfoOfAlunoListViewModel();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["response"] = this.response ? this.response.toJSON() : <any>undefined;
+        super.toJSON(data);
+        return data; 
+    }
+}
+
+export interface IRequestInfoOfAlunoListViewModel extends IRequestInfo {
+    response?: AlunoListViewModel | undefined;
+}
+
+export class AlunoListViewModel implements IAlunoListViewModel {
+    alunos?: AlunoDetailsModel[] | undefined;
+
+    constructor(data?: IAlunoListViewModel) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(data?: any) {
+        if (data) {
+            if (data["alunos"] && data["alunos"].constructor === Array) {
+                this.alunos = [] as any;
+                for (let item of data["alunos"])
+                    this.alunos!.push(AlunoDetailsModel.fromJS(item));
+            }
+        }
+    }
+
+    static fromJS(data: any): AlunoListViewModel {
+        data = typeof data === 'object' ? data : {};
+        let result = new AlunoListViewModel();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        if (this.alunos && this.alunos.constructor === Array) {
+            data["alunos"] = [];
+            for (let item of this.alunos)
+                data["alunos"].push(item.toJSON());
+        }
+        return data; 
+    }
+}
+
+export interface IAlunoListViewModel {
+    alunos?: AlunoDetailsModel[] | undefined;
+}
+
+export class AlunoDetailsModel implements IAlunoDetailsModel {
     alunoId?: number;
+    nomePublicador?: string | undefined;
+    fazLeitura?: boolean;
+    fazDemonstracao?: boolean;
+    fazDiscurso?: boolean;
+
+    constructor(data?: IAlunoDetailsModel) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(data?: any) {
+        if (data) {
+            this.alunoId = data["alunoId"];
+            this.nomePublicador = data["nomePublicador"];
+            this.fazLeitura = data["fazLeitura"];
+            this.fazDemonstracao = data["fazDemonstracao"];
+            this.fazDiscurso = data["fazDiscurso"];
+        }
+    }
+
+    static fromJS(data: any): AlunoDetailsModel {
+        data = typeof data === 'object' ? data : {};
+        let result = new AlunoDetailsModel();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["alunoId"] = this.alunoId;
+        data["nomePublicador"] = this.nomePublicador;
+        data["fazLeitura"] = this.fazLeitura;
+        data["fazDemonstracao"] = this.fazDemonstracao;
+        data["fazDiscurso"] = this.fazDiscurso;
+        return data; 
+    }
+}
+
+export interface IAlunoDetailsModel {
+    alunoId?: number;
+    nomePublicador?: string | undefined;
+    fazLeitura?: boolean;
+    fazDemonstracao?: boolean;
+    fazDiscurso?: boolean;
+}
+
+export class RequestInfoOfAlunoDetailsModel extends RequestInfo implements IRequestInfoOfAlunoDetailsModel {
+    response?: AlunoDetailsModel | undefined;
+
+    constructor(data?: IRequestInfoOfAlunoDetailsModel) {
+        super(data);
+    }
+
+    init(data?: any) {
+        super.init(data);
+        if (data) {
+            this.response = data["response"] ? AlunoDetailsModel.fromJS(data["response"]) : <any>undefined;
+        }
+    }
+
+    static fromJS(data: any): RequestInfoOfAlunoDetailsModel {
+        data = typeof data === 'object' ? data : {};
+        let result = new RequestInfoOfAlunoDetailsModel();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["response"] = this.response ? this.response.toJSON() : <any>undefined;
+        super.toJSON(data);
+        return data; 
+    }
+}
+
+export interface IRequestInfoOfAlunoDetailsModel extends IRequestInfo {
+    response?: AlunoDetailsModel | undefined;
+}
+
+export class CriarAlunoCommand implements ICriarAlunoCommand {
     publicadorId?: number;
     fazLeitura?: boolean;
     fazDemonstracao?: boolean;
@@ -1318,7 +1660,6 @@ export class CriarAlunoCommand implements ICriarAlunoCommand {
 
     init(data?: any) {
         if (data) {
-            this.alunoId = data["alunoId"];
             this.publicadorId = data["publicadorId"];
             this.fazLeitura = data["fazLeitura"];
             this.fazDemonstracao = data["fazDemonstracao"];
@@ -1335,7 +1676,6 @@ export class CriarAlunoCommand implements ICriarAlunoCommand {
 
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-        data["alunoId"] = this.alunoId;
         data["publicadorId"] = this.publicadorId;
         data["fazLeitura"] = this.fazLeitura;
         data["fazDemonstracao"] = this.fazDemonstracao;
@@ -1345,11 +1685,62 @@ export class CriarAlunoCommand implements ICriarAlunoCommand {
 }
 
 export interface ICriarAlunoCommand {
-    alunoId?: number;
     publicadorId?: number;
     fazLeitura?: boolean;
     fazDemonstracao?: boolean;
     fazDiscurso?: boolean;
+}
+
+export class ProblemDetails implements IProblemDetails {
+    type?: string | undefined;
+    title?: string | undefined;
+    status?: number | undefined;
+    detail?: string | undefined;
+    instance?: string | undefined;
+
+    constructor(data?: IProblemDetails) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(data?: any) {
+        if (data) {
+            this.type = data["type"];
+            this.title = data["title"];
+            this.status = data["status"];
+            this.detail = data["detail"];
+            this.instance = data["instance"];
+        }
+    }
+
+    static fromJS(data: any): ProblemDetails {
+        data = typeof data === 'object' ? data : {};
+        let result = new ProblemDetails();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["type"] = this.type;
+        data["title"] = this.title;
+        data["status"] = this.status;
+        data["detail"] = this.detail;
+        data["instance"] = this.instance;
+        return data; 
+    }
+}
+
+export interface IProblemDetails {
+    type?: string | undefined;
+    title?: string | undefined;
+    status?: number | undefined;
+    detail?: string | undefined;
+    instance?: string | undefined;
 }
 
 export class AtualizarAlunoCommand implements IAtualizarAlunoCommand {
@@ -1404,6 +1795,171 @@ export interface IAtualizarAlunoCommand {
     fazDiscurso?: boolean;
 }
 
+export class RequestInfoOfDesignacaoListViewModel extends RequestInfo implements IRequestInfoOfDesignacaoListViewModel {
+    response?: DesignacaoListViewModel | undefined;
+
+    constructor(data?: IRequestInfoOfDesignacaoListViewModel) {
+        super(data);
+    }
+
+    init(data?: any) {
+        super.init(data);
+        if (data) {
+            this.response = data["response"] ? DesignacaoListViewModel.fromJS(data["response"]) : <any>undefined;
+        }
+    }
+
+    static fromJS(data: any): RequestInfoOfDesignacaoListViewModel {
+        data = typeof data === 'object' ? data : {};
+        let result = new RequestInfoOfDesignacaoListViewModel();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["response"] = this.response ? this.response.toJSON() : <any>undefined;
+        super.toJSON(data);
+        return data; 
+    }
+}
+
+export interface IRequestInfoOfDesignacaoListViewModel extends IRequestInfo {
+    response?: DesignacaoListViewModel | undefined;
+}
+
+export class DesignacaoListViewModel implements IDesignacaoListViewModel {
+    designacoes?: DesignacaoDetailModel[] | undefined;
+
+    constructor(data?: IDesignacaoListViewModel) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(data?: any) {
+        if (data) {
+            if (data["designacoes"] && data["designacoes"].constructor === Array) {
+                this.designacoes = [] as any;
+                for (let item of data["designacoes"])
+                    this.designacoes!.push(DesignacaoDetailModel.fromJS(item));
+            }
+        }
+    }
+
+    static fromJS(data: any): DesignacaoListViewModel {
+        data = typeof data === 'object' ? data : {};
+        let result = new DesignacaoListViewModel();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        if (this.designacoes && this.designacoes.constructor === Array) {
+            data["designacoes"] = [];
+            for (let item of this.designacoes)
+                data["designacoes"].push(item.toJSON());
+        }
+        return data; 
+    }
+}
+
+export interface IDesignacaoListViewModel {
+    designacoes?: DesignacaoDetailModel[] | undefined;
+}
+
+export class DesignacaoDetailModel implements IDesignacaoDetailModel {
+    id?: number;
+    nomePrincipal?: string | undefined;
+    nomeAjudante?: string | undefined;
+    licao?: number;
+    data?: string | undefined;
+    tipo?: string | undefined;
+    local?: string | undefined;
+
+    constructor(data?: IDesignacaoDetailModel) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(data?: any) {
+        if (data) {
+            this.id = data["id"];
+            this.nomePrincipal = data["nomePrincipal"];
+            this.nomeAjudante = data["nomeAjudante"];
+            this.licao = data["licao"];
+            this.data = data["data"];
+            this.tipo = data["tipo"];
+            this.local = data["local"];
+        }
+    }
+
+    static fromJS(data: any): DesignacaoDetailModel {
+        data = typeof data === 'object' ? data : {};
+        let result = new DesignacaoDetailModel();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["id"] = this.id;
+        data["nomePrincipal"] = this.nomePrincipal;
+        data["nomeAjudante"] = this.nomeAjudante;
+        data["licao"] = this.licao;
+        data["data"] = this.data;
+        data["tipo"] = this.tipo;
+        data["local"] = this.local;
+        return data; 
+    }
+}
+
+export interface IDesignacaoDetailModel {
+    id?: number;
+    nomePrincipal?: string | undefined;
+    nomeAjudante?: string | undefined;
+    licao?: number;
+    data?: string | undefined;
+    tipo?: string | undefined;
+    local?: string | undefined;
+}
+
+export abstract class File implements IFile {
+
+    constructor(data?: IFile) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(data?: any) {
+    }
+
+    static fromJS(data: any): File {
+        data = typeof data === 'object' ? data : {};
+        throw new Error("The abstract class 'File' cannot be instantiated.");
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        return data; 
+    }
+}
+
+export interface IFile {
+}
+
 export class PdfGenerateCommand implements IPdfGenerateCommand {
     nomeArquivo?: string | undefined;
     designacoes?: number[] | undefined;
@@ -1452,8 +2008,40 @@ export interface IPdfGenerateCommand {
     designacoes?: number[] | undefined;
 }
 
+export class RequestInfoOfDesignacaoDetailModel extends RequestInfo implements IRequestInfoOfDesignacaoDetailModel {
+    response?: DesignacaoDetailModel | undefined;
+
+    constructor(data?: IRequestInfoOfDesignacaoDetailModel) {
+        super(data);
+    }
+
+    init(data?: any) {
+        super.init(data);
+        if (data) {
+            this.response = data["response"] ? DesignacaoDetailModel.fromJS(data["response"]) : <any>undefined;
+        }
+    }
+
+    static fromJS(data: any): RequestInfoOfDesignacaoDetailModel {
+        data = typeof data === 'object' ? data : {};
+        let result = new RequestInfoOfDesignacaoDetailModel();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["response"] = this.response ? this.response.toJSON() : <any>undefined;
+        super.toJSON(data);
+        return data; 
+    }
+}
+
+export interface IRequestInfoOfDesignacaoDetailModel extends IRequestInfo {
+    response?: DesignacaoDetailModel | undefined;
+}
+
 export class DesignarCommand implements IDesignarCommand {
-    designacaoId?: number;
     licaoId?: number;
     alunoPrincipalId?: number;
     alunoAjudanteId?: number | undefined;
@@ -1472,7 +2060,6 @@ export class DesignarCommand implements IDesignarCommand {
 
     init(data?: any) {
         if (data) {
-            this.designacaoId = data["designacaoId"];
             this.licaoId = data["licaoId"];
             this.alunoPrincipalId = data["alunoPrincipalId"];
             this.alunoAjudanteId = data["alunoAjudanteId"];
@@ -1491,7 +2078,6 @@ export class DesignarCommand implements IDesignarCommand {
 
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-        data["designacaoId"] = this.designacaoId;
         data["licaoId"] = this.licaoId;
         data["alunoPrincipalId"] = this.alunoPrincipalId;
         data["alunoAjudanteId"] = this.alunoAjudanteId;
@@ -1503,7 +2089,6 @@ export class DesignarCommand implements IDesignarCommand {
 }
 
 export interface IDesignarCommand {
-    designacaoId?: number;
     licaoId?: number;
     alunoPrincipalId?: number;
     alunoAjudanteId?: number | undefined;
@@ -1587,6 +2172,156 @@ export interface IAtualizarDesignacaoCommand {
     local?: LocalDesignacao;
 }
 
+export class RequestInfoOfLicaoListViewModel extends RequestInfo implements IRequestInfoOfLicaoListViewModel {
+    response?: LicaoListViewModel | undefined;
+
+    constructor(data?: IRequestInfoOfLicaoListViewModel) {
+        super(data);
+    }
+
+    init(data?: any) {
+        super.init(data);
+        if (data) {
+            this.response = data["response"] ? LicaoListViewModel.fromJS(data["response"]) : <any>undefined;
+        }
+    }
+
+    static fromJS(data: any): RequestInfoOfLicaoListViewModel {
+        data = typeof data === 'object' ? data : {};
+        let result = new RequestInfoOfLicaoListViewModel();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["response"] = this.response ? this.response.toJSON() : <any>undefined;
+        super.toJSON(data);
+        return data; 
+    }
+}
+
+export interface IRequestInfoOfLicaoListViewModel extends IRequestInfo {
+    response?: LicaoListViewModel | undefined;
+}
+
+export class LicaoListViewModel implements ILicaoListViewModel {
+    licoes?: Licao[] | undefined;
+
+    constructor(data?: ILicaoListViewModel) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(data?: any) {
+        if (data) {
+            if (data["licoes"] && data["licoes"].constructor === Array) {
+                this.licoes = [] as any;
+                for (let item of data["licoes"])
+                    this.licoes!.push(Licao.fromJS(item));
+            }
+        }
+    }
+
+    static fromJS(data: any): LicaoListViewModel {
+        data = typeof data === 'object' ? data : {};
+        let result = new LicaoListViewModel();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        if (this.licoes && this.licoes.constructor === Array) {
+            data["licoes"] = [];
+            for (let item of this.licoes)
+                data["licoes"].push(item.toJSON());
+        }
+        return data; 
+    }
+}
+
+export interface ILicaoListViewModel {
+    licoes?: Licao[] | undefined;
+}
+
+export class Licao implements ILicao {
+    licaoId?: number;
+    tituloLicao?: string | undefined;
+
+    constructor(data?: ILicao) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(data?: any) {
+        if (data) {
+            this.licaoId = data["licaoId"];
+            this.tituloLicao = data["tituloLicao"];
+        }
+    }
+
+    static fromJS(data: any): Licao {
+        data = typeof data === 'object' ? data : {};
+        let result = new Licao();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["licaoId"] = this.licaoId;
+        data["tituloLicao"] = this.tituloLicao;
+        return data; 
+    }
+}
+
+export interface ILicao {
+    licaoId?: number;
+    tituloLicao?: string | undefined;
+}
+
+export class RequestInfoOfLicao extends RequestInfo implements IRequestInfoOfLicao {
+    response?: Licao | undefined;
+
+    constructor(data?: IRequestInfoOfLicao) {
+        super(data);
+    }
+
+    init(data?: any) {
+        super.init(data);
+        if (data) {
+            this.response = data["response"] ? Licao.fromJS(data["response"]) : <any>undefined;
+        }
+    }
+
+    static fromJS(data: any): RequestInfoOfLicao {
+        data = typeof data === 'object' ? data : {};
+        let result = new RequestInfoOfLicao();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["response"] = this.response ? this.response.toJSON() : <any>undefined;
+        super.toJSON(data);
+        return data; 
+    }
+}
+
+export interface IRequestInfoOfLicao extends IRequestInfo {
+    response?: Licao | undefined;
+}
+
 export class CriarLicaoCommand implements ICriarLicaoCommand {
     id?: number;
     titulo?: string | undefined;
@@ -1667,8 +2402,193 @@ export interface IAtualizarLicaoCommand {
     titulo?: string | undefined;
 }
 
-export class CriarPublicadorCommand implements ICriarPublicadorCommand {
+export class RequestInfoOfPublicadorListViewModel extends RequestInfo implements IRequestInfoOfPublicadorListViewModel {
+    response?: PublicadorListViewModel | undefined;
+
+    constructor(data?: IRequestInfoOfPublicadorListViewModel) {
+        super(data);
+    }
+
+    init(data?: any) {
+        super.init(data);
+        if (data) {
+            this.response = data["response"] ? PublicadorListViewModel.fromJS(data["response"]) : <any>undefined;
+        }
+    }
+
+    static fromJS(data: any): RequestInfoOfPublicadorListViewModel {
+        data = typeof data === 'object' ? data : {};
+        let result = new RequestInfoOfPublicadorListViewModel();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["response"] = this.response ? this.response.toJSON() : <any>undefined;
+        super.toJSON(data);
+        return data; 
+    }
+}
+
+export interface IRequestInfoOfPublicadorListViewModel extends IRequestInfo {
+    response?: PublicadorListViewModel | undefined;
+}
+
+export class PublicadorListViewModel implements IPublicadorListViewModel {
+    publicadores?: PublicadorDetailModel[] | undefined;
+
+    constructor(data?: IPublicadorListViewModel) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(data?: any) {
+        if (data) {
+            if (data["publicadores"] && data["publicadores"].constructor === Array) {
+                this.publicadores = [] as any;
+                for (let item of data["publicadores"])
+                    this.publicadores!.push(PublicadorDetailModel.fromJS(item));
+            }
+        }
+    }
+
+    static fromJS(data: any): PublicadorListViewModel {
+        data = typeof data === 'object' ? data : {};
+        let result = new PublicadorListViewModel();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        if (this.publicadores && this.publicadores.constructor === Array) {
+            data["publicadores"] = [];
+            for (let item of this.publicadores)
+                data["publicadores"].push(item.toJSON());
+        }
+        return data; 
+    }
+}
+
+export interface IPublicadorListViewModel {
+    publicadores?: PublicadorDetailModel[] | undefined;
+}
+
+export class PublicadorDetailModel implements IPublicadorDetailModel {
     publicadorId?: number;
+    sexo?: string | undefined;
+    privilegio?: string | undefined;
+    email?: string | undefined;
+    telefone?: string | undefined;
+    primeiroNome?: string | undefined;
+    ultimoNome?: string | undefined;
+    nomeCompleto?: string | undefined;
+    isAluno?: boolean;
+    isOrador?: boolean;
+    isDirigente?: boolean;
+
+    constructor(data?: IPublicadorDetailModel) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(data?: any) {
+        if (data) {
+            this.publicadorId = data["publicadorId"];
+            this.sexo = data["sexo"];
+            this.privilegio = data["privilegio"];
+            this.email = data["email"];
+            this.telefone = data["telefone"];
+            this.primeiroNome = data["primeiroNome"];
+            this.ultimoNome = data["ultimoNome"];
+            this.nomeCompleto = data["nomeCompleto"];
+            this.isAluno = data["isAluno"];
+            this.isOrador = data["isOrador"];
+            this.isDirigente = data["isDirigente"];
+        }
+    }
+
+    static fromJS(data: any): PublicadorDetailModel {
+        data = typeof data === 'object' ? data : {};
+        let result = new PublicadorDetailModel();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["publicadorId"] = this.publicadorId;
+        data["sexo"] = this.sexo;
+        data["privilegio"] = this.privilegio;
+        data["email"] = this.email;
+        data["telefone"] = this.telefone;
+        data["primeiroNome"] = this.primeiroNome;
+        data["ultimoNome"] = this.ultimoNome;
+        data["nomeCompleto"] = this.nomeCompleto;
+        data["isAluno"] = this.isAluno;
+        data["isOrador"] = this.isOrador;
+        data["isDirigente"] = this.isDirigente;
+        return data; 
+    }
+}
+
+export interface IPublicadorDetailModel {
+    publicadorId?: number;
+    sexo?: string | undefined;
+    privilegio?: string | undefined;
+    email?: string | undefined;
+    telefone?: string | undefined;
+    primeiroNome?: string | undefined;
+    ultimoNome?: string | undefined;
+    nomeCompleto?: string | undefined;
+    isAluno?: boolean;
+    isOrador?: boolean;
+    isDirigente?: boolean;
+}
+
+export class RequestInfoOfPublicadorDetailModel extends RequestInfo implements IRequestInfoOfPublicadorDetailModel {
+    response?: PublicadorDetailModel | undefined;
+
+    constructor(data?: IRequestInfoOfPublicadorDetailModel) {
+        super(data);
+    }
+
+    init(data?: any) {
+        super.init(data);
+        if (data) {
+            this.response = data["response"] ? PublicadorDetailModel.fromJS(data["response"]) : <any>undefined;
+        }
+    }
+
+    static fromJS(data: any): RequestInfoOfPublicadorDetailModel {
+        data = typeof data === 'object' ? data : {};
+        let result = new RequestInfoOfPublicadorDetailModel();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["response"] = this.response ? this.response.toJSON() : <any>undefined;
+        super.toJSON(data);
+        return data; 
+    }
+}
+
+export interface IRequestInfoOfPublicadorDetailModel extends IRequestInfo {
+    response?: PublicadorDetailModel | undefined;
+}
+
+export class CriarPublicadorCommand implements ICriarPublicadorCommand {
     primeiroNome?: string | undefined;
     ultimoNome?: string | undefined;
     email?: string | undefined;
@@ -1687,7 +2607,6 @@ export class CriarPublicadorCommand implements ICriarPublicadorCommand {
 
     init(data?: any) {
         if (data) {
-            this.publicadorId = data["publicadorId"];
             this.primeiroNome = data["primeiroNome"];
             this.ultimoNome = data["ultimoNome"];
             this.email = data["email"];
@@ -1706,7 +2625,6 @@ export class CriarPublicadorCommand implements ICriarPublicadorCommand {
 
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-        data["publicadorId"] = this.publicadorId;
         data["primeiroNome"] = this.primeiroNome;
         data["ultimoNome"] = this.ultimoNome;
         data["email"] = this.email;
@@ -1718,7 +2636,6 @@ export class CriarPublicadorCommand implements ICriarPublicadorCommand {
 }
 
 export interface ICriarPublicadorCommand {
-    publicadorId?: number;
     primeiroNome?: string | undefined;
     ultimoNome?: string | undefined;
     email?: string | undefined;
@@ -1796,6 +2713,256 @@ export interface IAtualizarPublicadorCommand {
     telefone?: string | undefined;
     sexo?: Genero;
     privilegio?: Privilegio;
+}
+
+export class DeletarVariosPublicadorCommand implements IDeletarVariosPublicadorCommand {
+    publicadorIds?: number[] | undefined;
+
+    constructor(data?: IDeletarVariosPublicadorCommand) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(data?: any) {
+        if (data) {
+            if (data["publicadorIds"] && data["publicadorIds"].constructor === Array) {
+                this.publicadorIds = [] as any;
+                for (let item of data["publicadorIds"])
+                    this.publicadorIds!.push(item);
+            }
+        }
+    }
+
+    static fromJS(data: any): DeletarVariosPublicadorCommand {
+        data = typeof data === 'object' ? data : {};
+        let result = new DeletarVariosPublicadorCommand();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        if (this.publicadorIds && this.publicadorIds.constructor === Array) {
+            data["publicadorIds"] = [];
+            for (let item of this.publicadorIds)
+                data["publicadorIds"].push(item);
+        }
+        return data; 
+    }
+}
+
+export interface IDeletarVariosPublicadorCommand {
+    publicadorIds?: number[] | undefined;
+}
+
+export class RequestInfoOfUsuarioListViewModel extends RequestInfo implements IRequestInfoOfUsuarioListViewModel {
+    response?: UsuarioListViewModel | undefined;
+
+    constructor(data?: IRequestInfoOfUsuarioListViewModel) {
+        super(data);
+    }
+
+    init(data?: any) {
+        super.init(data);
+        if (data) {
+            this.response = data["response"] ? UsuarioListViewModel.fromJS(data["response"]) : <any>undefined;
+        }
+    }
+
+    static fromJS(data: any): RequestInfoOfUsuarioListViewModel {
+        data = typeof data === 'object' ? data : {};
+        let result = new RequestInfoOfUsuarioListViewModel();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["response"] = this.response ? this.response.toJSON() : <any>undefined;
+        super.toJSON(data);
+        return data; 
+    }
+}
+
+export interface IRequestInfoOfUsuarioListViewModel extends IRequestInfo {
+    response?: UsuarioListViewModel | undefined;
+}
+
+export class UsuarioListViewModel implements IUsuarioListViewModel {
+    usuarios?: UsuarioDetailModel[] | undefined;
+
+    constructor(data?: IUsuarioListViewModel) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(data?: any) {
+        if (data) {
+            if (data["usuarios"] && data["usuarios"].constructor === Array) {
+                this.usuarios = [] as any;
+                for (let item of data["usuarios"])
+                    this.usuarios!.push(UsuarioDetailModel.fromJS(item));
+            }
+        }
+    }
+
+    static fromJS(data: any): UsuarioListViewModel {
+        data = typeof data === 'object' ? data : {};
+        let result = new UsuarioListViewModel();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        if (this.usuarios && this.usuarios.constructor === Array) {
+            data["usuarios"] = [];
+            for (let item of this.usuarios)
+                data["usuarios"].push(item.toJSON());
+        }
+        return data; 
+    }
+}
+
+export interface IUsuarioListViewModel {
+    usuarios?: UsuarioDetailModel[] | undefined;
+}
+
+export class UsuarioDetailModel implements IUsuarioDetailModel {
+    id?: number;
+    primeiroNome?: string | undefined;
+    ultimoNome?: string | undefined;
+    userName?: string | undefined;
+
+    constructor(data?: IUsuarioDetailModel) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(data?: any) {
+        if (data) {
+            this.id = data["id"];
+            this.primeiroNome = data["primeiroNome"];
+            this.ultimoNome = data["ultimoNome"];
+            this.userName = data["userName"];
+        }
+    }
+
+    static fromJS(data: any): UsuarioDetailModel {
+        data = typeof data === 'object' ? data : {};
+        let result = new UsuarioDetailModel();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["id"] = this.id;
+        data["primeiroNome"] = this.primeiroNome;
+        data["ultimoNome"] = this.ultimoNome;
+        data["userName"] = this.userName;
+        return data; 
+    }
+}
+
+export interface IUsuarioDetailModel {
+    id?: number;
+    primeiroNome?: string | undefined;
+    ultimoNome?: string | undefined;
+    userName?: string | undefined;
+}
+
+export class RequestInfoOfUsuarioDto extends RequestInfo implements IRequestInfoOfUsuarioDto {
+    response?: UsuarioDto | undefined;
+
+    constructor(data?: IRequestInfoOfUsuarioDto) {
+        super(data);
+    }
+
+    init(data?: any) {
+        super.init(data);
+        if (data) {
+            this.response = data["response"] ? UsuarioDto.fromJS(data["response"]) : <any>undefined;
+        }
+    }
+
+    static fromJS(data: any): RequestInfoOfUsuarioDto {
+        data = typeof data === 'object' ? data : {};
+        let result = new RequestInfoOfUsuarioDto();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["response"] = this.response ? this.response.toJSON() : <any>undefined;
+        super.toJSON(data);
+        return data; 
+    }
+}
+
+export interface IRequestInfoOfUsuarioDto extends IRequestInfo {
+    response?: UsuarioDto | undefined;
+}
+
+export class UsuarioDto implements IUsuarioDto {
+    id?: number;
+    userName?: string | undefined;
+    password?: string | undefined;
+    token?: string | undefined;
+
+    constructor(data?: IUsuarioDto) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(data?: any) {
+        if (data) {
+            this.id = data["id"];
+            this.userName = data["userName"];
+            this.password = data["password"];
+            this.token = data["token"];
+        }
+    }
+
+    static fromJS(data: any): UsuarioDto {
+        data = typeof data === 'object' ? data : {};
+        let result = new UsuarioDto();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["id"] = this.id;
+        data["userName"] = this.userName;
+        data["password"] = this.password;
+        data["token"] = this.token;
+        return data; 
+    }
+}
+
+export interface IUsuarioDto {
+    id?: number;
+    userName?: string | undefined;
+    password?: string | undefined;
+    token?: string | undefined;
 }
 
 export class AutenticarUsuarioCommand implements IAutenticarUsuarioCommand {
@@ -1896,13 +3063,6 @@ export enum Role {
     Escola = 3, 
     Territorio = 4, 
     Discurso = 5, 
-}
-
-export interface FileResponse {
-    data: Blob;
-    status: number;
-    fileName?: string;
-    headers?: { [name: string]: any };
 }
 
 export class SwaggerException extends Error {

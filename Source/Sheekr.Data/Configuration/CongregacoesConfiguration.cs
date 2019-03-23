@@ -15,7 +15,7 @@ namespace Sheekr.Data.Configuration
 
             builder.Property(c => c.CongregacaoId)
                 .HasColumnName("CongregacaoId")
-                .ValueGeneratedNever();
+                .ValueGeneratedOnAdd();
 
             builder.OwnsOne(c => c.NomeCongregacao);
 

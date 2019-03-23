@@ -6,6 +6,8 @@ using Sheekr.Application.Escola.Desigacoes.Query;
 using System.IO;
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Authorization;
+using System.Net;
+using Sheekr.Application;
 
 namespace Sheekr.WebApp.Controllers
 {
@@ -16,6 +18,7 @@ namespace Sheekr.WebApp.Controllers
     {
         // GET api/designacoes
         [HttpGet]
+        [ProducesResponseType(typeof(RequestInfo<DesignacaoListViewModel>), (int)HttpStatusCode.OK)]
         public async Task<IActionResult> GetAllAsync([FromQuery] int qtde)
         {
             return Ok(await Mediator.Send(new GetAllDesignacoesQuery()));
@@ -23,6 +26,7 @@ namespace Sheekr.WebApp.Controllers
 
         // GET api/designacoes/gerarpdf
         [HttpGet("[action]")]
+        [ProducesResponseType(typeof(File), (int)HttpStatusCode.OK)]
         public async Task<IActionResult> GerarPdf([FromBody] PdfGenerateCommand command)
         {
             var sucess = await Mediator.Send(command);
@@ -37,6 +41,7 @@ namespace Sheekr.WebApp.Controllers
 
         // GET api/designacoes/5
         [HttpGet("{id}")]
+        [ProducesResponseType(typeof(RequestInfo<DesignacaoDetailModel>), (int)HttpStatusCode.OK)]
         public async Task<IActionResult> GetAsync([FromRoute] int id)
         {
             return Ok(await Mediator.Send(new GetDetailDesignacaoQuery { Id = id }));
@@ -44,6 +49,7 @@ namespace Sheekr.WebApp.Controllers
 
         // POST api/designacoes
         [HttpPost]
+        [ProducesResponseType(typeof(RequestInfo), (int)HttpStatusCode.OK)]
         public async Task<IActionResult> PostAsync([FromBody]DesignarCommand command)
         {
             return Ok(await Mediator.Send(command));
@@ -51,6 +57,8 @@ namespace Sheekr.WebApp.Controllers
 
         // PUT api/designacoes/5
         [HttpPut("{id}")]
+        [ProducesResponseType(typeof(RequestInfo), (int)HttpStatusCode.OK)]
+        [ProducesResponseType((int)HttpStatusCode.BadRequest)]
         public async Task<IActionResult> PutAsync([FromRoute] int id, [FromBody] AtualizarDesignacaoCommand command)
         {
             if (command == null || command.DesignacaoId != id)
@@ -62,11 +70,10 @@ namespace Sheekr.WebApp.Controllers
 
         // DELETE api/designacoes/5
         [HttpDelete("{id}")]
+        [ProducesResponseType(typeof(RequestInfo), (int)HttpStatusCode.OK)]
         public async Task<IActionResult> DeleteAsync([FromRoute] int id)
         {
-            await Mediator.Send(new CancelarDesignacaoCommand { Id = id });
-
-            return NoContent();
+            return Ok(await Mediator.Send(new CancelarDesignacaoCommand { Id = id }));
         }
     }
 }

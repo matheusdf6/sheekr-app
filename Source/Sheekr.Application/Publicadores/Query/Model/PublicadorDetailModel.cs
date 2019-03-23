@@ -13,18 +13,22 @@ namespace Sheekr.Application.Publicadores.Query
         public string Privilegio { get; set; }
         public string Email { get; set; }
         public string Telefone { get; set; }
+        public string PrimeiroNome { get; set; }
+        public string UltimoNome { get; set; }
         public string NomeCompleto { get; set; }
         public bool IsAluno { get; set; }
         public bool IsOrador { get; set; }
         public bool IsDirigente { get; set; }
 
-        public static Expression<Func<Publicador,PublicadorDetailModel>> Projection
+        public static Expression<Func<Publicador, PublicadorDetailModel>> Projection
         {
             get
             {
                 return publicador => new PublicadorDetailModel
                 {
                     PublicadorId = publicador.PublicadorId,
+                    PrimeiroNome = publicador.PrimeiroNome,
+                    UltimoNome = publicador.UltimoNome,
                     NomeCompleto = publicador.NomeCompleto,
                     Email = publicador.Email,
                     Telefone = publicador.Telefone,

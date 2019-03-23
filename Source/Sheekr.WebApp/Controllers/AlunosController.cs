@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Sheekr.Application.Escola;
 using Sheekr.Application.Escola.Alunos.Command;
 using Sheekr.Application.Escola.Alunos.Query;
-
+using Sheekr.Application;
 namespace Sheekr.WebApp.Controllers
 {
     [Route("api/[controller]")]
@@ -20,6 +21,7 @@ namespace Sheekr.WebApp.Controllers
         /// <returns>Retorna os alunos do cadastro</returns>
         /// <reponse code="200">Foi retornado todos os alunos corretamente</reponse>
         [HttpGet]
+        [ProducesResponseType(typeof(RequestInfo<AlunoListViewModel>), (int)HttpStatusCode.OK)]
         public async Task<IActionResult> GetAllAsync()
         {
             return Ok(await Mediator.Send(new GetAllAlunosQuery()));
@@ -32,6 +34,7 @@ namespace Sheekr.WebApp.Controllers
         /// <param name="id">A chave primária do aluno</param>
         /// <response code="200">Aluno encontrado</response>
         /// <returns>Retorna os detalhes do aluno</returns>
+        [ProducesResponseType(typeof(RequestInfo<AlunoDetailsModel>), (int)HttpStatusCode.OK)]
         [HttpGet("{id}")]
         public async Task<IActionResult> GetAsync([FromRoute] int id)
         {
@@ -40,6 +43,7 @@ namespace Sheekr.WebApp.Controllers
 
         // POST api/alunos
         [HttpPost]
+        [ProducesResponseType(typeof(RequestInfo), (int)HttpStatusCode.OK)]
         public async Task<IActionResult> PostAsync([FromBody]CriarAlunoCommand command)
         {
             return Ok(await Mediator.Send(command));
@@ -47,9 +51,11 @@ namespace Sheekr.WebApp.Controllers
 
         // PUT api/alunos/5
         [HttpPut("{id}")]
+        [ProducesResponseType(typeof(RequestInfo), (int)HttpStatusCode.OK)]
+        [ProducesResponseType((int)HttpStatusCode.BadRequest)]
         public async Task<IActionResult> PutAsync(int id, [FromBody] AtualizarAlunoCommand command)
         {
-            if(command == null || command.AlunoId != id)
+            if (command == null || command.AlunoId != id)
             {
                 return BadRequest();
             }
@@ -58,11 +64,10 @@ namespace Sheekr.WebApp.Controllers
 
         // DELETE api/alunos/5
         [HttpDelete("{id}")]
+        [ProducesResponseType(typeof(RequestInfo), (int)HttpStatusCode.OK)]
         public async Task<IActionResult> DeleteAsync([FromRoute] int id)
         {
-            await Mediator.Send(new DeletarAlunoCommand { AlunoId = id });
-
-            return NoContent();
+            return Ok(await Mediator.Send(new DeletarAlunoCommand { AlunoId = id }));
         }
     }
 }

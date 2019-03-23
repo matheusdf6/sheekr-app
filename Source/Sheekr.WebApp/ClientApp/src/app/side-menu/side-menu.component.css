@@ -1,0 +1,175 @@
+/*
+*
+  GLOBAL
+*
+*/
+nav.nav-side-menu {
+  margin-right: 20px;
+}
+
+ul.side-menu {
+  padding: 0;
+  margin: 0;
+  list-style-type: none;
+  width: 100%;
+}
+
+ul.side-menu li {
+  font-size: 1rem;
+  background: #c53530;
+  color: white;
+  text-align: center;
+  height: 35px;
+  margin-bottom: 10px;
+  display: block;
+}
+
+ul.side-menu li a {
+  display: block;
+  width: 100%;
+  color: #ffffff;
+  text-decoration: none;
+  position: relative;
+}
+
+ul.side-menu li a span.icon {
+  position: absolute;
+  top: 0;
+  left: 0;
+  /* Tamanho e medidas de margem conforme tela */
+}
+
+/* 
+*********************************************
+  MOBILE
+*********************************************
+*/
+@media only screen and (max-width: 576px) {
+  nav.nav-side-menu {
+    width: 100%;
+  }
+
+  ul.side-menu {
+    height: 175px;
+  }
+
+  ul.side-menu li {
+    margin-bottom: 0px;
+    border-bottom: solid gray 1px;
+  }
+
+  ul.side-menu li.nav-side-sah-btn {
+    display: block;
+  }
+
+  ul.side-menu li a {
+    display: inline-block;
+    margin-top: 7px;
+  }
+
+  ul.side-menu li a span.icon {
+    margin-left: 15px;
+  }
+
+  ul.side-menu li a span.title {
+    margin-top: 7px;
+  }
+}
+
+/* 
+*********************************************
+  TABLET
+*********************************************
+*/
+
+@media only screen and (min-width: 577px) and (max-width: 768px) {
+  nav.nav-side-menu {
+    width: 50px;
+    margin-right: 5px;
+  }
+
+  ul.side-menu {
+    height: auto;
+    opacity: 1;
+    visibility: visible;
+  }
+
+  ul.side-menu li {
+    border-radius: 50%;
+    width: 35px;
+  }
+
+  ul.side-menu li.nav-side-dash-btn {
+    display: none;
+    width: 0;
+    height: 0;
+  }
+
+  ul.side-menu li a span.icon {
+    display: inline-block;
+    margin-left: 10px;
+    margin-top: 7px;
+    line-height: 1.4rem;
+  }
+
+  ul.side-menu li a span.title {
+    display: none;
+    width: 0px;
+    height: 0px;
+  }
+}
+
+/* 
+*********************************************
+  DESKTOP
+*********************************************
+*/
+
+@media only screen and (min-width: 769px) {
+  nav.nav-side-menu {
+    width: 200px;
+  }
+
+  button.nav-collapse {
+    display: none;
+  }
+
+  ul.side-menu {
+    height: auto;
+    opacity: 1;
+    visibility: visible;
+  }
+
+  ul.side-menu li:not(.nav-side-dash-btn) {
+    border-radius: 20px;
+    width: 200px;
+    -moz-transition: width 0.2s;
+    -o-transition: width 0.2s;
+    -webkit-transition: width 0.2s;
+    transition: width 0.2s;
+    display: flex;
+    justify-content: center;
+    -webkit-align-items: center;
+    align-items: center;
+  }
+
+  ul.side-menu li:hover {
+    width: 210px;
+  }
+
+  ul.side-menu li.nav-side-dash-btn {
+    display: none;
+    width: 0;
+    height: 0;
+  }
+
+  ul.side-menu li a span {
+    display: inline-block;
+  }
+
+  ul.side-menu li a span.icon {
+    height: 35px;
+    margin-left: 15px;
+    line-height: 1.4rem;
+  }
+}

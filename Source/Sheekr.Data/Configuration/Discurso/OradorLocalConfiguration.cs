@@ -15,7 +15,7 @@ namespace Sheekr.Data.Configuration
 
             builder.Property(o => o.OradorId)
                 .HasColumnName("OradorId")
-                .ValueGeneratedNever();
+                .ValueGeneratedOnAdd();
 
             builder.HasOne(o => o.DadosPublicador)
                 .WithOne(p => p.Orador)
@@ -31,7 +31,7 @@ namespace Sheekr.Data.Configuration
 
             builder.HasMany(o => o.DiscursosFeitos)
                 .WithOne(d => d.OradorLocal);
-                
+
             builder.Ignore(o => o.PrimeiroNome);
             builder.Ignore(o => o.UltimoNome);
         }

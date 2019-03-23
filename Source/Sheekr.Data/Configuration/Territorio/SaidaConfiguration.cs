@@ -14,7 +14,7 @@ namespace Sheekr.Data.Configuration
 
             builder.Property(s => s.SaidaId)
                 .HasColumnName("SaidaId")
-                .ValueGeneratedNever();
+                .ValueGeneratedOnAdd();
 
             builder.Property(s => s.Data)
                 .HasColumnType("date")
@@ -24,12 +24,14 @@ namespace Sheekr.Data.Configuration
                 .WithMany(d => d.Saidas)
                 .HasForeignKey(s => s.DirigenteId)
                 .HasConstraintName("FK_Saida_Dirigente")
+                .OnDelete(DeleteBehavior.Restrict)
                 .IsRequired();
 
             builder.HasOne(s => s.Territorio)
                 .WithMany(t => t.DiasTrabalhados)
                 .HasForeignKey(s => s.TerritorioId)
                 .HasConstraintName("FK_Saida_Territorio")
+                .OnDelete(DeleteBehavior.Restrict)
                 .IsRequired();
         }
     }

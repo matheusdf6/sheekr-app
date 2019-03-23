@@ -22,9 +22,14 @@
           "200": {
             "description": "",
             "content": {
-              "application/octet-stream": {
+              "application/json": {
                 "schema": {
-                  "type": "file"
+                  "nullable": true,
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/RequestInfoOfAlunoListViewModel"
+                    }
+                  ]
                 }
               }
             }
@@ -52,9 +57,14 @@
           "200": {
             "description": "",
             "content": {
-              "application/octet-stream": {
+              "application/json": {
                 "schema": {
-                  "type": "file"
+                  "nullable": true,
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/RequestInfo"
+                    }
+                  ]
                 }
               }
             }
@@ -84,9 +94,14 @@
           "200": {
             "description": "",
             "content": {
-              "application/octet-stream": {
+              "application/json": {
                 "schema": {
-                  "type": "file"
+                  "nullable": true,
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/RequestInfoOfAlunoDetailsModel"
+                    }
+                  ]
                 }
               }
             }
@@ -126,9 +141,29 @@
           "200": {
             "description": "",
             "content": {
-              "application/octet-stream": {
+              "application/json": {
                 "schema": {
-                  "type": "file"
+                  "nullable": true,
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/RequestInfo"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "nullable": true,
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/ProblemDetails"
+                    }
+                  ]
                 }
               }
             }
@@ -156,9 +191,14 @@
           "200": {
             "description": "",
             "content": {
-              "application/octet-stream": {
+              "application/json": {
                 "schema": {
-                  "type": "file"
+                  "nullable": true,
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/RequestInfo"
+                    }
+                  ]
                 }
               }
             }
@@ -188,9 +228,14 @@
           "200": {
             "description": "",
             "content": {
-              "application/octet-stream": {
+              "application/json": {
                 "schema": {
-                  "type": "file"
+                  "nullable": true,
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/RequestInfoOfDesignacaoListViewModel"
+                    }
+                  ]
                 }
               }
             }
@@ -218,9 +263,14 @@
           "200": {
             "description": "",
             "content": {
-              "application/octet-stream": {
+              "application/json": {
                 "schema": {
-                  "type": "file"
+                  "nullable": true,
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/RequestInfo"
+                    }
+                  ]
                 }
               }
             }
@@ -250,9 +300,14 @@
           "200": {
             "description": "",
             "content": {
-              "application/octet-stream": {
+              "application/json": {
                 "schema": {
-                  "type": "file"
+                  "nullable": true,
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/File"
+                    }
+                  ]
                 }
               }
             }
@@ -282,9 +337,14 @@
           "200": {
             "description": "",
             "content": {
-              "application/octet-stream": {
+              "application/json": {
                 "schema": {
-                  "type": "file"
+                  "nullable": true,
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/RequestInfoOfDesignacaoDetailModel"
+                    }
+                  ]
                 }
               }
             }
@@ -324,9 +384,29 @@
           "200": {
             "description": "",
             "content": {
-              "application/octet-stream": {
+              "application/json": {
                 "schema": {
-                  "type": "file"
+                  "nullable": true,
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/RequestInfo"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "nullable": true,
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/ProblemDetails"
+                    }
+                  ]
                 }
               }
             }
@@ -354,9 +434,14 @@
           "200": {
             "description": "",
             "content": {
-              "application/octet-stream": {
+              "application/json": {
                 "schema": {
-                  "type": "file"
+                  "nullable": true,
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/RequestInfo"
+                    }
+                  ]
                 }
               }
             }
@@ -374,9 +459,14 @@
           "200": {
             "description": "",
             "content": {
-              "application/octet-stream": {
+              "application/json": {
                 "schema": {
-                  "type": "file"
+                  "nullable": true,
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/RequestInfoOfLicaoListViewModel"
+                    }
+                  ]
                 }
               }
             }
@@ -404,9 +494,14 @@
           "200": {
             "description": "",
             "content": {
-              "application/octet-stream": {
+              "application/json": {
                 "schema": {
-                  "type": "file"
+                  "nullable": true,
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/RequestInfo"
+                    }
+                  ]
                 }
               }
             }
@@ -436,9 +531,14 @@
           "200": {
             "description": "",
             "content": {
-              "application/octet-stream": {
+              "application/json": {
                 "schema": {
-                  "type": "file"
+                  "nullable": true,
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/RequestInfoOfLicao"
+                    }
+                  ]
                 }
               }
             }
@@ -478,9 +578,29 @@
           "200": {
             "description": "",
             "content": {
-              "application/octet-stream": {
+              "application/json": {
                 "schema": {
-                  "type": "file"
+                  "nullable": true,
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/RequestInfo"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "nullable": true,
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/ProblemDetails"
+                    }
+                  ]
                 }
               }
             }
@@ -508,9 +628,14 @@
           "200": {
             "description": "",
             "content": {
-              "application/octet-stream": {
+              "application/json": {
                 "schema": {
-                  "type": "file"
+                  "nullable": true,
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/RequestInfo"
+                    }
+                  ]
                 }
               }
             }
@@ -528,9 +653,14 @@
           "200": {
             "description": "",
             "content": {
-              "application/octet-stream": {
+              "application/json": {
                 "schema": {
-                  "type": "file"
+                  "nullable": true,
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/RequestInfoOfPublicadorListViewModel"
+                    }
+                  ]
                 }
               }
             }
@@ -558,9 +688,49 @@
           "200": {
             "description": "",
             "content": {
-              "application/octet-stream": {
+              "application/json": {
                 "schema": {
-                  "type": "file"
+                  "nullable": true,
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/RequestInfo"
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Publicadores"
+        ],
+        "operationId": "Publicadores_DeleteMany",
+        "requestBody": {
+          "x-name": "command",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DeletarVariosPublicadorCommand"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "nullable": true,
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/RequestInfo"
+                    }
+                  ]
                 }
               }
             }
@@ -590,9 +760,14 @@
           "200": {
             "description": "",
             "content": {
-              "application/octet-stream": {
+              "application/json": {
                 "schema": {
-                  "type": "file"
+                  "nullable": true,
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/RequestInfoOfPublicadorDetailModel"
+                    }
+                  ]
                 }
               }
             }
@@ -632,9 +807,29 @@
           "200": {
             "description": "",
             "content": {
-              "application/octet-stream": {
+              "application/json": {
                 "schema": {
-                  "type": "file"
+                  "nullable": true,
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/RequestInfo"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "nullable": true,
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/ProblemDetails"
+                    }
+                  ]
                 }
               }
             }
@@ -662,9 +857,14 @@
           "200": {
             "description": "",
             "content": {
-              "application/octet-stream": {
+              "application/json": {
                 "schema": {
-                  "type": "file"
+                  "nullable": true,
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/RequestInfo"
+                    }
+                  ]
                 }
               }
             }
@@ -682,9 +882,14 @@
           "200": {
             "description": "",
             "content": {
-              "application/octet-stream": {
+              "application/json": {
                 "schema": {
-                  "type": "file"
+                  "nullable": true,
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/RequestInfoOfUsuarioListViewModel"
+                    }
+                  ]
                 }
               }
             }
@@ -714,9 +919,14 @@
           "200": {
             "description": "",
             "content": {
-              "application/octet-stream": {
+              "application/json": {
                 "schema": {
-                  "type": "file"
+                  "nullable": true,
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/RequestInfoOfUsuarioDto"
+                    }
+                  ]
                 }
               }
             }
@@ -746,9 +956,14 @@
           "200": {
             "description": "",
             "content": {
-              "application/octet-stream": {
+              "application/json": {
                 "schema": {
-                  "type": "file"
+                  "nullable": true,
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/RequestInfo"
+                    }
+                  ]
                 }
               }
             }
@@ -759,7 +974,41 @@
   },
   "components": {
     "schemas": {
-      "CriarAlunoCommand": {
+      "RequestInfoOfAlunoListViewModel": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/RequestInfo"
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "response": {
+                "nullable": true,
+                "oneOf": [
+                  {
+                    "$ref": "#/components/schemas/AlunoListViewModel"
+                  }
+                ]
+              }
+            }
+          }
+        ]
+      },
+      "AlunoListViewModel": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "alunos": {
+            "type": "array",
+            "nullable": true,
+            "items": {
+              "$ref": "#/components/schemas/AlunoDetailsModel"
+            }
+          }
+        }
+      },
+      "AlunoDetailsModel": {
         "type": "object",
         "additionalProperties": false,
         "properties": {
@@ -767,6 +1016,60 @@
             "type": "integer",
             "format": "int32"
           },
+          "nomePublicador": {
+            "type": "string",
+            "nullable": true
+          },
+          "fazLeitura": {
+            "type": "boolean"
+          },
+          "fazDemonstracao": {
+            "type": "boolean"
+          },
+          "fazDiscurso": {
+            "type": "boolean"
+          }
+        }
+      },
+      "RequestInfo": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "isSucceed": {
+            "type": "boolean"
+          },
+          "errors": {
+            "type": "object",
+            "nullable": true,
+            "additionalProperties": {}
+          }
+        }
+      },
+      "RequestInfoOfAlunoDetailsModel": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/RequestInfo"
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "response": {
+                "nullable": true,
+                "oneOf": [
+                  {
+                    "$ref": "#/components/schemas/AlunoDetailsModel"
+                  }
+                ]
+              }
+            }
+          }
+        ]
+      },
+      "CriarAlunoCommand": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
           "publicadorId": {
             "type": "integer",
             "format": "int32"
@@ -779,6 +1082,35 @@
           },
           "fazDiscurso": {
             "type": "boolean"
+          }
+        }
+      },
+      "ProblemDetails": {
+        "type": "object",
+        "additionalProperties": {
+          "nullable": true
+        },
+        "properties": {
+          "type": {
+            "type": "string",
+            "nullable": true
+          },
+          "title": {
+            "type": "string",
+            "nullable": true
+          },
+          "status": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "detail": {
+            "type": "string",
+            "nullable": true
+          },
+          "instance": {
+            "type": "string",
+            "nullable": true
           }
         }
       },
@@ -805,6 +1137,79 @@
           }
         }
       },
+      "RequestInfoOfDesignacaoListViewModel": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/RequestInfo"
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "response": {
+                "nullable": true,
+                "oneOf": [
+                  {
+                    "$ref": "#/components/schemas/DesignacaoListViewModel"
+                  }
+                ]
+              }
+            }
+          }
+        ]
+      },
+      "DesignacaoListViewModel": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "designacoes": {
+            "type": "array",
+            "nullable": true,
+            "items": {
+              "$ref": "#/components/schemas/DesignacaoDetailModel"
+            }
+          }
+        }
+      },
+      "DesignacaoDetailModel": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "nomePrincipal": {
+            "type": "string",
+            "nullable": true
+          },
+          "nomeAjudante": {
+            "type": "string",
+            "nullable": true
+          },
+          "licao": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "data": {
+            "type": "string",
+            "nullable": true
+          },
+          "tipo": {
+            "type": "string",
+            "nullable": true
+          },
+          "local": {
+            "type": "string",
+            "nullable": true
+          }
+        }
+      },
+      "File": {
+        "type": "object",
+        "x-abstract": true,
+        "additionalProperties": false
+      },
       "PdfGenerateCommand": {
         "type": "object",
         "additionalProperties": false,
@@ -823,14 +1228,31 @@
           }
         }
       },
+      "RequestInfoOfDesignacaoDetailModel": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/RequestInfo"
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "response": {
+                "nullable": true,
+                "oneOf": [
+                  {
+                    "$ref": "#/components/schemas/DesignacaoDetailModel"
+                  }
+                ]
+              }
+            }
+          }
+        ]
+      },
       "DesignarCommand": {
         "type": "object",
         "additionalProperties": false,
         "properties": {
-          "designacaoId": {
-            "type": "integer",
-            "format": "int32"
-          },
           "licaoId": {
             "type": "integer",
             "format": "int32"
@@ -923,6 +1345,75 @@
           }
         }
       },
+      "RequestInfoOfLicaoListViewModel": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/RequestInfo"
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "response": {
+                "nullable": true,
+                "oneOf": [
+                  {
+                    "$ref": "#/components/schemas/LicaoListViewModel"
+                  }
+                ]
+              }
+            }
+          }
+        ]
+      },
+      "LicaoListViewModel": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "licoes": {
+            "type": "array",
+            "nullable": true,
+            "items": {
+              "$ref": "#/components/schemas/Licao"
+            }
+          }
+        }
+      },
+      "Licao": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "licaoId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "tituloLicao": {
+            "type": "string",
+            "nullable": true
+          }
+        }
+      },
+      "RequestInfoOfLicao": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/RequestInfo"
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "response": {
+                "nullable": true,
+                "oneOf": [
+                  {
+                    "$ref": "#/components/schemas/Licao"
+                  }
+                ]
+              }
+            }
+          }
+        ]
+      },
       "CriarLicaoCommand": {
         "type": "object",
         "additionalProperties": false,
@@ -951,7 +1442,41 @@
           }
         }
       },
-      "CriarPublicadorCommand": {
+      "RequestInfoOfPublicadorListViewModel": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/RequestInfo"
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "response": {
+                "nullable": true,
+                "oneOf": [
+                  {
+                    "$ref": "#/components/schemas/PublicadorListViewModel"
+                  }
+                ]
+              }
+            }
+          }
+        ]
+      },
+      "PublicadorListViewModel": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "publicadores": {
+            "type": "array",
+            "nullable": true,
+            "items": {
+              "$ref": "#/components/schemas/PublicadorDetailModel"
+            }
+          }
+        }
+      },
+      "PublicadorDetailModel": {
         "type": "object",
         "additionalProperties": false,
         "properties": {
@@ -959,6 +1484,70 @@
             "type": "integer",
             "format": "int32"
           },
+          "sexo": {
+            "type": "string",
+            "nullable": true
+          },
+          "privilegio": {
+            "type": "string",
+            "nullable": true
+          },
+          "email": {
+            "type": "string",
+            "nullable": true
+          },
+          "telefone": {
+            "type": "string",
+            "nullable": true
+          },
+          "primeiroNome": {
+            "type": "string",
+            "nullable": true
+          },
+          "ultimoNome": {
+            "type": "string",
+            "nullable": true
+          },
+          "nomeCompleto": {
+            "type": "string",
+            "nullable": true
+          },
+          "isAluno": {
+            "type": "boolean"
+          },
+          "isOrador": {
+            "type": "boolean"
+          },
+          "isDirigente": {
+            "type": "boolean"
+          }
+        }
+      },
+      "RequestInfoOfPublicadorDetailModel": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/RequestInfo"
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "response": {
+                "nullable": true,
+                "oneOf": [
+                  {
+                    "$ref": "#/components/schemas/PublicadorDetailModel"
+                  }
+                ]
+              }
+            }
+          }
+        ]
+      },
+      "CriarPublicadorCommand": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
           "primeiroNome": {
             "type": "string",
             "nullable": true
@@ -1038,6 +1627,119 @@
           },
           "privilegio": {
             "$ref": "#/components/schemas/Privilegio"
+          }
+        }
+      },
+      "DeletarVariosPublicadorCommand": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "publicadorIds": {
+            "type": "array",
+            "nullable": true,
+            "items": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        }
+      },
+      "RequestInfoOfUsuarioListViewModel": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/RequestInfo"
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "response": {
+                "nullable": true,
+                "oneOf": [
+                  {
+                    "$ref": "#/components/schemas/UsuarioListViewModel"
+                  }
+                ]
+              }
+            }
+          }
+        ]
+      },
+      "UsuarioListViewModel": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "usuarios": {
+            "type": "array",
+            "nullable": true,
+            "items": {
+              "$ref": "#/components/schemas/UsuarioDetailModel"
+            }
+          }
+        }
+      },
+      "UsuarioDetailModel": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "primeiroNome": {
+            "type": "string",
+            "nullable": true
+          },
+          "ultimoNome": {
+            "type": "string",
+            "nullable": true
+          },
+          "userName": {
+            "type": "string",
+            "nullable": true
+          }
+        }
+      },
+      "RequestInfoOfUsuarioDto": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/RequestInfo"
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "response": {
+                "nullable": true,
+                "oneOf": [
+                  {
+                    "$ref": "#/components/schemas/UsuarioDto"
+                  }
+                ]
+              }
+            }
+          }
+        ]
+      },
+      "UsuarioDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "userName": {
+            "type": "string",
+            "nullable": true
+          },
+          "password": {
+            "type": "string",
+            "nullable": true
+          },
+          "token": {
+            "type": "string",
+            "nullable": true
           }
         }
       },

@@ -25,7 +25,6 @@ namespace Sheekr.Application.Publicadores.Command
             {
                 _db.Publicadores.Add(new Publicador()
                 {
-                    PublicadorId = request.PublicadorId,
                     PrimeiroNome = request.PrimeiroNome.Trim(),
                     UltimoNome = request.UltimoNome.Trim(),
                     Email = (request.Email != null) ? request.Email.Trim() : null,

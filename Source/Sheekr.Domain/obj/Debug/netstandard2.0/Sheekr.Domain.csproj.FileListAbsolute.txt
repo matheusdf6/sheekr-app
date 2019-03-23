@@ -10,12 +10,12 @@ C:\Users\mathe\source\repos\Sheekr\Sheekr.Domain\obj\Debug\netstandard2.0\Sheekr
 C:\Users\mathe\source\repos\Sheekr\Sheekr.Domain\obj\Debug\netstandard2.0\Sheekr.Domain.dll
 C:\Users\mathe\source\repos\Sheekr\Sheekr.Domain\obj\Debug\netstandard2.0\Sheekr.Domain.pdb
 C:\Users\mathe\source\repos\Sheekr\Sheekr.Domain\obj\Debug\netstandard2.0\Sheekr.Domain.csprojAssemblyReference.cache
+C:\Users\mathe\Desktop\sheekr-app\sheekr-app\Source\Sheekr.Domain\bin\Debug\netstandard2.0\Sheekr.Domain.deps.json
+C:\Users\mathe\Desktop\sheekr-app\sheekr-app\Source\Sheekr.Domain\bin\Debug\netstandard2.0\Sheekr.Domain.dll
+C:\Users\mathe\Desktop\sheekr-app\sheekr-app\Source\Sheekr.Domain\bin\Debug\netstandard2.0\Sheekr.Domain.pdb
 C:\Users\mathe\Desktop\sheekr-app\sheekr-app\Source\Sheekr.Domain\obj\Debug\netstandard2.0\Sheekr.Domain.csprojAssemblyReference.cache
 C:\Users\mathe\Desktop\sheekr-app\sheekr-app\Source\Sheekr.Domain\obj\Debug\netstandard2.0\Sheekr.Domain.csproj.CoreCompileInputs.cache
 C:\Users\mathe\Desktop\sheekr-app\sheekr-app\Source\Sheekr.Domain\obj\Debug\netstandard2.0\Sheekr.Domain.AssemblyInfoInputs.cache
 C:\Users\mathe\Desktop\sheekr-app\sheekr-app\Source\Sheekr.Domain\obj\Debug\netstandard2.0\Sheekr.Domain.AssemblyInfo.cs
 C:\Users\mathe\Desktop\sheekr-app\sheekr-app\Source\Sheekr.Domain\obj\Debug\netstandard2.0\Sheekr.Domain.dll
 C:\Users\mathe\Desktop\sheekr-app\sheekr-app\Source\Sheekr.Domain\obj\Debug\netstandard2.0\Sheekr.Domain.pdb
-C:\Users\mathe\Desktop\sheekr-app\sheekr-app\Source\Sheekr.Domain\bin\Debug\netstandard2.0\Sheekr.Domain.deps.json
-C:\Users\mathe\Desktop\sheekr-app\sheekr-app\Source\Sheekr.Domain\bin\Debug\netstandard2.0\Sheekr.Domain.dll
-C:\Users\mathe\Desktop\sheekr-app\sheekr-app\Source\Sheekr.Domain\bin\Debug\netstandard2.0\Sheekr.Domain.pdb

@@ -1,0 +1,110 @@
+<div class="container-form box-shadow">
+  <div class="container-form-header">
+    <a routerLink="/publicador"
+      ><span class="oi back" data-glyph="arrow-thick-left"></span
+    ></a>
+    <h1>Novo Publicador</h1>
+  </div>
+  <div class="container-form-body">
+    <ngx-ui-loader></ngx-ui-loader>
+    <form (ngSubmit)="criarNovo(publicador)" [formGroup]="publicador">
+      <div class="row">
+        <div class="form-control column col-4">
+          <label for="primeiro-nome">Primeiro Nome *</label>
+          <input
+            id="primeiro-nome"
+            name="primeiro-nome"
+            class="form-control-input"
+            formControlName="primeiroNome"
+            type="text"
+          />
+        </div>
+
+        <div class="form-control column col-4">
+          <label for="ultimo-nome">Último Nome *</label>
+          <input
+            id="ultimo-nome"
+            name="ultimo-nome"
+            class="form-control-input"
+            formControlName="ultimoNome"
+            type="text"
+          />
+        </div>
+
+        <div class="form-control column col-4">
+          <label for="sexo">Sexo *</label>
+          <select
+            id="sexo"
+            name="sexo"
+            class="form-control-select"
+            formControlName="sexo"
+          >
+            <option value="1">Masculino</option>
+            <option value="2">Feminino</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="form-control column col-6">
+          <label for="email">Email</label>
+          <input
+            id="email"
+            name="email"
+            formControlName="email"
+            class="form-control-input"
+            type="email"
+          />
+        </div>
+
+        <div class="form-control column col-3">
+          <label for="telefone">Telefone</label>
+          <input
+            id="telefone"
+            name="telefone"
+            class="form-control-input"
+            type="text"
+            formControlName="telefone"
+            mask="(00) 00000-0000"
+            placeholder="(XX) XXXXX-XXXX"
+          />
+        </div>
+
+        <div class="form-control column col-3">
+          <label for="privilegio">Privilégio *</label>
+          <select
+            id="privilegio"
+            name="privilegio"
+            class="form-control-select"
+            formControlName="privilegio"
+          >
+            <option value="1">Nenhum</option>
+            <option value="2">Servo Ministerial</option>
+            <option value="3">Ancião</option>
+          </select>
+        </div>
+      </div>
+
+      <br />
+      <p>Os elementos marcados com asterisco (*) são obrigatórios!</p>
+      <button type="submit" [disabled]="publicador.invalid">
+        Criar Novo
+      </button>
+      <button type="button" (click)="limpar()">Limpar</button>
+    </form>
+  </div>
+
+  <div class="form-status" [ngClass]="{ 'on-hide': !submited && !loading }">
+    <div class="form-status-sucess" style="background: green;" *ngIf="result">
+      <h2>Publicador criado com sucesso!</h2>
+    </div>
+    <div
+      class="form-status-error"
+      style="background: rgb(131, 53, 53);"
+      *ngIf="!result"
+    >
+      <h2>Erro! Publicador não criado!</h2>
+      <h3>{{ erros }}</h3>
+    </div>
+  </div>
+</div>

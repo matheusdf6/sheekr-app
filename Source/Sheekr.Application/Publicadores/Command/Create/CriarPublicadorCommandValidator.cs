@@ -8,7 +8,6 @@ namespace Sheekr.Application.Publicadores.Command
     {
         public CriarPublicadorCommandValidator()
         {
-            RuleFor(pub => pub.PublicadorId).NotEmpty();
             RuleFor(pub => pub.PrimeiroNome).NotNull().NotEmpty()
                 .WithMessage("O campo 'Primeiro Nome' é nulo ou está vazio");
             RuleFor(pub => pub.UltimoNome).NotNull().NotEmpty()

@@ -1,6 +1,46 @@
-@media (max-width: 767px) {
-  /* On small screens, the nav menu spans the full width of the screen. Leave a space for it. */
-  .body-content {
-    padding-top: 50px;
+.app-main {
+  height: calc(100vh - 80px);
+  width: 100%;
+  margin: 0;
+}
+
+.app-content {
+  width: 95%;
+}
+
+@media (max-width: 576px) {
+  .app-main {
+    padding: 0;
+    display: block;
+  }
+
+  .app-content {
+    margin: 10px auto;
+  }
+}
+
+@media (min-width: 577px) {
+  .app-content {
+    margin: 0px auto;
+  }
+}
+
+@media (min-width: 577px) and (max-width: 768px) {
+  .app-main {
+    padding: 20px 15px;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .app-content {
+    margin: 0px 10px;
+  }
+}
+
+@media (min-width: 769px) {
+  .app-main {
+    padding: 20px 38px 20px 30px;
+    display: flex;
+    justify-content: space-between;
   }
 }

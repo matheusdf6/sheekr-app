@@ -8,7 +8,6 @@ namespace Sheekr.Application.Escola.Alunos.Command
     /// </summary>
     public class CriarAlunoCommand : IRequest<RequestInfo>
     {
-        public int AlunoId { get; set; }
         public int PublicadorId { get; set; }
         public bool FazLeitura { get; set; }
         public bool FazDemonstracao { get; set; }

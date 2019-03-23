@@ -14,7 +14,7 @@ namespace Sheekr.Data.Configuration
 
             builder.Property(a => a.AlunoId)
                 .HasColumnName("AlunoId")
-                .ValueGeneratedNever();
+                .ValueGeneratedOnAdd();
 
             builder.Property(a => a.FazDemonstracao)
                 .HasColumnType("bit")
@@ -32,6 +32,7 @@ namespace Sheekr.Data.Configuration
                 .WithOne(p => p.Aluno)
                 .HasForeignKey<Aluno>(a => a.PublicadorId)
                 .HasConstraintName("FK_Aluno_Publicador")
+                .OnDelete(DeleteBehavior.Cascade)
                 .IsRequired();
 
             builder.HasMany(a => a.DesignacoesPrincipal)

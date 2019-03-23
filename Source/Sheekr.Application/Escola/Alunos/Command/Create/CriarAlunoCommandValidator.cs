@@ -4,7 +4,7 @@ using System.Text;
 using FluentValidation;
 
 namespace Sheekr.Application.Escola.Alunos.Command
-{ 
+{
     /// <summary>
     /// Classe que valida os dados informados na classe "CriarAlunoCommand"
     /// </summary>
@@ -12,7 +12,6 @@ namespace Sheekr.Application.Escola.Alunos.Command
     {
         public CriarAlunoCommandValidator()
         {
-            RuleFor(a => a.AlunoId).NotEmpty();
             RuleFor(a => a.PublicadorId).NotEmpty();
             RuleFor(a => a.FazLeitura).NotNull();
             RuleFor(a => a.FazDemonstracao).NotNull();

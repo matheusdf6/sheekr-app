@@ -17,7 +17,7 @@ namespace Sheekr.Data.Configuration
 
             builder.Property(d => d.DesignacaoId)
                 .HasColumnName("DesignacaoId")
-                .ValueGeneratedNever();
+                .ValueGeneratedOnAdd();
 
             builder.Property(d => d.Data)
                 .HasColumnType("date")
@@ -36,6 +36,7 @@ namespace Sheekr.Data.Configuration
                 .WithMany()
                 .HasForeignKey(d => d.LicaoId)
                 .HasConstraintName("FK_Designacao_Licao")
+                .OnDelete(DeleteBehavior.Restrict)
                 .IsRequired();
 
             builder.HasOne(d => d.AlunoPrincipal)

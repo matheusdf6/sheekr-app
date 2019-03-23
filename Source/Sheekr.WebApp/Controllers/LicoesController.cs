@@ -1,7 +1,10 @@
-﻿using System.Threading.Tasks;
+﻿using System.Net;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Sheekr.Application;
 using Sheekr.Application.Escola.Licoes.Command;
 using Sheekr.Application.Escola.Licoes.Query;
+using Sheekr.Domain.Entities;
 
 namespace Sheekr.WebApp.Controllers
 {
@@ -11,6 +14,7 @@ namespace Sheekr.WebApp.Controllers
     {
         // GET api/licoes   
         [HttpGet]
+        [ProducesResponseType(typeof(RequestInfo<LicaoListViewModel>), (int)HttpStatusCode.OK)]
         public async Task<IActionResult> GetAllAsync()
         {
             return Ok(await Mediator.Send(new GetAllLicoesQuery()));
@@ -18,6 +22,7 @@ namespace Sheekr.WebApp.Controllers
 
         // GET api/licoes/5
         [HttpGet("{id}")]
+        [ProducesResponseType(typeof(RequestInfo<Licao>), (int)HttpStatusCode.OK)]
         public async Task<IActionResult> GetAsync([FromRoute] int id)
         {
             return Ok(await Mediator.Send(new GetDetailLicaoQuery { Id = id }));
@@ -25,6 +30,7 @@ namespace Sheekr.WebApp.Controllers
 
         // POST api/licoes
         [HttpPost]
+        [ProducesResponseType(typeof(RequestInfo), (int)HttpStatusCode.OK)]
         public async Task<IActionResult> PostAsync([FromBody] CriarLicaoCommand command)
         {
             return Ok(await Mediator.Send(command));
@@ -32,6 +38,8 @@ namespace Sheekr.WebApp.Controllers
 
         // PUT api/licoes/5
         [HttpPut("{id}")]
+        [ProducesResponseType(typeof(RequestInfo), (int)HttpStatusCode.OK)]
+        [ProducesResponseType((int)HttpStatusCode.BadRequest)]
         public async Task<IActionResult> PutAsync([FromRoute] int id, [FromBody] AtualizarLicaoCommand command)
         {
             if (command == null || command.Id != id)
@@ -43,11 +51,10 @@ namespace Sheekr.WebApp.Controllers
 
         // DELETE api/licoes/5
         [HttpDelete("{id}")]
+        [ProducesResponseType(typeof(RequestInfo), (int)HttpStatusCode.OK)]
         public async Task<IActionResult> DeleteAsync([FromRoute] int id)
         {
-            await Mediator.Send(new DeletarLicaoCommand { Id = id });
-
-            return NoContent();
+            return Ok(await Mediator.Send(new DeletarLicaoCommand { Id = id }));
         }
     }
 }

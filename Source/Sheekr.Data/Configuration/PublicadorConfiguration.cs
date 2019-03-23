@@ -16,7 +16,7 @@ namespace Sheekr.Data.Configuration
 
             builder.Property(p => p.PublicadorId)
                 .HasColumnName("PublicadorId")
-                .ValueGeneratedNever();
+                .ValueGeneratedOnAdd();
 
             builder.Property(p => p.Sexo)
                 .HasConversion(new EnumToNumberConverter<Genero, int>())
@@ -39,7 +39,7 @@ namespace Sheekr.Data.Configuration
                 .IsRequired();
 
             builder.Ignore(p => p.NomeCompleto);
-                
+
             builder.HasOne(p => p.Aluno)
                 .WithOne(a => a.DadosPublicador);
 

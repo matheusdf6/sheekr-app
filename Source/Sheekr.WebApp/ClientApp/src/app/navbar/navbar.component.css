@@ -1,0 +1,351 @@
+nav {
+  background: #ffffff;
+  margin: 0;
+  width: 100%;
+}
+
+div.app-nav-user-img {
+  margin: 0px;
+  background: rgba(255, 0, 0, 1);
+  background: -moz-linear-gradient(
+    -45deg,
+    rgba(255, 0, 0, 1) 0%,
+    rgba(38, 0, 43, 1) 100%
+  );
+  background: -webkit-gradient(
+    left top,
+    right bottom,
+    color-stop(0%, rgba(255, 0, 0, 1)),
+    color-stop(100%, rgba(38, 0, 43, 1))
+  );
+  background: -webkit-linear-gradient(
+    -45deg,
+    rgba(255, 0, 0, 1) 0%,
+    rgba(38, 0, 43, 1) 100%
+  );
+  background: -o-linear-gradient(
+    -45deg,
+    rgba(255, 0, 0, 1) 0%,
+    rgba(38, 0, 43, 1) 100%
+  );
+  background: -ms-linear-gradient(
+    -45deg,
+    rgba(255, 0, 0, 1) 0%,
+    rgba(38, 0, 43, 1) 100%
+  );
+  background: linear-gradient(
+    135deg,
+    rgba(255, 0, 0, 1) 0%,
+    rgba(38, 0, 43, 1) 100%
+  );
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ff0000', endColorstr='#26002b', GradientType=1 );
+  border-radius: 50%;
+  -moz-border-radius: 50%;
+  -webkit-border-radius: 50%;
+}
+
+div.app-nav-user-front img {
+  border-radius: 50%;
+}
+
+@media (max-width: 576px) {
+  nav {
+    height: 50px;
+  }
+
+  nav .navbar-container {
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+  }
+
+  div.app-nav-dash {
+    display: none;
+    width: 0;
+  }
+
+  div.app-nav-collapse {
+    display: block;
+    color: #4f000b;
+    border-radius: 20px;
+    height: 40px;
+    width: 40px;
+    margin: 5px 0 5px 15px;
+    transition: all 0.4s;
+  }
+
+  div .app-nav-collapse .btn-collapse {
+    display: block;
+    position: relative;
+    width: 100%;
+    height: 100%;
+  }
+
+  div .app-nav-collapse:hover {
+    background: #f0f0f0;
+    -webkit-box-shadow: 1px 1px 5px 0px rgba(0, 0, 0, 0.4);
+    -moz-box-shadow: 1px 1px 5px 0px rgba(0, 0, 0, 0.4);
+    box-shadow: 1px 1px 5px 0px rgba(0, 0, 0, 0.4);
+  }
+
+  div .app-nav-collapse .btn-collapse .icon {
+    position: absolute;
+    top: 0;
+    left: 0;
+    font-size: 22px;
+    margin: 5px 9px;
+  }
+
+  div.app-nav-brand {
+    margin: 5px;
+    height: 40px;
+  }
+
+  div.app-nav-brand img {
+    width: 145px;
+    height: 40px;
+  }
+
+  div.app-nav-user-box {
+    width: 40px;
+    height: 40px;
+    margin: 5px 10px 5px 0px;
+  }
+
+  div.app-nav-user-info {
+    display: none;
+    width: 0px;
+  }
+
+  div.app-nav-user-img {
+    width: 40px;
+    height: 40px;
+  }
+
+  div.app-nav-user-front {
+    width: 32px;
+    height: 32px;
+  }
+
+  div.app-nav-user-front img {
+    width: 32px;
+    height: 32px;
+    margin: 4px;
+  }
+}
+
+@media (min-width: 577px) {
+  nav {
+    height: 80px;
+  }
+
+  nav .navbar-container {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  div.app-nav-collapse {
+    display: none;
+    width: 0;
+  }
+
+  div.app-nav-dash {
+    height: 40px;
+    background: rgba(255, 0, 0, 1);
+    background: -moz-linear-gradient(
+      -45deg,
+      rgba(255, 0, 0, 1) 0%,
+      rgba(38, 0, 43, 1) 100%
+    );
+    background: -webkit-gradient(
+      left top,
+      right bottom,
+      color-stop(0%, rgba(255, 0, 0, 1)),
+      color-stop(100%, rgba(38, 0, 43, 1))
+    );
+    background: -webkit-linear-gradient(
+      -45deg,
+      rgba(255, 0, 0, 1) 0%,
+      rgba(38, 0, 43, 1) 100%
+    );
+    background: -o-linear-gradient(
+      -45deg,
+      rgba(255, 0, 0, 1) 0%,
+      rgba(38, 0, 43, 1) 100%
+    );
+    background: -ms-linear-gradient(
+      -45deg,
+      rgba(255, 0, 0, 1) 0%,
+      rgba(38, 0, 43, 1) 100%
+    );
+    background: linear-gradient(
+      135deg,
+      rgba(255, 0, 0, 1) 0%,
+      rgba(38, 0, 43, 1) 100%
+    );
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ff0000', endColorstr='#26002b', GradientType=1 );
+  }
+
+  div.app-nav-dash button.app-nav-button {
+    margin: 5px;
+    background: white;
+    border: none;
+    height: 30px;
+    color: black;
+    transition: background 0.2s;
+    font-size: 12pt;
+    text-align: center;
+    color: #707070;
+    font-weight: bold;
+    outline: none;
+    cursor: pointer;
+  }
+
+  div.app-nav-dash button.app-nav-button:hover {
+    background: rgba(0, 0, 0, 0);
+    color: white;
+  }
+
+  div.app-nav-brand {
+    margin: 10px 0px;
+    height: 60px;
+  }
+
+  div.app-nav-brand img {
+    width: 220px;
+    height: 60px;
+  }
+
+  div.app-nav-user-box {
+    height: 50px;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  div.app-nav-user-img {
+    margin: 0px;
+    background: rgba(255, 0, 0, 1);
+    background: -moz-linear-gradient(
+      -45deg,
+      rgba(255, 0, 0, 1) 0%,
+      rgba(38, 0, 43, 1) 100%
+    );
+    background: -webkit-gradient(
+      left top,
+      right bottom,
+      color-stop(0%, rgba(255, 0, 0, 1)),
+      color-stop(100%, rgba(38, 0, 43, 1))
+    );
+    background: -webkit-linear-gradient(
+      -45deg,
+      rgba(255, 0, 0, 1) 0%,
+      rgba(38, 0, 43, 1) 100%
+    );
+    background: -o-linear-gradient(
+      -45deg,
+      rgba(255, 0, 0, 1) 0%,
+      rgba(38, 0, 43, 1) 100%
+    );
+    background: -ms-linear-gradient(
+      -45deg,
+      rgba(255, 0, 0, 1) 0%,
+      rgba(38, 0, 43, 1) 100%
+    );
+    background: linear-gradient(
+      135deg,
+      rgba(255, 0, 0, 1) 0%,
+      rgba(38, 0, 43, 1) 100%
+    );
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ff0000', endColorstr='#26002b', GradientType=1 );
+    border-radius: 50%;
+    -moz-border-radius: 50%;
+    -webkit-border-radius: 50%;
+    width: 50px;
+    height: 50px;
+  }
+
+  div.app-nav-user-front {
+    width: 40px;
+    height: 40px;
+  }
+
+  div.app-nav-user-front img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin: 5px;
+  }
+}
+
+@media (min-width: 577px) and (max-width: 768px) {
+  div.app-nav-dash {
+    margin: 20px 15px;
+    width: 40px;
+    border-radius: 50%;
+  }
+
+  div.app-nav-dash button.app-nav-button {
+    width: 30px;
+    border-radius: 50%;
+  }
+
+  div.app-nav-dash button.app-nav-button .title {
+    display: none;
+    width: 0;
+  }
+
+  div.app-nav-dash button.app-nav-button:hover {
+    background: rgba(0, 0, 0, 0);
+    color: white;
+  }
+
+  div.app-nav-user-box {
+    width: 50px;
+    margin: 15px;
+  }
+
+  div.app-nav-user-info {
+    display: none;
+    width: 0;
+  }
+}
+
+@media (min-width: 769px) {
+  div.app-nav-dash {
+    margin: 20px 30px;
+    width: 200px;
+    border-radius: 25px;
+  }
+
+  div.app-nav-dash button.app-nav-button {
+    width: 190px;
+    border-radius: 25px;
+  }
+
+  div.app-nav-user-box {
+    width: 190px;
+    margin: 15px 38px 15px 0px;
+  }
+
+  div.app-nav-user-info {
+    width: 130px;
+    padding: 7px 0px;
+  }
+
+  div.app-nav-user-info span {
+    display: block;
+    text-align: right;
+    color: #707070;
+  }
+
+  div.app-nav-user-info #username {
+    font-size: 14pt;
+    margin: 0px;
+    line-height: 1;
+  }
+
+  div.app-nav-user-info #role {
+    font-size: 8pt;
+    margin: 0px;
+  }
+}

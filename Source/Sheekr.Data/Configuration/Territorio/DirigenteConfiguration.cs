@@ -14,12 +14,13 @@ namespace Sheekr.Data.Configuration
 
             builder.Property(d => d.DirigenteId)
                 .HasColumnName("DirigenteId")
-                .ValueGeneratedNever();
+                .ValueGeneratedOnAdd();
 
             builder.HasOne(d => d.DadosPublicador)
                 .WithOne(p => p.Dirigente)
                 .HasForeignKey<Dirigente>(d => d.PublicadorId)
                 .HasConstraintName("FK_Dirigente_Publicador")
+                .OnDelete(DeleteBehavior.Cascade)
                 .IsRequired();
 
             builder.HasMany(d => d.Saidas)

@@ -1,0 +1,110 @@
+form {
+  margin: 20px;
+}
+
+form .form-group .form-control label {
+  font-size: 16px;
+  text-decoration-style: bold;
+}
+
+button {
+  width: 200px;
+  background: #720026;
+  color: white;
+  cursor: pointer;
+  height: 30px;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  margin: 5px;
+}
+
+button:hover {
+  background: #4f000b;
+}
+
+.container-form {
+  width: 100%;
+  border: solid 1px #c0c0c0;
+  border-radius: 15px;
+}
+
+.container-form-header {
+  box-sizing: border-box;
+  width: 100%;
+  height: 80px;
+  text-align: center;
+  border-radius: 15px 15px 0 0;
+  background: #c53530;
+  position: relative;
+}
+
+.container-form-header .back {
+  position: absolute;
+  top: 0;
+  left: 0;
+  margin-top: 20px;
+  margin-left: 20px;
+  font-size: 2rem;
+  line-height: 1.25em;
+  color: white;
+}
+
+.container-form-header .back:hover {
+  color: #720026;
+}
+
+.container-form-header h1 {
+  margin: 0px;
+  padding: 15px;
+  color: white;
+}
+
+.container-form-body {
+  position: relative;
+}
+
+.form-status,
+.form-status div {
+  height: 50px;
+  width: 100%;
+  border-radius: 0 0 15px 15px;
+}
+
+.form-status div h2 {
+  margin: 0px;
+  padding: 10px;
+}
+
+.on-hide {
+  display: none;
+  height: 0;
+}
+
+.form-status-sucess {
+  background: green;
+  text-align: center;
+  color: white;
+}
+
+.form-status-error {
+  background: rgb(131, 53, 53);
+  text-align: center;
+  color: white;
+}
+
+.ng-pristine:not(form) {
+  border-left: 5px solid gray;
+}
+
+#email.ng-valid.ng-dirty,
+#primeiro-nome.ng-valid,
+#ultimo-nome.ng-valid,
+#sexo.ng-valid,
+#privilegio.ng-valid {
+  border-left: 5px solid #74bf79;
+}
+
+.ng-invalid:not(form) {
+  border-left: 5px solid #a63d3b;
+}
