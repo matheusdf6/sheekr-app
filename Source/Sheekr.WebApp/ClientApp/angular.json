@@ -23,7 +23,9 @@
             "assets": ["src/assets"],
             "styles": [
               "./node_modules/open-iconic/font/css/open-iconic.css",
+              "./node_modules/ngx-toastr/toastr.css/",
               "src/styles-app-loading.css",
+              "src/bootstrap.min.css",
               "src/styles.css"
             ],
             "scripts": []

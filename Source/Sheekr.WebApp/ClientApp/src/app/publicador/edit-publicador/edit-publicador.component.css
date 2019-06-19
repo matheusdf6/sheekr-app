@@ -43,11 +43,25 @@ button:hover {
   position: absolute;
   top: 0;
   left: 0;
-  margin-top: 20px;
-  margin-left: 20px;
+  color: white;
   font-size: 2rem;
   line-height: 1.25em;
-  color: white;
+  margin-left: 20px;
+  margin-top: 27px;
+}
+
+@media screen and (max-width: 577px) {
+  .container-form-header .back {
+    margin-top: 27px;
+    font-size: 1.3rem;
+  }
+}
+
+@media screen and (min-width: 578px) {
+  .container-form-header .back {
+    margin-top: 20px;
+    font-size: 2rem;
+  }
 }
 
 .container-form-header .back:hover {
@@ -60,6 +74,19 @@ button:hover {
   color: white;
 }
 
+@media screen and (max-width: 577px) {
+  .container-form-header h1 {
+    padding: 25px;
+    font-size: 1.3rem;
+  }
+}
+
+@media screen and (min-width: 578px) {
+  .container-form-header h1 {
+    padding: 15px;
+    font-size: 2rem;
+  }
+}
 .container-form-body {
   position: relative;
 }

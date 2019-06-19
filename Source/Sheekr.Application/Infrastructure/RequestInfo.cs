@@ -11,6 +11,7 @@ namespace Sheekr.Application
         //public IList<Exception> Exceptions { get; set; }
 
         public IDictionary<string, object> Errors { get; set; }
+        public IDictionary<string, object> Extras { get; set; }
 
         public void Sucess()
         {
@@ -18,23 +19,18 @@ namespace Sheekr.Application
         }
         public void AddFailure(string failure, Exception exception = null)
         {
-            /*
-            if (Failures == null)
-                Failures = new List<string>();
-            Failures.Add(failure);
-
-            if(exception != null)
-            {
-                if (Exceptions == null)
-                    Exceptions = new List<Exception>();
-                Exceptions.Add(exception);
-            }*/
-
             if (Errors == null)
                 Errors = new Dictionary<string, object>();
-            Errors.Add(failure, (exception!=null) ? new { Name = exception.GetType().FullName, exception.Message} : null);
+            Errors.Add(failure, (exception != null) ? new { Name = exception.GetType().FullName, exception.Message } : null);
 
-            IsSucceed = false;            
+            IsSucceed = false;
+        }
+
+        public void AddExtra(string key, object value)
+        {
+            if (Extras == null)
+                Extras = new Dictionary<string, object>();
+            Extras.Add(key, value);
         }
     }
 

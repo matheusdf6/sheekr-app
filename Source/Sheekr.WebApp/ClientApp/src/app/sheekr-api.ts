@@ -1432,6 +1432,7 @@ export class UsuariosClient implements IUsuariosClient {
 export class RequestInfo implements IRequestInfo {
     isSucceed?: boolean;
     errors?: { [key: string] : any; } | undefined;
+    extras?: { [key: string] : any; } | undefined;
 
     constructor(data?: IRequestInfo) {
         if (data) {
@@ -1450,6 +1451,13 @@ export class RequestInfo implements IRequestInfo {
                 for (let key in data["errors"]) {
                     if (data["errors"].hasOwnProperty(key))
                         this.errors![key] = data["errors"][key];
+                }
+            }
+            if (data["extras"]) {
+                this.extras = {} as any;
+                for (let key in data["extras"]) {
+                    if (data["extras"].hasOwnProperty(key))
+                        this.extras![key] = data["extras"][key];
                 }
             }
         }
@@ -1472,6 +1480,13 @@ export class RequestInfo implements IRequestInfo {
                     data["errors"][key] = this.errors[key];
             }
         }
+        if (this.extras) {
+            data["extras"] = {};
+            for (let key in this.extras) {
+                if (this.extras.hasOwnProperty(key))
+                    data["extras"][key] = this.extras[key];
+            }
+        }
         return data; 
     }
 }
@@ -1479,6 +1494,7 @@ export class RequestInfo implements IRequestInfo {
 export interface IRequestInfo {
     isSucceed?: boolean;
     errors?: { [key: string] : any; } | undefined;
+    extras?: { [key: string] : any; } | undefined;
 }
 
 export class RequestInfoOfAlunoListViewModel extends RequestInfo implements IRequestInfoOfAlunoListViewModel {

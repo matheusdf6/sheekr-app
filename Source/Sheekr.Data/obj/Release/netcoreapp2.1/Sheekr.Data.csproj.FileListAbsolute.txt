@@ -1,0 +1,14 @@
+C:\Users\mathe\Desktop\sheekr-app\sheekr-app\Source\Sheekr.Data\bin\Release\netcoreapp2.1\Sheekr.Data.deps.json
+C:\Users\mathe\Desktop\sheekr-app\sheekr-app\Source\Sheekr.Data\bin\Release\netcoreapp2.1\Sheekr.Data.runtimeconfig.json
+C:\Users\mathe\Desktop\sheekr-app\sheekr-app\Source\Sheekr.Data\bin\Release\netcoreapp2.1\Sheekr.Data.runtimeconfig.dev.json
+C:\Users\mathe\Desktop\sheekr-app\sheekr-app\Source\Sheekr.Data\bin\Release\netcoreapp2.1\Sheekr.Data.dll
+C:\Users\mathe\Desktop\sheekr-app\sheekr-app\Source\Sheekr.Data\bin\Release\netcoreapp2.1\Sheekr.Data.pdb
+C:\Users\mathe\Desktop\sheekr-app\sheekr-app\Source\Sheekr.Data\bin\Release\netcoreapp2.1\Sheekr.Domain.dll
+C:\Users\mathe\Desktop\sheekr-app\sheekr-app\Source\Sheekr.Data\bin\Release\netcoreapp2.1\Sheekr.Domain.pdb
+C:\Users\mathe\Desktop\sheekr-app\sheekr-app\Source\Sheekr.Data\obj\Release\netcoreapp2.1\Sheekr.Data.csprojAssemblyReference.cache
+C:\Users\mathe\Desktop\sheekr-app\sheekr-app\Source\Sheekr.Data\obj\Release\netcoreapp2.1\Sheekr.Data.csproj.CoreCompileInputs.cache
+C:\Users\mathe\Desktop\sheekr-app\sheekr-app\Source\Sheekr.Data\obj\Release\netcoreapp2.1\Sheekr.Data.AssemblyInfoInputs.cache
+C:\Users\mathe\Desktop\sheekr-app\sheekr-app\Source\Sheekr.Data\obj\Release\netcoreapp2.1\Sheekr.Data.AssemblyInfo.cs
+C:\Users\mathe\Desktop\sheekr-app\sheekr-app\Source\Sheekr.Data\obj\Release\netcoreapp2.1\Sheekr.Data.csproj.CopyComplete
+C:\Users\mathe\Desktop\sheekr-app\sheekr-app\Source\Sheekr.Data\obj\Release\netcoreapp2.1\Sheekr.Data.dll
+C:\Users\mathe\Desktop\sheekr-app\sheekr-app\Source\Sheekr.Data\obj\Release\netcoreapp2.1\Sheekr.Data.pdb

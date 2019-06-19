@@ -1,0 +1,28 @@
+<div class="publicador-card box-shadow">
+  <div class="check-wrapper">
+    <input type="checkbox" (change)="onSelect()" />
+    <a routerLink="/publicador/editar/{{publicador.publicadorId}}"><span class="oi icon" data-glyph="pencil"></span></a>
+  </div>
+  <div class="publicador-card-header" (click)="exibirDetalhes(cardBody)">
+    <p id="pub-card-nome">{{ publicador.nomeCompleto }}</p>
+    <p id="pub-card-priv">{{ getPrivilegio() }}</p>
+  </div><br>
+  <!--<button type="button" (click)="exibirDetalhes(cardBody)">Exibir Detalhes</button>-->
+  <div #cardBody class="publicador-card-body">
+    <div class="row">
+      <div class="card-contatos column col-4">
+        <h3>Contato:</h3>
+        <p>Telefone: {{ publicador.telefone || "—" }}</p>
+        <p>Email: {{ publicador.email || "—"}}</p>
+      </div>
+      <div *ngIf="hasInformacoes()" class="card-links column col-8">
+        <h3>Outras informações:</h3>
+        <ul>
+          <li *ngIf="publicador.isAluno == true">Ir para Informações de Aluno</li>
+          <li *ngIf="publicador.isOrador == true">Ir para Informações de Orador</li>
+          <li *ngIf="publicador.isDirigente == true">Ir para Informações de Dirigente</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>

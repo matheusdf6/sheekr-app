@@ -23,7 +23,7 @@ namespace Sheekr.Application.Publicadores.Command
         {
             try
             {
-                _db.Publicadores.Add(new Publicador()
+                var publicador = new Publicador()
                 {
                     PrimeiroNome = request.PrimeiroNome.Trim(),
                     UltimoNome = request.UltimoNome.Trim(),
@@ -31,10 +31,12 @@ namespace Sheekr.Application.Publicadores.Command
                     Telefone = (request.Telefone != null) ? request.Telefone.Trim() : null,
                     Sexo = request.Sexo,
                     Privilegio = request.Privilegio
-                });
-
+                };
+                _db.Publicadores.Add(publicador);
                 await _db.SaveChangesAsync(cancellationToken);
+                _info.AddExtra("id", publicador.PublicadorId);
                 _info.Sucess();
+
             }
             catch (DbException ex)
             {

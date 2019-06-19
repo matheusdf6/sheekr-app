@@ -1,81 +1,112 @@
-<div class="app-toolbar">
-  <ul class="toolbar-nav">
-    <li>
-      <a class="btn-tool" routerLink="/publicador/novo">
-        <span class="oi icon" data-glyph="plus"></span>
-        <span class="title">Novo</span>
-      </a>
-    </li>
-    <li>
-      <button
-        class="btn-tool"
-        (click)="abrirModal()"
-        [disabled]="checkedIndexes.length == 0"
-      >
-        <span class="oi icon" data-glyph="trash"></span>
-        <span class="title">Excluir</span>
-      </button>
-    </li>
-  </ul>
-</div>
-<div class="table-container box-shadow">
-  <div class="table-title">
-    <h2>Lista de Publicadores</h2>
+<div class="content-wrapper">
+  <div #toolsContainer class="app-toolbar">
+    <button tooltip="Ações" placement="left" [isDisabled]="this.tooltipDisable" id="floating-button" type="button" (click)="exibirFloatMenu()">
+      <span class="oi" data-glyph="wrench"></span>
+    </button>
+    <ul #tools class="toolbar-nav">
+      <li>
+        <button tooltip="Criar Novo" placement="left" [isDisabled]="this.tooltipDisable" class="btn-tool" routerLink="/publicador/novo">
+          <span class="oi icon" data-glyph="plus"></span>
+          <span class="title">Novo</span>
+        </button>
+      </li>
+
+      <li>
+        <button
+          tooltip="Excluir"
+          placement="left"
+          [isDisabled]="this.tooltipDisable"
+          class="btn-tool"
+          (click)="abrirModal()"
+          [disabled]="checkedIndexes.length == 0"
+        >
+          <span class="oi icon" data-glyph="trash"></span>
+          <span class="title">Excluir</span>
+        </button>
+      </li>
+      <li>
+        <button tooltip="Fechar Guias" placement="left" [isDisabled]="this.tooltipDisable" class="btn-tool" (click)="fecharGuias()">
+          <span class="oi icon" data-glyph="layers"></span>
+          <span class="title">Fechar guias</span>
+        </button>
+      </li>
+    </ul>
   </div>
-  <div class="table">
-    <table>
-      <thead>
-        <tr>
-          <th></th>
-          <th></th>
-          <th>Nome Completo</th>
-          <th>Sexo</th>
-          <th>Privilegio</th>
-          <th>Telefone</th>
-          <th>Email</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let pub of publicadores; let i = index">
-          <td>
-            <input
-              type="checkbox"
-              (change)="checkPublicador(i, pub.publicadorId)"
-            />
-          </td>
-          <td>
-            <a
-              class="btn-link-edit"
-              routerLink="/publicador/editar/{{ pub.publicadorId }}"
-            >
-              <span class="oi" data-glyph="pencil"></span>
-            </a>
-          </td>
-          <td>{{ pub.nomeCompleto }}</td>
-          <td>{{ pub.sexo }}</td>
-          <td>{{ humanizeService.humanizeCamelCase(pub.privilegio) }}</td>
-          <td>{{ pub.telefone }}</td>
-          <td>{{ pub.email }}</td>
-        </tr>
-      </tbody>
-    </table>
+
+  <div class="list-container">
+    <div class="list-title box-shadow">
+      <h2>Lista de Publicadores</h2>
+    </div>
+    <div class="publicador-list">
+      <ul #lista>
+        <li *ngFor="let pub of publicadores; let i = index">
+          <app-dados-publicador [publicador]="pub" [index]="i" (selectedPublicador)="onSelect($event)"> </app-dados-publicador>
+        </li>
+      </ul>
+    </div>
   </div>
-</div>
-<div class="modal" [ngStyle]="{ display: modalOpen ? 'block' : 'none' }">
-  <div class="modal-flex-container">
-    <div class="modal-content">
-      <div class="modal-header">
-        <span class="modal-btn-close" (click)="fechar()">&times;</span>
-        <h2>Excluir Publicador</h2>
-      </div>
-      <div class="modal-body">
-        <p>Você realmente deseja excluir esse(s) publicador(es)?</p>
-        <p>Quantidade: {{ checkedIndexes.length }}</p>
-      </div>
-      <div class="modal-footer">
-        <button type="button" (click)="fechar()">Cancelar</button>
-        <button type="button" (click)="excluir()">Excluir</button>
+
+  <div class="modal" [ngStyle]="{ display: modalOpen ? 'block' : 'none' }">
+    <div class="modal-flex-container">
+      <div class="modal-content">
+        <div class="modal-header">
+          <span class="modal-btn-close" (click)="fechar()">&times;</span>
+          <h2>Excluir Publicador</h2>
+        </div>
+        <div class="modal-body">
+          <p>Você realmente deseja excluir esse(s) publicador(es)?</p>
+          <p>Quantidade: {{ checkedIndexes.length }}</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" (click)="fechar()">Cancelar</button>
+          <button type="button" (click)="excluir()">
+            Excluir
+          </button>
+        </div>
       </div>
     </div>
   </div>
 </div>
+
+<!-- 
+  VERSÃO LISTA TABELA
+
+<div class="table">
+      <table>
+        <thead>
+          <tr>
+            <th></th>
+            <th></th>
+            <th>Nome Completo</th>
+            <th>Sexo</th>
+            <th>Privilegio</th>
+            <th>Telefone</th>
+            <th>Email</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let pub of publicadores; let i = index">
+            <td>
+              <input
+                type="checkbox"
+                (change)="checkPublicador(i, pub.publicadorId)"
+              />
+            </td>
+            <td>
+              <a
+                class="btn-link-edit"
+                routerLink="/publicador/editar/{{ pub.publicadorId }}"
+              >
+                <span class="oi" data-glyph="pencil"></span>
+              </a>
+            </td>
+            <td>{{ pub.nomeCompleto }}</td>
+            <td>{{ pub.sexo }}</td>
+            <td>{{ humanizeService.humanizeCamelCase(pub.privilegio) }}</td>
+            <td>{{ pub.telefone }}</td>
+            <td>{{ pub.email }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+-->

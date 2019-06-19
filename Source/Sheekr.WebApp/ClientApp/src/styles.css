@@ -15,7 +15,17 @@ body {
 }
 
 a {
+  text-decoration: none;
+  outline: none;
+}
+
+a,
+button:not([disabled]) {
   cursor: pointer;
+}
+
+button[disabled] {
+  cursor: not-allowed;
 }
 
 .app-row {
@@ -23,28 +33,33 @@ a {
   justify-content: space-between;
 }
 
+.container {
+  width: 90%;
+  margin: 0 auto;
+}
+
 /* FORM GLOBAL STYLES */
 
 /*
-.form-group {
-  display: flex;
-  justify-content: space-between;
-}
-
-.form-group .form-control:first-child {
-  margin-right: 10px;
-}
-*/
+        .form-group {
+          display: flex;
+          justify-content: space-between;
+        }
+        
+        .form-group .form-control:first-child {
+          margin-right: 10px;
+        }
+        */
 /*
-.form-control {
-  width: 100%;
-}
-*/
+        .form-control {
+          width: 100%;
+        }
+        */
 .form-control {
   margin-bottom: 10px;
 }
 
-.form-control input,
+.form-control input:not([type="checkbox"]),
 .form-control select {
   width: 100%;
   display: block;
@@ -58,21 +73,25 @@ a {
   transition: box-shadow 0.15s ease-in-out;
 }
 
-.form-control input:focus,
+.form-control input[type="checkbox"] {
+  display: inline-block;
+}
+
+.form-control input:not([type="checkbox"]):focus,
 .form-control select:focus {
   box-shadow: 0px 0px 5px 2px #dba2a2;
 }
 /*
-.form-control-input {
-  width: calc(
-    100% - 10px
-  ); /* 10px = 5px(borda esq.) + 4px (padding ambos lados) + 1px(borda dir.) 
-}
-
-.form-control-select {
-  width: 300px;
-}
-*/
+        .form-control-input {
+          width: calc(
+            100% - 10px
+          ); /* 10px = 5px(borda esq.) + 4px (padding ambos lados) + 1px(borda dir.) 
+        }
+        
+        .form-control-select {
+          width: 300px;
+        }
+        */
 
 /* ----------------- GRIDS --------------------- */
 
@@ -274,7 +293,7 @@ a {
 
 .app-toolbar .toolbar-nav li {
   display: inline-block;
-  width: 100px;
+  width: 150px;
   margin: 2px 10px 2px 0px;
 }
 
@@ -289,7 +308,6 @@ a {
   border: 1px solid #4f000b;
   border-radius: 15px;
   padding: 2px;
-  cursor: pointer;
 }
 
 .app-toolbar .toolbar-nav li .btn-tool:hover:not([disabled]) {

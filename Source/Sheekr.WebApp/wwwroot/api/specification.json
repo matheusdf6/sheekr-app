@@ -1042,6 +1042,11 @@
             "type": "object",
             "nullable": true,
             "additionalProperties": {}
+          },
+          "extras": {
+            "type": "object",
+            "nullable": true,
+            "additionalProperties": {}
           }
         }
       },

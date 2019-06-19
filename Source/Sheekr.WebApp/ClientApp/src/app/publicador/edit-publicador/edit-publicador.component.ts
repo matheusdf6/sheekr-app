@@ -1,19 +1,9 @@
 import { Component, OnInit } from "@angular/core";
-import {
-  PublicadoresClient,
-  PublicadorDetailModel,
-  AtualizarPublicadorCommand,
-  Genero,
-  Privilegio
-} from "src/app/sheekr-api";
-import {
-  FormBuilder,
-  FormGroup,
-  Validators,
-  FormControl
-} from "@angular/forms";
+import { PublicadoresClient, PublicadorDetailModel, AtualizarPublicadorCommand, Genero, Privilegio } from "src/app/sheekr-api";
+import { FormBuilder, FormGroup, Validators, FormControl } from "@angular/forms";
 import { ActivatedRoute } from "@angular/router";
 import { NgxUiLoaderService } from "ngx-ui-loader";
+import { ToastrService, Toast } from "ngx-toastr";
 
 @Component({
   selector: "app-edit-publicador",
@@ -24,7 +14,8 @@ import { NgxUiLoaderService } from "ngx-ui-loader";
 export class EditPublicadorComponent implements OnInit {
   client: PublicadoresClient;
   publicador: FormGroup;
-  ngxService: NgxUiLoaderService;
+  ngxLoader: NgxUiLoaderService;
+  ngxToastr: ToastrService;
   publicadorId: number;
   publicadorModel: PublicadorDetailModel;
   route: ActivatedRoute;
@@ -32,14 +23,10 @@ export class EditPublicadorComponent implements OnInit {
   submited: boolean;
   result: boolean;
 
-  constructor(
-    client: PublicadoresClient,
-    private fb: FormBuilder,
-    route: ActivatedRoute,
-    ngxService: NgxUiLoaderService
-  ) {
+  constructor(client: PublicadoresClient, private fb: FormBuilder, route: ActivatedRoute, ngxLoader: NgxUiLoaderService, ngxToastr: ToastrService) {
     this.client = client;
-    this.ngxService = ngxService;
+    this.ngxLoader = ngxLoader;
+    this.ngxToastr = ngxToastr;
     this.route = route;
     this.publicador = fb.group({
       publicadorId: new FormControl(),
@@ -70,9 +57,7 @@ export class EditPublicadorComponent implements OnInit {
   }
 
   atualizar({ value }: { value: PublicadorDetailModel }) {
-    this.loading = true;
-    this.submited = true;
-    this.ngxService.start();
+    this.ngxLoader.start();
 
     let command = new AtualizarPublicadorCommand();
     command.publicadorId = this.publicadorId;
@@ -86,23 +71,17 @@ export class EditPublicadorComponent implements OnInit {
     this.client.put(this.publicadorId, command).subscribe(
       info => {
         if (info.isSucceed) {
-          this.result = true;
+          this.ngxToastr.success(`O publicador ${this.publicadorModel.nomeCompleto} foi atualizado`, "Sucesso!");
         } else {
-          this.result = false;
+          this.ngxToastr.error(`Não foi possivel atualizar`, "Erro!");
         }
-        this.loading = false;
-        this.ngxService.stop();
+        this.ngxLoader.stop();
       },
       error => {
-        this.result = false;
-        this.loading = false;
-        this.ngxService.stop();
-        console.log(error);
+        this.ngxToastr.error(`Não foi possivel atualizar`, "Erro!");
+        this.ngxLoader.stop();
       }
     );
-
-    this.ngxService.stop();
-    this.loading = false;
   }
 
   limpar() {

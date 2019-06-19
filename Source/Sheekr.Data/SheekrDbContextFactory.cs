@@ -8,7 +8,7 @@ namespace Sheekr.Data
 {
     public class SheekrDbContextFactory : IDesignTimeDbContextFactory<SheekrDbContext>
     {
-        public const string ConnectionStringName = "SheekrDatabase";
+        public const string ConnectionStringName = "AzureDatabase";
         public const string AspNetCoreEnvironment = "ASPNETCORE_ENVIRONMENT";
 
         protected SheekrDbContext CreateNewInstance(DbContextOptions<SheekrDbContext> options)
@@ -20,7 +20,7 @@ namespace Sheekr.Data
         {
             try
             {
-                var basePath = @"C:\Users\mathe\source\repos\Sheekr\Sheekr.Tests.Console"; //Directory.GetCurrentDirectory() + string.Format("{0}..{0}Sheekr.Tests.Console", Path.DirectorySeparatorChar);
+                var basePath = Directory.GetCurrentDirectory() + string.Format("{0}..{0}Sheekr.WebApp", Path.DirectorySeparatorChar);
                 return Create(basePath, Environment.GetEnvironmentVariable(AspNetCoreEnvironment));
             }
             catch (Exception ex)

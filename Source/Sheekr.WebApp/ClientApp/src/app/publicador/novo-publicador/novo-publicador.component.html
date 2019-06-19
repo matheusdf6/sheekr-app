@@ -1,44 +1,25 @@
 <div class="container-form box-shadow">
   <div class="container-form-header">
-    <a routerLink="/publicador"
-      ><span class="oi back" data-glyph="arrow-thick-left"></span
-    ></a>
+    <a routerLink="/publicador"><span class="oi back" data-glyph="arrow-thick-left"></span></a>
     <h1>Novo Publicador</h1>
   </div>
   <div class="container-form-body">
     <ngx-ui-loader></ngx-ui-loader>
-    <form (ngSubmit)="criarNovo(publicador)" [formGroup]="publicador">
+    <form class="form-group" (ngSubmit)="criarNovo(publicador)" [formGroup]="publicador">
       <div class="row">
         <div class="form-control column col-4">
           <label for="primeiro-nome">Primeiro Nome *</label>
-          <input
-            id="primeiro-nome"
-            name="primeiro-nome"
-            class="form-control-input"
-            formControlName="primeiroNome"
-            type="text"
-          />
+          <input id="primeiro-nome" name="primeiro-nome" class="form-control-input" formControlName="primeiroNome" type="text" />
         </div>
 
         <div class="form-control column col-4">
           <label for="ultimo-nome">Último Nome *</label>
-          <input
-            id="ultimo-nome"
-            name="ultimo-nome"
-            class="form-control-input"
-            formControlName="ultimoNome"
-            type="text"
-          />
+          <input id="ultimo-nome" name="ultimo-nome" class="form-control-input" formControlName="ultimoNome" type="text" />
         </div>
 
         <div class="form-control column col-4">
           <label for="sexo">Sexo *</label>
-          <select
-            id="sexo"
-            name="sexo"
-            class="form-control-select"
-            formControlName="sexo"
-          >
+          <select id="sexo" name="sexo" class="form-control-select" formControlName="sexo">
             <option value="1">Masculino</option>
             <option value="2">Feminino</option>
           </select>
@@ -48,13 +29,7 @@
       <div class="row">
         <div class="form-control column col-6">
           <label for="email">Email</label>
-          <input
-            id="email"
-            name="email"
-            formControlName="email"
-            class="form-control-input"
-            type="email"
-          />
+          <input id="email" name="email" formControlName="email" class="form-control-input" type="email" />
         </div>
 
         <div class="form-control column col-3">
@@ -72,12 +47,7 @@
 
         <div class="form-control column col-3">
           <label for="privilegio">Privilégio *</label>
-          <select
-            id="privilegio"
-            name="privilegio"
-            class="form-control-select"
-            formControlName="privilegio"
-          >
+          <select id="privilegio" name="privilegio" class="form-control-select" formControlName="privilegio">
             <option value="1">Nenhum</option>
             <option value="2">Servo Ministerial</option>
             <option value="3">Ancião</option>
@@ -85,26 +55,67 @@
         </div>
       </div>
 
+      <h3 id="title-funcoes">Adicionar funções:</h3>
+      <div class="form-group" formGroupName="alunoOptions">
+        <div class="row">
+          <div class="column col-4">
+            <div class="form-control data-funcao box-shadow" [ngClass]="{ selected: publicador.get('isAluno').value }">
+              <div class="data-funcao-title">
+                <button type="button" (click)="addAluno()">
+                  <span #icon class="oi icon" data-glyph="plus"></span>
+                </button>
+                <span class="funcao">Aluno</span>
+              </div>
+              <div #options class="data-funcao-options">
+                <span>Tipos de Designações: </span>
+                <ul>
+                  <li>
+                    <input id="fazLeitura" name="fazLeitura" type="checkbox" formControlName="fazLeitura" />
+                    <label for="fazLeitura">Leitura</label>
+                  </li>
+                  <li>
+                    <input id="fazDemonstracao" name="fazDemonstracao" type="checkbox" formControlName="fazDemonstracao" />
+                    <label for="fazDemonstracao">Demonstracao</label>
+                  </li>
+                  <li>
+                    <input id="fazDiscurso" name="fazDiscurso" type="checkbox" formControlName="fazDiscurso" />
+                    <label for="fazDiscurso">Discurso</label>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="column col-4">
+            <div class="form-control data-funcao box-shadow" [ngClass]="{ selected: publicador.get('isOrador').value }">
+              <div class="data-funcao-title">
+                <button type="button" (click)="addOrador()">
+                  <span #icon class="oi icon" data-glyph="plus"></span>
+                </button>
+                <span class="funcao">Orador</span>
+              </div>
+            </div>
+          </div>
+          <div class="column col-4">
+            <div class="form-control data-funcao box-shadow" [ngClass]="{ selected: publicador.get('isDirigente').value }">
+              <div class="data-funcao-title">
+                <button type="button" (click)="addDirigente()">
+                  <span #icon class="oi icon" data-glyph="plus"></span>
+                </button>
+                <span class="funcao">Dirigente</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
       <br />
       <p>Os elementos marcados com asterisco (*) são obrigatórios!</p>
-      <button type="submit" [disabled]="publicador.invalid">
-        Criar Novo
-      </button>
-      <button type="button" (click)="limpar()">Limpar</button>
+      <div class="form-button-group">
+        <button type="submit" [disabled]="publicador.invalid">
+          Criar Novo
+        </button>
+        <button type="button" (click)="limpar()">Limpar</button>
+      </div>
     </form>
-  </div>
-
-  <div class="form-status" [ngClass]="{ 'on-hide': !submited && !loading }">
-    <div class="form-status-sucess" style="background: green;" *ngIf="result">
-      <h2>Publicador criado com sucesso!</h2>
-    </div>
-    <div
-      class="form-status-error"
-      style="background: rgb(131, 53, 53);"
-      *ngIf="!result"
-    >
-      <h2>Erro! Publicador não criado!</h2>
-      <h3>{{ erros }}</h3>
-    </div>
   </div>
 </div>

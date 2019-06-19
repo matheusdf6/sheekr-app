@@ -17,8 +17,8 @@ export class SideMenuComponent implements OnInit {
   @ViewChild("menu") menuRef: ElementRef;
   animationState: string;
   isSmallScreen: boolean;
-  collapse: CollapseCallback = () =>
-    (this.animationState = this.animationState === "out" ? "in" : "out");
+  tooltipDisable = false;
+  collapse: CollapseCallback = () => (this.animationState = this.animationState === "out" ? "in" : "out");
 
   constructor() {
     if (window.innerWidth > 576) {
@@ -28,6 +28,7 @@ export class SideMenuComponent implements OnInit {
       this.animationState = "out";
       this.isSmallScreen = true;
     }
+    innerWidth > 576 && innerWidth <= 768 ? (this.tooltipDisable = false) : (this.tooltipDisable = true);
   }
 
   ngOnInit() {
@@ -35,12 +36,15 @@ export class SideMenuComponent implements OnInit {
   }
 
   onResize(event) {
-    if (event.target.innerWidth > 576) {
+    let innerWidth: number = event.target.innerWidth;
+    if (innerWidth > 576) {
       this.animationState = "in";
       this.isSmallScreen = false;
     } else {
       this.animationState = "out";
       this.isSmallScreen = true;
+      this.tooltipDisable = true;
     }
+    innerWidth > 576 && innerWidth <= 768 ? (this.tooltipDisable = false) : (this.tooltipDisable = true);
   }
 }

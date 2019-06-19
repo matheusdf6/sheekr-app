@@ -2,42 +2,18 @@ nav {
   background: #ffffff;
   margin: 0;
   width: 100%;
+  min-width: 320px;
 }
 
 div.app-nav-user-img {
   margin: 0px;
   background: rgba(255, 0, 0, 1);
-  background: -moz-linear-gradient(
-    -45deg,
-    rgba(255, 0, 0, 1) 0%,
-    rgba(38, 0, 43, 1) 100%
-  );
-  background: -webkit-gradient(
-    left top,
-    right bottom,
-    color-stop(0%, rgba(255, 0, 0, 1)),
-    color-stop(100%, rgba(38, 0, 43, 1))
-  );
-  background: -webkit-linear-gradient(
-    -45deg,
-    rgba(255, 0, 0, 1) 0%,
-    rgba(38, 0, 43, 1) 100%
-  );
-  background: -o-linear-gradient(
-    -45deg,
-    rgba(255, 0, 0, 1) 0%,
-    rgba(38, 0, 43, 1) 100%
-  );
-  background: -ms-linear-gradient(
-    -45deg,
-    rgba(255, 0, 0, 1) 0%,
-    rgba(38, 0, 43, 1) 100%
-  );
-  background: linear-gradient(
-    135deg,
-    rgba(255, 0, 0, 1) 0%,
-    rgba(38, 0, 43, 1) 100%
-  );
+  background: -moz-linear-gradient(-45deg, rgba(255, 0, 0, 1) 0%, rgba(38, 0, 43, 1) 100%);
+  background: -webkit-gradient(left top, right bottom, color-stop(0%, rgba(255, 0, 0, 1)), color-stop(100%, rgba(38, 0, 43, 1)));
+  background: -webkit-linear-gradient(-45deg, rgba(255, 0, 0, 1) 0%, rgba(38, 0, 43, 1) 100%);
+  background: -o-linear-gradient(-45deg, rgba(255, 0, 0, 1) 0%, rgba(38, 0, 43, 1) 100%);
+  background: -ms-linear-gradient(-45deg, rgba(255, 0, 0, 1) 0%, rgba(38, 0, 43, 1) 100%);
+  background: linear-gradient(135deg, rgba(255, 0, 0, 1) 0%, rgba(38, 0, 43, 1) 100%);
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ff0000', endColorstr='#26002b', GradientType=1 );
   border-radius: 50%;
   -moz-border-radius: 50%;
@@ -152,56 +128,30 @@ div.app-nav-user-front img {
   div.app-nav-dash {
     height: 40px;
     background: rgba(255, 0, 0, 1);
-    background: -moz-linear-gradient(
-      -45deg,
-      rgba(255, 0, 0, 1) 0%,
-      rgba(38, 0, 43, 1) 100%
-    );
-    background: -webkit-gradient(
-      left top,
-      right bottom,
-      color-stop(0%, rgba(255, 0, 0, 1)),
-      color-stop(100%, rgba(38, 0, 43, 1))
-    );
-    background: -webkit-linear-gradient(
-      -45deg,
-      rgba(255, 0, 0, 1) 0%,
-      rgba(38, 0, 43, 1) 100%
-    );
-    background: -o-linear-gradient(
-      -45deg,
-      rgba(255, 0, 0, 1) 0%,
-      rgba(38, 0, 43, 1) 100%
-    );
-    background: -ms-linear-gradient(
-      -45deg,
-      rgba(255, 0, 0, 1) 0%,
-      rgba(38, 0, 43, 1) 100%
-    );
-    background: linear-gradient(
-      135deg,
-      rgba(255, 0, 0, 1) 0%,
-      rgba(38, 0, 43, 1) 100%
-    );
+    background: -moz-linear-gradient(-45deg, rgba(255, 0, 0, 1) 0%, rgba(38, 0, 43, 1) 100%);
+    background: -webkit-gradient(left top, right bottom, color-stop(0%, rgba(255, 0, 0, 1)), color-stop(100%, rgba(38, 0, 43, 1)));
+    background: -webkit-linear-gradient(-45deg, rgba(255, 0, 0, 1) 0%, rgba(38, 0, 43, 1) 100%);
+    background: -o-linear-gradient(-45deg, rgba(255, 0, 0, 1) 0%, rgba(38, 0, 43, 1) 100%);
+    background: -ms-linear-gradient(-45deg, rgba(255, 0, 0, 1) 0%, rgba(38, 0, 43, 1) 100%);
+    background: linear-gradient(135deg, rgba(255, 0, 0, 1) 0%, rgba(38, 0, 43, 1) 100%);
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ff0000', endColorstr='#26002b', GradientType=1 );
   }
 
-  div.app-nav-dash button.app-nav-button {
+  div.app-nav-dash a.app-nav-button {
+    display: block;
+    position: relative;
     margin: 5px;
+    padding-top: 3px;
     background: white;
     border: none;
     height: 30px;
-    color: black;
     transition: background 0.2s;
-    font-size: 12pt;
+    font-size: 13pt;
     text-align: center;
     color: #707070;
-    font-weight: bold;
-    outline: none;
-    cursor: pointer;
   }
 
-  div.app-nav-dash button.app-nav-button:hover {
+  div.app-nav-dash a.app-nav-button:hover {
     background: rgba(0, 0, 0, 0);
     color: white;
   }
@@ -225,37 +175,12 @@ div.app-nav-user-front img {
   div.app-nav-user-img {
     margin: 0px;
     background: rgba(255, 0, 0, 1);
-    background: -moz-linear-gradient(
-      -45deg,
-      rgba(255, 0, 0, 1) 0%,
-      rgba(38, 0, 43, 1) 100%
-    );
-    background: -webkit-gradient(
-      left top,
-      right bottom,
-      color-stop(0%, rgba(255, 0, 0, 1)),
-      color-stop(100%, rgba(38, 0, 43, 1))
-    );
-    background: -webkit-linear-gradient(
-      -45deg,
-      rgba(255, 0, 0, 1) 0%,
-      rgba(38, 0, 43, 1) 100%
-    );
-    background: -o-linear-gradient(
-      -45deg,
-      rgba(255, 0, 0, 1) 0%,
-      rgba(38, 0, 43, 1) 100%
-    );
-    background: -ms-linear-gradient(
-      -45deg,
-      rgba(255, 0, 0, 1) 0%,
-      rgba(38, 0, 43, 1) 100%
-    );
-    background: linear-gradient(
-      135deg,
-      rgba(255, 0, 0, 1) 0%,
-      rgba(38, 0, 43, 1) 100%
-    );
+    background: -moz-linear-gradient(-45deg, rgba(255, 0, 0, 1) 0%, rgba(38, 0, 43, 1) 100%);
+    background: -webkit-gradient(left top, right bottom, color-stop(0%, rgba(255, 0, 0, 1)), color-stop(100%, rgba(38, 0, 43, 1)));
+    background: -webkit-linear-gradient(-45deg, rgba(255, 0, 0, 1) 0%, rgba(38, 0, 43, 1) 100%);
+    background: -o-linear-gradient(-45deg, rgba(255, 0, 0, 1) 0%, rgba(38, 0, 43, 1) 100%);
+    background: -ms-linear-gradient(-45deg, rgba(255, 0, 0, 1) 0%, rgba(38, 0, 43, 1) 100%);
+    background: linear-gradient(135deg, rgba(255, 0, 0, 1) 0%, rgba(38, 0, 43, 1) 100%);
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ff0000', endColorstr='#26002b', GradientType=1 );
     border-radius: 50%;
     -moz-border-radius: 50%;
@@ -284,17 +209,17 @@ div.app-nav-user-front img {
     border-radius: 50%;
   }
 
-  div.app-nav-dash button.app-nav-button {
+  div.app-nav-dash a.app-nav-button {
     width: 30px;
     border-radius: 50%;
   }
 
-  div.app-nav-dash button.app-nav-button .title {
+  div.app-nav-dash a.app-nav-button .title {
     display: none;
     width: 0;
   }
 
-  div.app-nav-dash button.app-nav-button:hover {
+  div.app-nav-dash a.app-nav-button:hover {
     background: rgba(0, 0, 0, 0);
     color: white;
   }
@@ -317,9 +242,16 @@ div.app-nav-user-front img {
     border-radius: 25px;
   }
 
-  div.app-nav-dash button.app-nav-button {
+  div.app-nav-dash a.app-nav-button {
     width: 190px;
     border-radius: 25px;
+  }
+
+  div.app-nav-dash a.app-nav-button .icon {
+    position: absolute;
+    top: 0;
+    left: 0;
+    margin: 3px 10px;
   }
 
   div.app-nav-user-box {

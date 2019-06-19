@@ -2,25 +2,9 @@ form {
   margin: 20px;
 }
 
-form .form-group .form-control label {
+form .form-control label {
   font-size: 16px;
   text-decoration-style: bold;
-}
-
-button {
-  width: 200px;
-  background: #720026;
-  color: white;
-  cursor: pointer;
-  height: 30px;
-  border: none;
-  border-radius: 8px;
-  font-size: 16px;
-  margin: 5px;
-}
-
-button:hover {
-  background: #4f000b;
 }
 
 .container-form {
@@ -93,7 +77,7 @@ button:hover {
   color: white;
 }
 
-.ng-pristine:not(form) {
+.ng-pristine:not(.form-group) {
   border-left: 5px solid gray;
 }
 
@@ -105,6 +89,99 @@ button:hover {
   border-left: 5px solid #74bf79;
 }
 
-.ng-invalid:not(form) {
+.ng-invalid:not(.form-group) {
   border-left: 5px solid #a63d3b;
+}
+
+#form-data-funcoes h3 {
+  margin: 15px 0 5px 0;
+}
+
+#form-data-funcoes .form-control {
+  margin-right: 20px;
+}
+
+.data-funcao {
+  min-height: 40px;
+  border-radius: 23px;
+  border: 2px solid #c3c3c3;
+  padding: 7px 5px 5px 5px;
+}
+
+.data-funcao-options.show {
+  display: block;
+  height: auto;
+  padding: 7px;
+}
+
+.data-funcao-options:not(.show) {
+  display: none;
+  height: 0;
+}
+
+.data-funcao-options ul {
+  padding: 0;
+  margin: 0;
+  list-style-type: none;
+}
+
+.data-funcao-title button {
+  border: none;
+  outline: none;
+  width: 30px;
+  height: 30px;
+  border-radius: 15px;
+  background: #c0c0c0;
+  margin-left: 3px;
+}
+
+.form-control.selected {
+  border-color: #74bf79;
+}
+
+.form-control:not(.selected) {
+  border-color: #720026;
+}
+
+.form-control:not(.selected) .data-funcao-title button:hover {
+  background: #74bf79;
+  color: white;
+}
+
+.form-control.selected .data-funcao-title button:hover {
+  background: #720026;
+  color: white;
+}
+
+.data-funcao-title span.icon {
+  cursor: pointer;
+}
+
+.data-funcao-title span.funcao {
+  margin-left: 15px;
+}
+
+.data-funcao #data-aluno-options {
+  height: 40px;
+  padding-top: 8px;
+}
+.data-funcao #data-aluno-options span,
+.data-funcao #data-aluno-options label {
+  margin-right: 10px;
+}
+
+.form-button-group button {
+  width: 200px;
+  background: #720026;
+  color: white;
+  cursor: pointer;
+  height: 30px;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  margin: 5px;
+}
+
+.form-button-group button:hover {
+  background: #4f000b;
 }

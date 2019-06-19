@@ -5,17 +5,15 @@ import { NovoPublicadorComponent } from "./novo-publicador/novo-publicador.compo
 import { ReactiveFormsModule } from "@angular/forms";
 import { PublicadoresClient } from "../sheekr-api";
 import { NgxMaskModule } from "ngx-mask";
-import {
-  NgxUiLoaderModule,
-  NgxUiLoaderConfig,
-  NgxUiLoaderHttpModule
-} from "ngx-ui-loader";
+import { NgxUiLoaderModule, NgxUiLoaderConfig, NgxUiLoaderHttpModule } from "ngx-ui-loader";
+import { TooltipModule } from "ngx-bootstrap/tooltip";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { ListPublicadoresComponent } from "../publicador/list-publicadores/list-publicadores.component";
 import { AppRoutingModule } from "../app-routing.module";
 import { HumanizeService } from "../humanize.service";
 import { EditPublicadorComponent } from "./edit-publicador/edit-publicador.component";
 import { BrowserModule } from "@angular/platform-browser";
+import { DadosPublicadorComponent } from "./dados-publicador/dados-publicador.component";
 
 const ngxUiLoaderConfig: NgxUiLoaderConfig = {
   bgsColor: "#720026",
@@ -54,14 +52,11 @@ const ngxUiLoaderConfig: NgxUiLoaderConfig = {
     NgxMaskModule.forRoot(),
     NgxUiLoaderModule.forRoot(ngxUiLoaderConfig),
     NgxUiLoaderHttpModule.forRoot({}),
+    TooltipModule.forRoot(),
     AppRoutingModule
   ],
   providers: [PublicadoresClient, HumanizeService],
-  declarations: [
-    NovoPublicadorComponent,
-    ListPublicadoresComponent,
-    EditPublicadorComponent
-  ]
+  declarations: [NovoPublicadorComponent, ListPublicadoresComponent, EditPublicadorComponent, DadosPublicadorComponent]
   //exports: [RouterModule]
 })
 export class PublicadorModule {}

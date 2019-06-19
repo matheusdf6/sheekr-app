@@ -1,72 +1,124 @@
-.table-container {
+.content-wrapper {
+  width: 100%;
+}
+
+.list-container {
   width: 100%;
   border-radius: 25px;
   margin-bottom: 20px;
+  background-color: rgba(0, 0, 0, 0);
 }
 
-.table-title {
+.list-title {
   width: 100%;
   height: 50px;
   text-align: center;
-  border-radius: 25px 25px 0 0;
+  border-radius: 25px;
   background: #c53530;
+  margin-bottom: 10px;
 }
 
-.table-title h2 {
+.list-title h2 {
   color: white;
   margin: 0px;
   padding: 9px;
 }
 
-.table-container .table {
-  width: 100%;
-  overflow-x: auto;
-}
-.table-container .table table {
-  width: 100%;
-  border-collapse: separate;
-  border-spacing: 0;
+.list-container .publicador-list ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
 }
 
-.table-container .table table tr {
-  height: 30px;
+.floating-menu {
+  position: fixed;
+  width: 60px;
+  height: 60px;
+  bottom: 30px;
+  right: 30px;
+  background-color: #4f000b;
+  color: #fff;
+  border-radius: 50px;
+  text-align: center;
+  -webkit-box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.75);
+  box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.75);
+
+  z-index: 999;
 }
 
-.table-container .table table tr:hover {
-  background: #f0f0f0;
+.app-toolbar > #floating-button {
+  display: none;
 }
 
-.table-container .table table thead tr {
-  text-align: left;
-  background: #cccccc;
-}
-
-.table-container .table table button {
-  background: rgba(0, 0, 0, 0);
+.floating-menu > #floating-button {
+  display: block;
+  outline: none;
   border: none;
-  font-size: 1.1rem;
-  cursor: pointer;
+  background: none;
+  color: white;
+  width: 100%;
+  height: 100%;
+  font-size: 1.3rem;
 }
 
-.table-container .table table input[type="checkbox"] {
-  border-radius: 4px;
+.floating-menu > ul:not(.show) {
+  display: none;
+  height: 0;
 }
 
-.table-container .table table .btn-link-edit {
-  background: rgba(0, 0, 0, 0);
-  font-size: 1.1rem;
-  cursor: pointer;
-  font-style: normal;
-  color: black;
+.floating-menu > ul.show {
+  list-style: none;
+}
+.floating-menu > ul.show li {
+  position: fixed;
+  height: 40px;
+  width: 40px;
+  border-radius: 20px;
+  background: #4f000b;
+  right: 40px;
 }
 
-.table-container .table table button:hover,
-.table-container .table table .btn-link-edit:hover {
-  color: #c53530;
+.floating-menu > ul.show li:nth-child(1) {
+  bottom: 100px;
 }
 
-.table-container .table table tr th,
-.table-container .table table tr td {
-  padding: 10px;
-  border-bottom: #f2f2f2 solid 1px;
+.floating-menu > ul.show li:nth-child(2) {
+  bottom: 150px;
 }
+
+.floating-menu > ul.show li:nth-child(3) {
+  bottom: 200px;
+}
+
+.floating-menu ul.show li button,
+.floating-menu ul.show li a {
+  border: none;
+  background: none;
+  width: 100%;
+  height: 100%;
+  color: white;
+}
+
+.floating-menu ul.show li span.title {
+  display: none;
+}
+/*
+@media (max-width: 576px) {
+  .content-wrapper {
+    width: 100%;
+  }
+}
+
+@media (min-width: 577px) and (max-width: 768px) {
+  .content-wrapper {
+    width: calc(100% - 55px);
+  }
+}
+
+@media (min-width: 769px) {
+  .content-wrapper {
+    width: calc(100% - 220px);
+  }
+}
+*/

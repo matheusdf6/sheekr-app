@@ -16,24 +16,25 @@ import { NovoPublicadorComponent } from "./publicador/novo-publicador/novo-publi
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { AppRoutingModule } from ".//app-routing.module";
 import { NgxUiLoaderRouterModule } from "ngx-ui-loader";
+import { ToastrModule } from "ngx-toastr";
 import { EventEmitterService } from "./event-emitter.service";
+import { TooltipModule } from "ngx-bootstrap/tooltip";
+import { EscolaModule } from "./escola/escola.module";
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    HomeComponent,
-    ListAlunosComponent,
-    NavbarComponent,
-    SideMenuComponent
-  ],
+  declarations: [AppComponent, HomeComponent, ListAlunosComponent, NavbarComponent, SideMenuComponent],
   imports: [
     BrowserModule.withServerTransition({ appId: "ng-cli-universal" }),
     CommonModule,
     BrowserAnimationsModule,
     HttpClientModule,
     NgxUiLoaderRouterModule.forRoot({}),
+    TooltipModule.forRoot(),
+    ToastrModule.forRoot({}),
+    TooltipModule.forRoot(),
     FormsModule,
     PublicadorModule,
+    EscolaModule,
     AppRoutingModule
   ],
   providers: [EventEmitterService],
